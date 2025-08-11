@@ -1,19 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProjectCardComponent } from './components/project-card/project-card.component';
-import { SkillProgressComponent } from './components/skill-progress/skill-progress.component';
-import { ExamplePipe } from './pipes/example.pipe';
-
-
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 
 @NgModule({
-  declarations: [
-    ProjectCardComponent,
-    SkillProgressComponent,
-    ExamplePipe
-  ],
-  imports: [
-    CommonModule
-  ]
+	declarations: [LoadingSpinnerComponent],
+	imports: [CommonModule]
 })
-export class SharedModule { }
+export class SharedModule {}
