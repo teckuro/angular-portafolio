@@ -1,0 +1,179 @@
+/* Estilos específicos del componente portfolio-page */
+
+.container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 2rem;
+	width: 100%;
+	min-height: 100vh;
+	background-color: var(--background-color);
+	color: var(--text-primary);
+	display: flex;
+	flex-direction: row;
+	gap: 3rem;
+	align-items: flex-start;
+	padding-top: 2rem;
+}
+
+header {
+	flex: 0 0 300px;
+	position: sticky;
+	top: 2rem;
+}
+
+.header-content {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+}
+
+.header-content-info h1 {
+	font-size: 2.5rem;
+	font-weight: var(--font-weight-bold);
+	color: var(--accent-pink);
+	margin-bottom: 0.5rem;
+}
+
+.header-content-info p {
+	font-size: 1.2rem;
+	color: var(--text-secondary);
+}
+
+.header-social-media {
+	text-align: left;
+}
+
+.social-media-content h2 {
+	color: var(--accent-blue);
+	margin-bottom: 0.5rem;
+	font-size: 1.5rem;
+}
+
+.social-media-content p {
+	color: var(--text-secondary);
+	line-height: 1.6;
+}
+
+main {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	justify-content: flex-start;
+	align-items: stretch;
+}
+
+.about {
+	text-align: left;
+	margin-bottom: 1rem;
+}
+
+.about-content h2 {
+	font-size: 2rem;
+	color: var(--accent-blue);
+	margin-bottom: 1rem;
+}
+
+.about-content p {
+	font-size: 1.1rem;
+	line-height: 1.6;
+	color: var(--text-primary);
+}
+
+.work-experience {
+	width: 100%;
+	margin-bottom: 1rem;
+}
+
+.work-experience-content {
+	width: 100%;
+}
+
+.work-experience-content h2 {
+	font-size: 2rem;
+	color: var(--accent-blue);
+	margin-bottom: 1.5rem;
+}
+
+.projects {
+	width: 100%;
+}
+
+.projects-content {
+	width: 100%;
+}
+
+.projects-content h2 {
+	font-size: 2rem;
+	color: var(--accent-blue);
+	margin-bottom: 1.5rem;
+}
+
+footer {
+	width: 100%;
+	padding: 2rem 0;
+	border-top: 1px solid var(--border-color);
+	text-align: center;
+	margin-top: 3rem;
+}
+
+.footer-content {
+	color: var(--text-secondary);
+}
+
+.footer-content a {
+	color: var(--accent-pink);
+	text-decoration: none;
+	font-weight: var(--font-weight-medium);
+}
+
+.footer-content a:hover {
+	color: var(--accent-pink-hover);
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+	.container {
+		flex-direction: column;
+		gap: 2rem;
+		padding-top: 1rem;
+	}
+
+	header {
+		flex: none;
+		width: 100%;
+		position: static;
+	}
+
+	.header-content {
+		text-align: center;
+	}
+
+	.header-social-media {
+		text-align: center;
+	}
+
+	main {
+		width: 100%;
+		gap: 2rem;
+	}
+
+	.about,
+	.work-experience {
+		margin-bottom: 2rem;
+	}
+}
+
+@media (max-width: 768px) {
+	.container {
+		padding: 0 1rem;
+	}
+
+	.header-content-info h1 {
+		font-size: 2rem;
+	}
+
+	main {
+		gap: 1.5rem;
+	}
+}

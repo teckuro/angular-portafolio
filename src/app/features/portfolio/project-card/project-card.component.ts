@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Project } from '../models/project.model';
 
 @Component({
 	selector: 'app-project-card',
@@ -6,6 +7,8 @@ import { Component } from '@angular/core';
 	styleUrls: ['./project-card.component.css']
 })
 export class ProjectCardComponent {
+	@Input() project!: Project;
+
 	constructor() {
 		// Constructor vacío intencional
 	}

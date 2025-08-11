@@ -1,0 +1,68 @@
+.work-card {
+	background: var(--background-secondary);
+	border: 1px solid var(--border-color);
+	border-radius: 8px;
+	padding: 1.5rem;
+	margin-bottom: 1.5rem;
+	box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+.work-header h3 {
+	color: var(--accent-pink);
+	margin-bottom: 0.5rem;
+	font-size: 1.25rem;
+}
+
+.company {
+	font-weight: var(--font-weight-semibold);
+	color: var(--text-primary);
+	margin-bottom: 0.25rem;
+}
+
+.period, .location {
+	color: var(--text-secondary);
+	font-size: 0.9rem;
+	margin-bottom: 0.25rem;
+}
+
+.description {
+	color: var(--text-primary);
+	margin: 1rem 0;
+	line-height: 1.6;
+}
+
+.tech-stack {
+	margin: 1rem 0;
+}
+
+.tech-tag {
+	background: var(--accent-blue);
+	color: var(--text-primary);
+	padding: 0.25rem 0.75rem;
+	border-radius: 20px;
+	font-size: 0.8rem;
+	margin-right: 0.5rem;
+	margin-bottom: 0.5rem;
+	display: inline-block;
+}
+
+.achievements {
+	list-style: none;
+	padding: 0;
+	margin: 1rem 0 0 0;
+}
+
+.achievements li {
+	color: var(--text-secondary);
+	margin-bottom: 0.5rem;
+	padding-left: 1.5rem;
+	position: relative;
+}
+
+.achievements li::before {
+	content: "•";
+	color: var(--accent-pink);
+	position: absolute;
+	left: 0;
+	font-weight: bold;
+}

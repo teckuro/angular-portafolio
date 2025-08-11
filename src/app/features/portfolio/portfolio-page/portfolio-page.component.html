@@ -1,1 +1,50 @@
-<p>portfolio-page works!</p>
+<div class="container">
+	<header>
+		<div class="header-content">
+			<div class="header-content-info">
+				<h1>Juan Pablo</h1>
+				<p>Software Engineer</p>
+			</div>
+			<div class="header-social-media">
+				<div class="social-media-content">
+					<h2>Social Media</h2>
+					<p>
+						I have a strong foundation in web development and a passion for
+						building web applications.
+					</p>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<main>
+		<div class="about">
+			<div class="about-content">
+				<h2>About Me</h2>
+				<p>
+					I am a software engineer with a passion for building web applications.
+				</p>
+			</div>
+		</div>
+		<div class="work-experience">
+			<div class="work-experience-content">
+				<h2>Work Experience</h2>
+				<ng-container *ngFor="let work of works$ | async">
+					<app-work-card [work]="work"></app-work-card>
+				</ng-container>
+			</div>
+		</div>
+		<div class="projects">
+			<div class="projects-content">
+				<h2>Projects</h2>
+				<ng-container *ngFor="let project of projects$ | async">
+					<app-project-card [project]="project"></app-project-card>
+				</ng-container>
+			</div>
+		</div>
+		<div class="footer-content">
+			apllicacion creada por
+			<a href="https://github.com/teckuro">Juan Pablo</a>
+		</div>
+	</main>
+</div>

@@ -1,0 +1,17 @@
+<div class="work-card">
+	<div class="work-header">
+		<h3>{{ work.position }}</h3>
+		<p class="company">{{ work.company }}</p>
+		<p class="period">{{ work.startDate }} - {{ work.endDate || 'Present' }}</p>
+		<p class="location">{{ work.location }}</p>
+	</div>
+	<div class="work-content">
+		<p class="description">{{ work.description }}</p>
+		<div class="tech-stack">
+			<span *ngFor="let tech of work.tech" class="tech-tag">{{ tech }}</span>
+		</div>
+		<ul class="achievements">
+			<li *ngFor="let achievement of work.achievements">{{ achievement }}</li>
+		</ul>
+	</div>
+</div>
