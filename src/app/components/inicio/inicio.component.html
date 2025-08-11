@@ -1,0 +1,64 @@
+<div class="content-title">
+	<h1>Inicio</h1>
+	<p>
+		Bienvenido al inicio de la aplicación. Aquí podrás ver las imágenes de Dota
+		2.
+	</p>
+</div>
+<div class="container-img">
+	<div class="card-initial" *ngFor="let item of datos">
+		<div class="card-initial-up">
+			<div class="content-img">
+				<div class="card-img">
+					<div class="img-attribute" [ngSwitch]="item.primary_attr">
+						<img
+							src="./assets/img/icon_agility.png"
+							alt="Agility"
+							*ngSwitchCase="'agi'"
+						/>
+						<img
+							src="./assets/img/icon_strength.png"
+							alt="Strength"
+							*ngSwitchCase="'str'"
+						/>
+						<img
+							src="./assets/img/icon_intelligence.png"
+							alt="Intelligence"
+							*ngSwitchCase="'int'"
+						/>
+						<img
+							src="./assets/img/icon_all.png"
+							alt="Default"
+							*ngSwitchDefault
+						/>
+					</div>
+					<img
+						class="img-hero"
+						src="http://cdn.dota2.com{{ item.img }}"
+						alt=""
+					/>
+				</div>
+			</div>
+		</div>
+		<div class="card-initial-down">
+			<div class="attribute">
+				<div class="name">
+					{{ item.name.split('_')[2] }}
+				</div>
+				<div class="description">
+					{{ item.name.split('_')[3] }}
+				</div>
+			</div>
+			<div class="roles">
+				<div class="">Roles</div>
+				<div class="description">
+					<ul>
+						<li *ngFor="let role of item.roles">
+							{{ role }}
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
