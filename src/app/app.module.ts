@@ -3,14 +3,21 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { InicioComponent } from './components/inicio/inicio.component';
-import { DotaService } from './services/dota/dota.service';
 import { HttpClientModule } from '@angular/common/http';
 
+// Importa CoreModule (lo tienes que crear y declarar header/footer ahí)
+import { CoreModule } from './core/core.module';
+
 @NgModule({
-	declarations: [AppComponent, InicioComponent],
-	imports: [BrowserModule, AppRoutingModule, HttpClientModule],
-	providers: [DotaService],
-	bootstrap: [AppComponent]
+  declarations: [AppComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    CoreModule   
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
+
