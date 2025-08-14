@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { SwUpdate } from '@angular/service-worker';
 
 @Component({
 	selector: 'app-root',
@@ -7,11 +7,26 @@ import { Router } from '@angular/router';
 	styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-	title = 'proyecto-deprecado';
+	title = 'angular-portafolio';
 
-	constructor(private router: Router) {}
+	constructor(private swUpdate: SwUpdate) {}
 
 	ngOnInit(): void {
-		this.router.initialNavigation();
+		this.checkForUpdates();
+	}
+
+	/**
+	 * Verifica actualizaciones de la PWA
+	 */
+	private checkForUpdates(): void {
+		if (this.swUpdate.isEnabled) {
+			this.swUpdate.versionUpdates.subscribe(event => {
+				if (event.type === 'VERSION_READY') {
+					if (confirm('Hay una nueva versión disponible. ¿Deseas actualizar?')) {
+						window.location.reload();
+					}
+				}
+			});
+		}
 	}
 }

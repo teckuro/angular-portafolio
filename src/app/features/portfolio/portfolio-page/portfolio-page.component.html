@@ -1,5 +1,5 @@
 <div class="container">
-	<header>
+	<header [class.header-visible]="headerVisible">
 		<div class="header-content">
 			<div class="header-content-info">
 				<h1>Juan Pablo</h1>
@@ -47,8 +47,8 @@
 	</header>
 
 	<main>
-		<div id="about" class="about">
-			<div class="about-content">
+		<div id="about" class="about" #section>
+			<div class="about-content" [class]="getAnimationClasses('about')">
 				<h2>Sobre Mí</h2>
 				<div class="about-description">
 					<p class="about-intro">
@@ -62,12 +62,15 @@
 				</div>
 			</div>
 		</div>
-		<div id="work" class="work-experience">
-			<div class="work-experience-content">
+		<div id="work" class="work-experience" #section>
+			<div
+				class="work-experience-content"
+				[class]="getAnimationClasses('work')"
+			>
 				<h2>Experiencia Laboral</h2>
 
-				<ng-container *ngFor="let work of works$ | async">
-					<div class="experience-card">
+				<ng-container *ngFor="let work of works$ | async; let i = index">
+					<div class="experience-card" [style.animation-delay]="i * 0.2 + 's'">
 						<div class="experience-header">
 							<h3>{{ work.company }}</h3>
 							<span class="experience-period">
@@ -115,17 +118,25 @@
 				</div>
 			</div>
 		</div>
-		<div id="projects" class="projects">
-			<div class="projects-content">
+		<div id="projects" class="projects" #section>
+			<div class="projects-content" [class]="getAnimationClasses('projects')">
 				<h2>Proyectos</h2>
-				<ng-container *ngFor="let project of projects$ | async">
-					<app-project-card [project]="project"></app-project-card>
+				<ng-container *ngFor="let project of projects$ | async; let i = index">
+					<app-project-card
+						[project]="project"
+						[style.animation-delay]="i * 0.15 + 's'"
+					></app-project-card>
 				</ng-container>
 			</div>
 		</div>
 		<div class="footer-content">
-			apllicacion creada por
-			<a href="https://github.com/teckuro">Juan Pablo</a>
+			Aplicación desarrollada con Angular 11 por
+			<a
+				href="https://github.com/teckuro"
+				target="_blank"
+				rel="noopener noreferrer"
+				>Juan Pablo Huerta</a
+			>
 		</div>
 	</main>
 
@@ -134,6 +145,7 @@
 		class="modal-overlay"
 		*ngIf="showCurriculumModal"
 		(click)="closeCurriculumModal()"
+		[class.modal-overlay-visible]="showCurriculumModal"
 	>
 		<div class="modal-content" (click)="$event.stopPropagation()">
 			<div class="modal-header">
@@ -163,7 +175,10 @@
 						<h5>Resumen Profesional</h5>
 						<p>
 							Desarrollador Full Stack con 4 años de experiencia en
-							integraciones de facturación electrónica.
+							integraciones de facturación electrónica, especializado en
+							tecnologías web modernas como Angular, PHP, Laravel y Node.js.
+							Apasionado por crear soluciones digitales eficientes y
+							experiencias de usuario excepcionales.
 						</p>
 					</div>
 

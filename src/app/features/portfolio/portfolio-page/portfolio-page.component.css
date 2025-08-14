@@ -1141,3 +1141,225 @@ footer {
 		font-size: 0.8rem;
 	}
 }
+
+/* ===== ANIMACIONES Y TRANSICIONES ===== */
+
+/* Animaciones de entrada para el header */
+header {
+	opacity: 0;
+	transform: translateY(-20px);
+	transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+header.header-visible {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+/* Animaciones para secciones */
+.section-content {
+	opacity: 0;
+	transform: translateY(30px);
+	transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.section-content.animate-in {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+/* Animaciones para cards de experiencia */
+.experience-card {
+	opacity: 0;
+	transform: translateX(-20px);
+	animation: slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes slideInLeft {
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+/* Animaciones para project cards */
+app-project-card {
+	opacity: 0;
+	transform: translateY(20px);
+	animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes fadeInUp {
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* Animaciones para el modal */
+.modal-overlay {
+	opacity: 0;
+	visibility: hidden;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-overlay.modal-overlay-visible {
+	opacity: 1;
+	visibility: visible;
+}
+
+.modal-content {
+	opacity: 0;
+	transform: scale(0.9) translateY(-20px);
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-content.modal-visible {
+	opacity: 1;
+	transform: scale(1) translateY(0);
+}
+
+/* Animaciones para elementos de navegación */
+.main-nav a {
+	position: relative;
+	overflow: hidden;
+}
+
+.main-nav a::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(
+		90deg,
+		transparent,
+		rgba(59, 130, 246, 0.1),
+		transparent
+	);
+	transition: left 0.5s;
+}
+
+.main-nav a:hover::before {
+	left: 100%;
+}
+
+/* Animaciones para tech tags */
+.tech-tag {
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tech-tag:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
+/* Animaciones para botones */
+.download-btn,
+.curriculum-link {
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	position: relative;
+	overflow: hidden;
+}
+
+.download-btn::before,
+.curriculum-link::before {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 0;
+	height: 0;
+	background: rgba(255, 255, 255, 0.2);
+	border-radius: 50%;
+	transform: translate(-50%, -50%);
+	transition:
+		width 0.3s,
+		height 0.3s;
+}
+
+.download-btn:hover::before,
+.curriculum-link:hover::before {
+	width: 300px;
+	height: 300px;
+}
+
+/* Animaciones para enlaces sociales */
+.header-social-media a {
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.header-social-media a:hover {
+	transform: translateY(-3px) scale(1.1);
+}
+
+/* Animaciones para scroll suave mejorado */
+html {
+	scroll-behavior: smooth;
+}
+
+/* Efectos de hover mejorados */
+.experience-card:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Animaciones para elementos de texto */
+.about-intro {
+	opacity: 0;
+	animation: fadeInText 1s cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards;
+}
+
+@keyframes fadeInText {
+	to {
+		opacity: 1;
+	}
+}
+
+/* Animaciones para títulos de sección */
+.about-content h2,
+.work-experience-content h2,
+.projects-content h2 {
+	opacity: 0;
+	transform: translateX(-20px);
+	animation: slideInTitle 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards;
+}
+
+@keyframes slideInTitle {
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+/* Efectos de parallax suave */
+header {
+	will-change: transform;
+}
+
+/* Optimizaciones para rendimiento */
+.section-content,
+.experience-card,
+app-project-card {
+	will-change: opacity, transform;
+}
+
+/* Animaciones para dispositivos que prefieren movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+/* Animaciones para modo oscuro (si se implementa en el futuro) */
+@media (prefers-color-scheme: dark) {
+	.tech-tag:hover {
+		box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+	}
+}
