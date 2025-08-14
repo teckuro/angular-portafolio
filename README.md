@@ -32,7 +32,7 @@ Portfolio personal desarrollado con Angular 11 que muestra mi experiencia profes
 
 ### Prerrequisitos
 
-- Node.js 14+
+- Node.js 16+ (recomendado para compatibilidad)
 - npm o yarn
 - Angular CLI 11
 
@@ -50,6 +50,20 @@ npm install
 
 # Ejecutar en modo desarrollo
 npm start
+```
+
+### Despliegue en Vercel
+
+El proyecto está configurado para despliegue automático en Vercel:
+
+1. **Configuración automática**: El archivo `vercel.json` maneja la configuración
+2. **Build optimizado**: Usa `ng build --prod` para producción
+3. **Routing**: Configurado para SPA (Single Page Application)
+4. **Node.js**: Configurado para usar Node.js 16
+
+```bash
+# Despliegue manual (si es necesario)
+vercel --prod
 ```
 
 ### Comandos Disponibles
@@ -132,8 +146,8 @@ El proyecto incluye tests unitarios completos para:
 ### PWA
 
 - ✅ Web App Manifest
-- ✅ Service Worker (básico)
 - ✅ Meta tags para instalación
+- ⚠️ Service Worker (removido por compatibilidad)
 
 ### Testing
 
