@@ -14,6 +14,13 @@ const routes: Routes = [
 			)
 	},
 
+	// Lazy loading del módulo admin
+	{
+		path: 'admin',
+		loadChildren: () =>
+			import('./features/admin/admin.module').then((m) => m.AdminModule)
+	},
+
 	// Ruta fallback si la URL no coincide con ninguna ruta
 	{ path: '**', redirectTo: 'portfolio' }
 ];

@@ -172,12 +172,8 @@ export class PortfolioPageComponent implements OnInit, AfterViewInit {
 		const scrollY = window.scrollY;
 		const windowHeight = window.innerHeight;
 
-		// Parallax effect for header
-		const header = this.elementRef.nativeElement.querySelector('header');
-		if (header) {
-			const translateY = scrollY * 0.1;
-			header.style.transform = `translateY(${translateY}px)`;
-		}
+		// Removed parallax effect to keep header fixed
+		// El header ahora permanece fijo sin movimiento
 	}
 
 	/**

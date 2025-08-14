@@ -31,14 +31,21 @@ header {
 	flex: 0 0 280px;
 	position: sticky;
 	top: 2rem;
+	height: 80vh;
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-start;
 }
 
 .header-content {
 	display: flex;
 	flex-direction: column;
 	gap: 2rem;
-	align-items: center;
-	text-align: center;
+	align-items: flex-start;
+	text-align: left;
+	width: 100%;
+	height: 100%;
+	justify-content: flex-start;
 }
 
 .header-content-info h1 {
@@ -47,6 +54,7 @@ header {
 	color: var(--text-primary);
 	margin-bottom: 0.5rem;
 	letter-spacing: -0.02em;
+	text-align: left;
 }
 
 .header-content-info p {
@@ -54,6 +62,7 @@ header {
 	color: var(--accent-blue);
 	font-weight: 500;
 	margin-bottom: 1rem;
+	text-align: left;
 }
 
 /* Ocultar nav en pantallas medianas y pequeñas */
@@ -66,6 +75,7 @@ header {
 /* Estilos para el nav con efecto de línea */
 .main-nav {
 	margin: 1.5rem 0;
+	width: 100%;
 }
 
 .main-nav ul {
@@ -75,6 +85,7 @@ header {
 	display: flex;
 	flex-direction: column;
 	gap: 0.75rem;
+	align-items: flex-start;
 }
 
 .main-nav li {
@@ -123,13 +134,14 @@ header {
 }
 
 .header-social-media {
-	text-align: center;
+	text-align: left;
+	width: 100%;
 }
 
 .social-media-content {
 	display: flex;
 	gap: 1rem;
-	justify-content: center;
+	justify-content: flex-start;
 }
 
 .social-media-content a {
@@ -276,244 +288,7 @@ main {
 	width: 60px;
 }
 
-/* Estilos para las tarjetas de experiencia */
-.experience-card {
-	margin-bottom: 2rem;
-	padding: 1.5rem;
-	background: transparent;
-	border: 1px solid transparent;
-	border-radius: 12px;
-	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-	position: relative;
-	overflow: hidden;
-	box-shadow: none;
-}
-
-.experience-card::before {
-	content: '';
-	position: absolute;
-	top: 0;
-	left: -100%;
-	width: 100%;
-	height: 100%;
-	background: linear-gradient(
-		90deg,
-		transparent,
-		rgba(255, 255, 255, 0.15),
-		transparent
-	);
-	transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.experience-card:hover::before {
-	left: 100%;
-}
-
-.experience-card:hover {
-	background: rgba(255, 255, 255, 0.08);
-	border-color: var(--accent-blue);
-	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-}
-
-.experience-card::after {
-	content: '';
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	border-radius: 12px;
-	background: linear-gradient(
-		135deg,
-		rgba(255, 255, 255, 0.1) 0%,
-		transparent 50%,
-		rgba(255, 255, 255, 0.05) 100%
-	);
-	opacity: 0;
-	transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-	pointer-events: none;
-}
-
-.experience-card:hover::after {
-	opacity: 1;
-}
-
-.experience-card .experience-header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin-bottom: 0.75rem;
-}
-
-.experience-card .experience-header h3 {
-	font-size: 1.25rem;
-	color: var(--text-primary);
-	margin: 0;
-	font-weight: 600;
-	letter-spacing: -0.01em;
-	transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.experience-card:hover .experience-header h3 {
-	color: var(--accent-blue);
-}
-
-.experience-card .experience-period {
-	font-size: 0.875rem;
-	color: var(--text-secondary);
-	background: transparent;
-	padding: 0;
-	border-radius: 0;
-	font-weight: 500;
-	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.experience-card:hover .experience-period {
-	color: var(--text-primary);
-}
-
-.experience-card .company-link {
-	color: var(--accent-blue);
-	font-size: 0.875rem;
-	margin-bottom: 1.25rem;
-	font-style: normal;
-	font-weight: 500;
-}
-
-.experience-card .company-link a {
-	color: var(--accent-blue);
-	text-decoration: none;
-	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-	position: relative;
-}
-
-.experience-card .company-link a::after {
-	content: '';
-	position: absolute;
-	bottom: -2px;
-	left: 0;
-	width: 0;
-	height: 1px;
-	background-color: var(--accent-blue);
-	transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.experience-card .company-link a:hover {
-	color: var(--accent-blue);
-	transform: translateY(-1px);
-}
-
-.experience-card .company-link a:hover::after {
-	width: 100%;
-}
-
-.experience-description p {
-	font-size: 1rem;
-	line-height: 1.6;
-	color: var(--text-secondary);
-	margin-bottom: 1.25rem;
-	font-weight: 400;
-	transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.experience-card:hover .experience-description p {
-	color: var(--text-primary);
-}
-
-.experience-highlights {
-	margin-bottom: 1.25rem;
-}
-
-.experience-highlights h4 {
-	font-size: 0.875rem;
-	color: var(--text-primary);
-	margin-bottom: 0.75rem;
-	border-bottom: none;
-	padding-bottom: 0;
-	display: block;
-	font-weight: 600;
-	text-transform: uppercase;
-	letter-spacing: 0.05em;
-}
-
-.experience-highlights ul {
-	margin: 0;
-	padding-left: 1.5rem;
-}
-
-.experience-highlights li {
-	margin-bottom: 0.5rem;
-	color: var(--text-secondary);
-	line-height: 1.6;
-	font-size: 0.875rem;
-	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-	padding-left: 0.5rem;
-	border-left: 2px solid transparent;
-}
-
-.experience-highlights li:hover {
-	color: var(--text-primary);
-	border-left-color: var(--accent-blue);
-	padding-left: 1rem;
-}
-
-.tech-stack h4 {
-	font-size: 0.875rem;
-	color: var(--text-primary);
-	margin-bottom: 0.75rem;
-	border-bottom: none;
-	padding-bottom: 0;
-	display: block;
-	font-weight: 600;
-	text-transform: uppercase;
-	letter-spacing: 0.05em;
-}
-
-.tech-tags {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 0.5rem;
-}
-
-.tech-tag {
-	background-color: rgba(49, 130, 206, 0.1);
-	color: var(--accent-blue);
-	padding: 0.4rem 0.8rem;
-	border-radius: 20px;
-	font-size: 0.75rem;
-	font-weight: 500;
-	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-	position: relative;
-	overflow: hidden;
-	border: 1px solid rgba(49, 130, 206, 0.2);
-}
-
-.tech-tag::before {
-	content: '';
-	position: absolute;
-	top: 0;
-	left: -100%;
-	width: 100%;
-	height: 100%;
-	background: linear-gradient(
-		90deg,
-		transparent,
-		rgba(49, 130, 206, 0.2),
-		transparent
-	);
-	transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.tech-tag:hover::before {
-	left: 100%;
-}
-
-.tech-tag:hover {
-	background-color: var(--accent-blue);
-	color: white;
-	transform: translateY(-1px);
-	box-shadow: 0 2px 8px var(--shadow-color);
-}
+/* Estilos para work-card (ahora manejados por el componente work-card) */
 
 .projects {
 	width: 100%;
@@ -901,44 +676,57 @@ main {
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-footer {
-	width: 100%;
-	padding: 2rem 0;
-	border-top: 1px solid var(--border-color);
-	text-align: center;
-	margin-top: 3rem;
-}
-
 .footer-content {
 	color: var(--text-secondary);
+	font-size: 0.875rem;
+	line-height: 1.6;
+	text-align: center;
+	padding: 2rem 0;
+	margin-top: 3rem;
+	position: relative;
+	overflow: hidden;
+}
+
+.footer-content::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 2px;
+	background: linear-gradient(
+		90deg,
+		transparent 0%,
+		rgba(255, 255, 255, 0.1) 50%,
+		transparent 100%
+	);
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.footer-content:hover::before {
+	background: linear-gradient(
+		90deg,
+		transparent 0%,
+		var(--accent-blue) 50%,
+		transparent 100%
+	);
+	box-shadow: 0 0 10px rgba(49, 130, 206, 0.3);
 }
 
 .footer-content a {
 	color: var(--accent-blue);
 	text-decoration: none;
-	font-weight: var(--font-weight-medium);
+	font-weight: 500;
 	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 	position: relative;
-}
-
-.footer-content a::after {
-	content: '';
-	position: absolute;
-	bottom: -2px;
-	left: 0;
-	width: 0;
-	height: 1px;
-	background-color: var(--accent-blue);
-	transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	opacity: 0.8;
 }
 
 .footer-content a:hover {
 	color: var(--accent-blue);
+	opacity: 1;
 	transform: translateY(-1px);
-}
-
-.footer-content a:hover::after {
-	width: 100%;
+	text-shadow: 0 0 8px rgba(49, 130, 206, 0.3);
 }
 
 /* Responsive design */
@@ -953,23 +741,36 @@ footer {
 		flex: none;
 		width: 100%;
 		position: static;
+		height: auto;
 	}
 
 	.header-content {
-		text-align: left;
-		align-items: flex-start;
+		text-align: center;
+		align-items: center;
+		height: auto;
+		justify-content: center;
 	}
 
 	.header-content-info h1 {
 		font-size: 2.2rem;
+		text-align: center;
 	}
 
 	.header-content-info p {
 		font-size: 1.1rem;
+		text-align: center;
 	}
 
 	.header-social-media {
-		text-align: left;
+		text-align: center;
+	}
+
+	.main-nav ul {
+		align-items: center;
+	}
+
+	.social-media-content {
+		justify-content: center;
 	}
 
 	main {
@@ -988,19 +789,19 @@ footer {
 		font-size: 1.8rem;
 	}
 
-	.experience-card .experience-header h3 {
+	app-work-card .work-company {
 		font-size: 1.2rem;
 	}
 
-	.experience-card .experience-period {
+	app-work-card .work-period {
 		font-size: 0.85rem;
 	}
 
-	.experience-description p {
+	app-work-card .work-description p {
 		font-size: 0.95rem;
 	}
 
-	.experience-highlights li {
+	app-work-card .work-highlights li {
 		font-size: 0.85rem;
 	}
 
@@ -1013,6 +814,11 @@ footer {
 		font-size: 0.85rem;
 		padding: 0.7rem 1.4rem;
 	}
+
+	.footer-content {
+		font-size: 0.8rem;
+		padding: 1.5rem 0;
+	}
 }
 
 @media (max-width: 768px) {
@@ -1023,6 +829,8 @@ footer {
 	.header-content {
 		text-align: center;
 		align-items: center;
+		height: auto;
+		justify-content: center;
 	}
 
 	.header-content-info h1 {
@@ -1047,19 +855,19 @@ footer {
 		font-size: 1.6rem;
 	}
 
-	.experience-card .experience-header h3 {
+	app-work-card .work-company {
 		font-size: 1.1rem;
 	}
 
-	.experience-card .experience-period {
+	app-work-card .work-period {
 		font-size: 0.8rem;
 	}
 
-	.experience-description p {
+	app-work-card .work-description p {
 		font-size: 0.9rem;
 	}
 
-	.experience-highlights li {
+	app-work-card .work-highlights li {
 		font-size: 0.8rem;
 	}
 
@@ -1102,24 +910,24 @@ footer {
 		font-size: 1.4rem;
 	}
 
-	.experience-card {
+	app-work-card {
 		padding: 1rem;
 		margin-bottom: 1.5rem;
 	}
 
-	.experience-card .experience-header h3 {
+	app-work-card .work-company {
 		font-size: 1rem;
 	}
 
-	.experience-card .experience-period {
+	app-work-card .work-period {
 		font-size: 0.75rem;
 	}
 
-	.experience-description p {
+	app-work-card .work-description p {
 		font-size: 0.85rem;
 	}
 
-	.experience-highlights li {
+	app-work-card .work-highlights li {
 		font-size: 0.75rem;
 	}
 
@@ -1139,6 +947,11 @@ footer {
 
 	.about-languages {
 		font-size: 0.8rem;
+	}
+
+	.footer-content {
+		font-size: 0.75rem;
+		padding: 1rem 0;
 	}
 }
 
@@ -1168,8 +981,8 @@ header.header-visible {
 	transform: translateY(0);
 }
 
-/* Animaciones para cards de experiencia */
-.experience-card {
+/* Animaciones para work cards */
+app-work-card {
 	opacity: 0;
 	transform: translateX(-20px);
 	animation: slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
@@ -1300,7 +1113,7 @@ html {
 }
 
 /* Efectos de hover mejorados */
-.experience-card:hover {
+app-work-card:hover {
 	transform: translateY(-2px);
 	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
@@ -1340,7 +1153,7 @@ header {
 
 /* Optimizaciones para rendimiento */
 .section-content,
-.experience-card,
+app-work-card,
 app-project-card {
 	will-change: opacity, transform;
 }

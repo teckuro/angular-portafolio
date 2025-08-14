@@ -1,121 +1,272 @@
 .work-card {
-	background: var(--background-secondary);
-	border: 1px solid transparent;
-	border-radius: 8px;
+	margin-bottom: 2rem;
 	padding: 1.5rem;
-	margin-bottom: 1.5rem;
-	box-shadow: 0 2px 8px var(--shadow-color);
-	display: flex;
-	flex-direction: row;
-	gap: 2rem;
-	align-items: flex-start;
+	background: transparent;
+	border: 1px solid transparent;
+	border-radius: 12px;
 	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	position: relative;
+	overflow: hidden;
+	box-shadow: none;
+}
+
+.work-card::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(
+		90deg,
+		transparent,
+		rgba(255, 255, 255, 0.15),
+		transparent
+	);
+	transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.work-card:hover::before {
+	left: 100%;
 }
 
 .work-card:hover {
+	background: rgba(255, 255, 255, 0.08);
 	border-color: var(--accent-blue);
-	transform: translateY(-2px);
-	box-shadow: 0 8px 25px var(--shadow-color);
+	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
-.work-left {
-	flex: 0 0 250px;
+.work-card::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	border-radius: 12px;
+	background: linear-gradient(
+		135deg,
+		rgba(255, 255, 255, 0.1) 0%,
+		transparent 50%,
+		rgba(255, 255, 255, 0.05) 100%
+	);
+	opacity: 0;
+	transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	pointer-events: none;
 }
 
-.work-info {
+.work-card:hover::after {
+	opacity: 1;
+}
+
+.work-header {
 	display: flex;
-	flex-direction: column;
-	gap: 0.5rem;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 0.75rem;
 }
 
-.period {
-	color: var(--accent-blue);
-	font-size: 0.9rem;
-	font-weight: var(--font-weight-medium);
-	margin: 0;
-}
-
-.position {
-	color: var(--accent-blue);
-	margin: 0;
+.work-company {
 	font-size: 1.25rem;
-	font-weight: var(--font-weight-semibold);
-}
-
-.company {
-	font-weight: var(--font-weight-semibold);
 	color: var(--text-primary);
 	margin: 0;
-	font-size: 1rem;
+	font-weight: 600;
+	letter-spacing: -0.01em;
+	transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.location {
+.work-card:hover .work-company {
+	color: var(--accent-blue);
+}
+
+.work-period {
+	font-size: 0.875rem;
 	color: var(--text-secondary);
-	font-size: 0.9rem;
-	margin: 0;
-}
-
-.work-right {
-	flex: 1;
-	min-width: 0;
-}
-
-.description {
-	color: var(--text-primary);
-	margin: 0 0 1rem 0;
-	line-height: 1.6;
-}
-
-.tech-stack {
-	margin: 1rem 0;
-}
-
-.tech-tag {
-	background: var(--accent-blue);
-	color: var(--text-primary);
-	padding: 0.25rem 0.75rem;
-	border-radius: 20px;
-	font-size: 0.8rem;
-	margin-right: 0.5rem;
-	margin-bottom: 0.5rem;
-	display: inline-block;
-}
-
-.achievements {
-	list-style: none;
+	background: transparent;
 	padding: 0;
-	margin: 1rem 0 0 0;
+	border-radius: 0;
+	font-weight: 500;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.achievements li {
-	color: var(--text-secondary);
-	margin-bottom: 0.5rem;
-	padding-left: 1.5rem;
+.work-card:hover .work-period {
+	color: var(--text-primary);
+}
+
+.company-link {
+	color: var(--accent-blue);
+	font-size: 0.875rem;
+	margin-bottom: 1.25rem;
+	font-style: normal;
+	font-weight: 500;
+}
+
+.company-link a {
+	color: var(--accent-blue);
+	text-decoration: none;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 	position: relative;
 }
 
-.achievements li::before {
-	content: '•';
-	color: var(--accent-blue);
+.company-link a::after {
+	content: '';
 	position: absolute;
+	bottom: -2px;
 	left: 0;
-	font-weight: bold;
+	width: 0;
+	height: 1px;
+	background-color: var(--accent-blue);
+	transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.company-link a:hover {
+	color: var(--accent-blue);
+	transform: translateY(-1px);
+}
+
+.company-link a:hover::after {
+	width: 100%;
+}
+
+.work-description p {
+	font-size: 1rem;
+	line-height: 1.6;
+	color: var(--text-secondary);
+	margin-bottom: 1.25rem;
+	font-weight: 400;
+	transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.work-card:hover .work-description p {
+	color: var(--text-primary);
+}
+
+.work-highlights {
+	margin-bottom: 1.25rem;
+}
+
+.work-highlights h4 {
+	font-size: 0.875rem;
+	color: var(--text-primary);
+	margin-bottom: 0.75rem;
+	border-bottom: none;
+	padding-bottom: 0;
+	display: block;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+}
+
+.work-highlights ul {
+	margin: 0;
+	padding-left: 1.5rem;
+}
+
+.work-highlights li {
+	margin-bottom: 0.5rem;
+	color: var(--text-secondary);
+	line-height: 1.6;
+	font-size: 0.875rem;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	padding-left: 0.5rem;
+	border-left: 2px solid transparent;
+}
+
+.work-highlights li:hover {
+	color: var(--text-primary);
+	border-left-color: var(--accent-blue);
+	padding-left: 1rem;
+}
+
+.tech-stack h4 {
+	font-size: 0.875rem;
+	color: var(--text-primary);
+	margin-bottom: 0.75rem;
+	border-bottom: none;
+	padding-bottom: 0;
+	display: block;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+}
+
+.tech-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+}
+
+.tech-tag {
+	background-color: rgba(49, 130, 206, 0.1);
+	color: var(--accent-blue);
+	padding: 0.4rem 0.8rem;
+	border-radius: 20px;
+	font-size: 0.75rem;
+	font-weight: 500;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	position: relative;
+	overflow: hidden;
+	border: 1px solid rgba(49, 130, 206, 0.2);
+}
+
+.tech-tag::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(
+		90deg,
+		transparent,
+		rgba(49, 130, 206, 0.2),
+		transparent
+	);
+	transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tech-tag:hover::before {
+	left: 100%;
+}
+
+.tech-tag:hover {
+	background-color: var(--accent-blue);
+	color: white;
+	transform: translateY(-1px);
+	box-shadow: 0 2px 8px var(--shadow-color);
 }
 
 /* Responsive design */
 @media (max-width: 768px) {
 	.work-card {
-		flex-direction: column;
-		gap: 1.5rem;
 		padding: 1rem;
+		margin-bottom: 1.5rem;
 	}
 
-	.work-left {
-		flex: none;
-		width: 100%;
+	.work-header {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.5rem;
 	}
 
-	.work-info {
-		gap: 0.25rem;
+	.work-company {
+		font-size: 1.1rem;
+	}
+
+	.work-period {
+		font-size: 0.8rem;
+	}
+
+	.work-description p {
+		font-size: 0.9rem;
+	}
+
+	.work-highlights li {
+		font-size: 0.8rem;
+	}
+
+	.tech-tag {
+		font-size: 0.7rem;
+		padding: 0.3rem 0.6rem;
 	}
 }

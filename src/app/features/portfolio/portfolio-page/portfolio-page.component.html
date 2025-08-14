@@ -78,45 +78,10 @@
 				<h2>Experiencia Laboral</h2>
 
 				<ng-container *ngFor="let work of works$ | async; let i = index">
-					<div class="experience-card" [style.animation-delay]="i * 0.2 + 's'">
-						<div class="experience-header">
-							<h3>{{ work.company }}</h3>
-							<span class="experience-period">
-								{{ work.startDate }} -
-								{{ work.isCurrent ? 'Actualidad' : work.endDate }}
-							</span>
-						</div>
-						<p class="company-link" *ngIf="work.companyUrl">
-							<a
-								[href]="work.companyUrl"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								{{
-									work.companyUrl.replace('https://', '').replace('http://', '')
-								}}
-							</a>
-						</p>
-						<div class="experience-description">
-							<p>{{ work.description }}</p>
-							<div class="experience-highlights">
-								<h4>Responsabilidades principales:</h4>
-								<ul>
-									<li *ngFor="let achievement of work.achievements">
-										{{ achievement }}
-									</li>
-								</ul>
-							</div>
-							<div class="tech-stack">
-								<h4>Tecnologías utilizadas:</h4>
-								<div class="tech-tags">
-									<span class="tech-tag" *ngFor="let tech of work.tech">{{
-										tech
-									}}</span>
-								</div>
-							</div>
-						</div>
-					</div>
+					<app-work-card
+						[work]="work"
+						[style.animation-delay]="i * 0.2 + 's'"
+					></app-work-card>
 				</ng-container>
 
 				<div class="curriculum-section">
@@ -138,13 +103,9 @@
 			</div>
 		</div>
 		<div class="footer-content">
-			Aplicación desarrollada con Angular 11 por
-			<a
-				href="https://github.com/teckuro"
-				target="_blank"
-				rel="noopener noreferrer"
-				>Juan Pablo Huerta</a
-			>
+			Diseñado y codificado en Visual Studio Code por mí mismo. Construido con
+			Angular y CSS, desplegado con Vercel. Todo el texto está configurado en la
+			tipografía Inter.
 		</div>
 	</main>
 

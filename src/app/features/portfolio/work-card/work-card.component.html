@@ -1,23 +1,32 @@
 <div class="work-card">
-	<div class="work-left">
-		<div class="work-info">
-			<p class="period">
-				{{ work.startDate }} - {{ work.endDate || 'Present' }}
-			</p>
-			<h3 class="position">{{ work.position }}</h3>
-			<p class="company">{{ work.company }}</p>
-			<p class="location">{{ work.location }}</p>
-		</div>
+	<div class="work-header">
+		<h3 class="work-company">{{ work.position }}</h3>
+		<span class="work-period">
+			{{ work.startDate }} - {{ work.isCurrent ? 'Actualidad' : work.endDate }}
+		</span>
 	</div>
-	<div class="work-right">
-		<p class="description">{{ work.description }}</p>
-		<div class="tech-stack">
-			<span *ngFor="let tech of work.tech" class="tech-tag">
-				{{ tech }}
-			</span>
+	<p class="company-link" *ngIf="work.companyUrl">
+		<a [href]="work.companyUrl" target="_blank" rel="noopener noreferrer">
+			{{ work.companyUrl.replace('https://', '').replace('http://', '') }}
+		</a>
+	</p>
+	<div class="work-description">
+		<p>{{ work.description }}</p>
+		<div class="work-highlights">
+			<h4>Responsabilidades principales:</h4>
+			<ul>
+				<li *ngFor="let achievement of work.achievements">
+					{{ achievement }}
+				</li>
+			</ul>
 		</div>
-		<ul class="achievements">
-			<li *ngFor="let achievement of work.achievements">{{ achievement }}</li>
-		</ul>
+		<div class="tech-stack">
+			<h4>Tecnologías utilizadas:</h4>
+			<div class="tech-tags">
+				<span class="tech-tag" *ngFor="let tech of work.tech">
+					{{ tech }}
+				</span>
+			</div>
+		</div>
 	</div>
 </div>
