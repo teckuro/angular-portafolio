@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { inject } from '@vercel/analytics';
 
 @Component({
 	selector: 'app-root',
@@ -10,8 +9,7 @@ export class AppComponent implements OnInit {
 	title = 'angular-portafolio';
 
 	constructor() {
-		// Inicializar Vercel Analytics
-		inject();
+		// Componente inicializado
 	}
 
 	ngOnInit(): void {
