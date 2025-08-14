@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
+import { inject } from '@vercel/analytics';
 
 @Component({
 	selector: 'app-root',
@@ -9,7 +10,10 @@ import { SwUpdate } from '@angular/service-worker';
 export class AppComponent implements OnInit {
 	title = 'angular-portafolio';
 
-	constructor(private swUpdate: SwUpdate) {}
+	constructor(private swUpdate: SwUpdate) {
+		// Inicializar Vercel Analytics
+		inject();
+	}
 
 	ngOnInit(): void {
 		this.checkForUpdates();
@@ -20,9 +24,11 @@ export class AppComponent implements OnInit {
 	 */
 	private checkForUpdates(): void {
 		if (this.swUpdate.isEnabled) {
-			this.swUpdate.versionUpdates.subscribe(event => {
+			this.swUpdate.versionUpdates.subscribe((event) => {
 				if (event.type === 'VERSION_READY') {
-					if (confirm('Hay una nueva versión disponible. ¿Deseas actualizar?')) {
+					if (
+						confirm('Hay una nueva versión disponible. ¿Deseas actualizar?')
+					) {
 						window.location.reload();
 					}
 				}

@@ -17,6 +17,7 @@ Portfolio personal desarrollado con Angular 11 que muestra mi experiencia profes
 - **Animaciones**: CSS Transitions, Intersection Observer API
 - **SEO**: Meta tags, Open Graph, Twitter Cards, Schema.org
 - **PWA**: Web App Manifest, Service Worker
+- **Analytics**: Vercel Analytics para tracking de usuarios
 - **Testing**: Jasmine, Karma
 - **Herramientas**: Angular CLI, ESLint, Prettier
 
@@ -94,13 +95,14 @@ src/
 - **Responsive**: Mobile-first approach
 - **Accesibilidad**: Navegación por teclado y lectores de pantalla
 
-## 📊 SEO y Performance
+## 📊 SEO, Performance y Analytics
 
 - **Meta Tags**: Descripción, keywords, autor
 - **Open Graph**: Optimizado para redes sociales
 - **Structured Data**: Schema.org para motores de búsqueda
 - **Performance**: Lazy loading, preload de recursos críticos
 - **PWA**: Manifest y service worker para funcionalidad offline
+- **Analytics**: Tracking de usuarios, navegación y interacciones
 
 ## 🧪 Testing
 
@@ -137,6 +139,16 @@ El proyecto incluye tests unitarios completos para:
 
 - ✅ Tests unitarios completos
 - ✅ Cobertura de funcionalidades principales
+
+### Analytics
+
+- ✅ Vercel Analytics integrado
+- ✅ Tracking de navegación entre secciones
+- ✅ Tracking de interacciones con proyectos
+- ✅ Tracking de descargas de curriculum
+- ✅ Tracking de clicks en redes sociales
+- ✅ Tracking de profundidad de scroll
+- ✅ Tracking de tiempo en página
 
 ## 👨‍💻 Autor
 

@@ -12,6 +12,7 @@ import { Project } from '../models/project.model';
 import { Work } from '../models/work.model';
 import { ProjectsService } from '../services/projects.service';
 import { WorksService } from '../services/works.service';
+import { AnalyticsService } from '../../../core/services/analytics.service';
 
 @Component({
 	selector: 'app-portfolio-page',
@@ -28,12 +29,17 @@ export class PortfolioPageComponent implements OnInit, AfterViewInit {
 	headerVisible = false;
 	sectionsVisible: { [key: string]: boolean } = {};
 
+	// Analytics tracking
+	private startTime = Date.now();
+	private lastScrollDepth = 0;
+
 	@ViewChildren('section') sections!: QueryList<ElementRef>;
 
 	constructor(
 		private projectsService: ProjectsService,
 		private worksService: WorksService,
-		private elementRef: ElementRef
+		private elementRef: ElementRef,
+		private analyticsService: AnalyticsService
 	) {
 		// Constructor vacío intencional
 	}
@@ -45,6 +51,9 @@ export class PortfolioPageComponent implements OnInit, AfterViewInit {
 		setTimeout(() => {
 			this.headerVisible = true;
 		}, 300);
+
+		// Track page view
+		this.analyticsService.trackPageView('portfolio');
 	}
 
 	ngAfterViewInit(): void {
@@ -112,6 +121,9 @@ export class PortfolioPageComponent implements OnInit, AfterViewInit {
 					'Sección activa:',
 					this.activeSection
 				);
+
+				// Track section navigation
+				this.analyticsService.trackSectionNavigation(sectionId);
 			}, 100);
 		}
 	}
@@ -123,6 +135,7 @@ export class PortfolioPageComponent implements OnInit, AfterViewInit {
 	onScroll(): void {
 		this.updateActiveSection();
 		this.handleScrollAnimations();
+		this.trackScrollDepth();
 	}
 
 	/**
@@ -168,11 +181,39 @@ export class PortfolioPageComponent implements OnInit, AfterViewInit {
 	}
 
 	/**
+	 * Track scroll depth for analytics
+	 */
+	private trackScrollDepth(): void {
+		const scrollTop = window.scrollY;
+		const docHeight =
+			document.documentElement.scrollHeight - window.innerHeight;
+		const scrollPercent = Math.round((scrollTop / docHeight) * 100);
+
+		// Track every 25% of scroll depth
+		if (scrollPercent >= 25 && this.lastScrollDepth < 25) {
+			this.analyticsService.trackScrollDepth(25);
+			this.lastScrollDepth = 25;
+		} else if (scrollPercent >= 50 && this.lastScrollDepth < 50) {
+			this.analyticsService.trackScrollDepth(50);
+			this.lastScrollDepth = 50;
+		} else if (scrollPercent >= 75 && this.lastScrollDepth < 75) {
+			this.analyticsService.trackScrollDepth(75);
+			this.lastScrollDepth = 75;
+		} else if (scrollPercent >= 100 && this.lastScrollDepth < 100) {
+			this.analyticsService.trackScrollDepth(100);
+			this.lastScrollDepth = 100;
+		}
+	}
+
+	/**
 	 * Abre el modal del curriculum con animación
 	 */
 	openCurriculumModal(): void {
 		this.showCurriculumModal = true;
 		document.body.style.overflow = 'hidden'; // Previene scroll del body
+
+		// Track curriculum modal open
+		this.analyticsService.trackCustomEvent('curriculum_modal_open');
 
 		// Trigger animation after modal is shown
 		setTimeout(() => {
@@ -203,6 +244,9 @@ export class PortfolioPageComponent implements OnInit, AfterViewInit {
 	 * Descarga el PDF del curriculum
 	 */
 	downloadPDF(): void {
+		// Track curriculum download
+		this.analyticsService.trackCurriculumDownload();
+
 		// URL del PDF (debes subir tu archivo PDF a assets)
 		const pdfUrl = 'assets/cv-juan-pablo-huerta.pdf';
 
@@ -225,5 +269,30 @@ export class PortfolioPageComponent implements OnInit, AfterViewInit {
 		const baseClasses = 'section-content';
 		const visibleClass = this.sectionsVisible[sectionId] ? 'animate-in' : '';
 		return `${baseClasses} ${visibleClass}`.trim();
+	}
+
+	/**
+	 * Track social media clicks
+	 */
+	trackSocialClick(platform: string): void {
+		this.analyticsService.trackSocialMediaClick(platform);
+	}
+
+	/**
+	 * Track project interactions
+	 */
+	trackProjectInteraction(projectTitle: string, action: string): void {
+		this.analyticsService.trackCustomEvent('project_interaction', {
+			project_title: projectTitle,
+			action: action
+		});
+	}
+
+	/**
+	 * Track time on page when component is destroyed
+	 */
+	ngOnDestroy(): void {
+		const timeOnPage = Math.round((Date.now() - this.startTime) / 1000);
+		this.analyticsService.trackTimeOnPage(timeOnPage);
 	}
 }
