@@ -1,14 +1,20 @@
 <div class="work-card">
-	<div class="work-header">
-		<h3>{{ work.position }}</h3>
-		<p class="company">{{ work.company }}</p>
-		<p class="period">{{ work.startDate }} - {{ work.endDate || 'Present' }}</p>
-		<p class="location">{{ work.location }}</p>
+	<div class="work-left">
+		<div class="work-info">
+			<p class="period">
+				{{ work.startDate }} - {{ work.endDate || 'Present' }}
+			</p>
+			<h3 class="position">{{ work.position }}</h3>
+			<p class="company">{{ work.company }}</p>
+			<p class="location">{{ work.location }}</p>
+		</div>
 	</div>
-	<div class="work-content">
+	<div class="work-right">
 		<p class="description">{{ work.description }}</p>
 		<div class="tech-stack">
-			<span *ngFor="let tech of work.tech" class="tech-tag">{{ tech }}</span>
+			<span *ngFor="let tech of work.tech" class="tech-tag">
+				{{ tech }}
+			</span>
 		</div>
 		<ul class="achievements">
 			<li *ngFor="let achievement of work.achievements">{{ achievement }}</li>

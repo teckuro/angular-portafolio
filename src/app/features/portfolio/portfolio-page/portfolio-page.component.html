@@ -3,40 +3,121 @@
 		<div class="header-content">
 			<div class="header-content-info">
 				<h1>Juan Pablo</h1>
-				<p>Software Engineer</p>
+				<p>Desarrollador Full Stack</p>
 			</div>
+			<nav class="main-nav">
+				<ul>
+					<li>
+						<a
+							(click)="scrollToSection('about')"
+							[ngClass]="{ active: activeSection === 'about' }"
+						>
+							<span>Sobre Mi</span>
+						</a>
+					</li>
+					<li>
+						<a
+							(click)="scrollToSection('work')"
+							[ngClass]="{ active: activeSection === 'work' }"
+						>
+							<span>Experiencia</span>
+						</a>
+					</li>
+					<li>
+						<a
+							(click)="scrollToSection('projects')"
+							[ngClass]="{ active: activeSection === 'projects' }"
+						>
+							<span>Proyectos</span>
+						</a>
+					</li>
+				</ul>
+			</nav>
 			<div class="header-social-media">
 				<div class="social-media-content">
-					<h2>Social Media</h2>
-					<p>
-						I have a strong foundation in web development and a passion for
-						building web applications.
-					</p>
+					<a href="https://www.linkedin.com/in/jphuerta1/" target="_blank">
+						<img src="../../../assets/img/linkedin.svg" alt="LinkedIn" />
+					</a>
+					<a href="https://github.com/teckuro" target="_blank">
+						<img src="../../../assets/img/github.svg" alt="GitHub" />
+					</a>
 				</div>
 			</div>
 		</div>
 	</header>
 
 	<main>
-		<div class="about">
+		<div id="about" class="about">
 			<div class="about-content">
-				<h2>About Me</h2>
-				<p>
-					I am a software engineer with a passion for building web applications.
-				</p>
+				<h2>Sobre Mí</h2>
+				<div class="about-description">
+					<p class="about-intro">
+						Desarrollador Full Stack con 4 años creando soluciones en PHP,
+						Laravel, JavaScript y Angular. He participado en integraciones de
+						facturación electrónica, mensajería y telecomunicaciones. Me motiva
+						construir productos digitales útiles y bien pensados, cuidando cada
+						detalle para ofrecer la mejor experiencia al usuario y un código de
+						calidad.
+					</p>
+				</div>
 			</div>
 		</div>
-		<div class="work-experience">
+		<div id="work" class="work-experience">
 			<div class="work-experience-content">
-				<h2>Work Experience</h2>
+				<h2>Experiencia Laboral</h2>
+
 				<ng-container *ngFor="let work of works$ | async">
-					<app-work-card [work]="work"></app-work-card>
+					<div class="experience-card">
+						<div class="experience-header">
+							<h3>{{ work.company }}</h3>
+							<span class="experience-period">
+								{{ work.startDate }} -
+								{{ work.isCurrent ? 'Actualidad' : work.endDate }}
+							</span>
+						</div>
+						<p class="company-link" *ngIf="work.companyUrl">
+							<a
+								[href]="work.companyUrl"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								{{
+									work.companyUrl.replace('https://', '').replace('http://', '')
+								}}
+							</a>
+						</p>
+						<div class="experience-description">
+							<p>{{ work.description }}</p>
+							<div class="experience-highlights">
+								<h4>Responsabilidades principales:</h4>
+								<ul>
+									<li *ngFor="let achievement of work.achievements">
+										{{ achievement }}
+									</li>
+								</ul>
+							</div>
+							<div class="tech-stack">
+								<h4>Tecnologías utilizadas:</h4>
+								<div class="tech-tags">
+									<span class="tech-tag" *ngFor="let tech of work.tech">{{
+										tech
+									}}</span>
+								</div>
+							</div>
+						</div>
+					</div>
 				</ng-container>
+
+				<div class="curriculum-section">
+					<span class="curriculum-link" (click)="openCurriculumModal()">
+						Ver curriculum completo
+					</span>
+				</div>
 			</div>
 		</div>
-		<div class="projects">
+		<div id="projects" class="projects">
 			<div class="projects-content">
-				<h2>Projects</h2>
+				<h2>Proyectos</h2>
 				<ng-container *ngFor="let project of projects$ | async">
 					<app-project-card [project]="project"></app-project-card>
 				</ng-container>
@@ -47,4 +128,103 @@
 			<a href="https://github.com/teckuro">Juan Pablo</a>
 		</div>
 	</main>
+
+	<!-- Modal del Curriculum -->
+	<div
+		class="modal-overlay"
+		*ngIf="showCurriculumModal"
+		(click)="closeCurriculumModal()"
+	>
+		<div class="modal-content" (click)="$event.stopPropagation()">
+			<div class="modal-header">
+				<h3>Curriculum Vitae</h3>
+				<div class="modal-actions">
+					<button class="download-btn" (click)="downloadPDF()">
+						📄 Descargar PDF
+					</button>
+					<button class="modal-close" (click)="closeCurriculumModal()">
+						×
+					</button>
+				</div>
+			</div>
+			<div class="modal-body">
+				<div class="curriculum-info">
+					<h4>Juan Pablo Huerta Saavedra</h4>
+					<p class="curriculum-title">Analista Programador Computacional</p>
+
+					<div class="curriculum-section">
+						<h5>Información de Contacto</h5>
+						<p>📧 Email: teckuro6&#64;gmail.com</p>
+						<p>📱 Teléfono: +56 9 57802607</p>
+						<p>📍 Ubicación: Viña del Mar, Chile</p>
+					</div>
+
+					<div class="curriculum-section">
+						<h5>Resumen Profesional</h5>
+						<p>
+							Desarrollador Full Stack con 4 años de experiencia en
+							integraciones de facturación electrónica.
+						</p>
+					</div>
+
+					<div class="curriculum-section">
+						<h5>Experiencia Laboral</h5>
+						<div class="curriculum-experience">
+							<h6>Integraciones de Facturación Electrónica</h6>
+							<p class="experience-period">2021 - Actualidad</p>
+							<ul>
+								<li>
+									Desarrollo de interfaces y componentes para sistemas de
+									facturación electrónica
+								</li>
+								<li>
+									Implementación de integraciones con WebPay REST y sistemas de
+									pago
+								</li>
+								<li>Gestión de requerimientos y documentación técnica</li>
+							</ul>
+						</div>
+						<div class="curriculum-experience">
+							<h6>Desarrollo de Portales y Automatización</h6>
+							<p class="experience-period">2020</p>
+							<ul>
+								<li>
+									Desarrollo Back-end con Laravel para procesos de
+									automatización
+								</li>
+								<li>
+									Desarrollo Front-end con Angular para portales de auto
+									atención
+								</li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="curriculum-section">
+						<h5>Habilidades Técnicas</h5>
+						<div class="skills-grid">
+							<span class="skill-tag">PHP</span>
+							<span class="skill-tag">Laravel</span>
+							<span class="skill-tag">JavaScript</span>
+							<span class="skill-tag">Angular</span>
+							<span class="skill-tag">jQuery</span>
+							<span class="skill-tag">Ajax</span>
+							<span class="skill-tag">PostgreSQL</span>
+							<span class="skill-tag">GraphQL</span>
+							<span class="skill-tag">Node.js</span>
+							<span class="skill-tag">Git</span>
+							<span class="skill-tag">WebPay REST</span>
+							<span class="skill-tag">HTML/CSS</span>
+						</div>
+					</div>
+
+					<div class="curriculum-section">
+						<h5>Idiomas</h5>
+						<p>Español: Nativo</p>
+						<p>Inglés: Nivel C1 (Avanzado)</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

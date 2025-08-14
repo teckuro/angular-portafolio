@@ -1,33 +1,68 @@
 .work-card {
 	background: var(--background-secondary);
-	border: 1px solid var(--border-color);
+	border: 1px solid transparent;
 	border-radius: 8px;
 	padding: 1.5rem;
 	margin-bottom: 1.5rem;
 	box-shadow: 0 2px 8px var(--shadow-color);
+	display: flex;
+	flex-direction: row;
+	gap: 2rem;
+	align-items: flex-start;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.work-header h3 {
-	color: var(--accent-pink);
-	margin-bottom: 0.5rem;
+.work-card:hover {
+	border-color: var(--accent-blue);
+	transform: translateY(-2px);
+	box-shadow: 0 8px 25px var(--shadow-color);
+}
+
+.work-left {
+	flex: 0 0 250px;
+}
+
+.work-info {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.period {
+	color: var(--accent-blue);
+	font-size: 0.9rem;
+	font-weight: var(--font-weight-medium);
+	margin: 0;
+}
+
+.position {
+	color: var(--accent-blue);
+	margin: 0;
 	font-size: 1.25rem;
+	font-weight: var(--font-weight-semibold);
 }
 
 .company {
 	font-weight: var(--font-weight-semibold);
 	color: var(--text-primary);
-	margin-bottom: 0.25rem;
+	margin: 0;
+	font-size: 1rem;
 }
 
-.period, .location {
+.location {
 	color: var(--text-secondary);
 	font-size: 0.9rem;
-	margin-bottom: 0.25rem;
+	margin: 0;
+}
+
+.work-right {
+	flex: 1;
+	min-width: 0;
 }
 
 .description {
 	color: var(--text-primary);
-	margin: 1rem 0;
+	margin: 0 0 1rem 0;
 	line-height: 1.6;
 }
 
@@ -60,9 +95,27 @@
 }
 
 .achievements li::before {
-	content: "•";
-	color: var(--accent-pink);
+	content: '•';
+	color: var(--accent-blue);
 	position: absolute;
 	left: 0;
 	font-weight: bold;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+	.work-card {
+		flex-direction: column;
+		gap: 1.5rem;
+		padding: 1rem;
+	}
+
+	.work-left {
+		flex: none;
+		width: 100%;
+	}
+
+	.work-info {
+		gap: 0.25rem;
+	}
 }

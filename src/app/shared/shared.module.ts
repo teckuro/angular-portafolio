@@ -4,6 +4,7 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
 
 @NgModule({
 	declarations: [LoadingSpinnerComponent],
-	imports: [CommonModule]
+	imports: [CommonModule],
+	exports: [LoadingSpinnerComponent]
 })
 export class SharedModule {}

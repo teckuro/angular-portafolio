@@ -9,71 +9,51 @@ export class WorksService {
 	private works: Work[] = [
 		{
 			id: 1,
-			company: 'TechCorp Solutions',
-			position: 'Senior Frontend Developer',
+			company: 'DESIS Facturación Electrónica',
+			position: 'Desarrollador Full Stack',
 			description:
-				'Desarrollo de aplicaciones web modernas con Angular y React',
-			startDate: '2023',
-			endDate: '2024',
-			location: 'Madrid, España',
-			tech: ['Angular', 'React', 'TypeScript', 'Node.js'],
-			achievements: [
-				'Lideré el desarrollo de 3 aplicaciones web críticas',
-				'Mejoré el rendimiento en un 40%',
-				'Mentoré a 2 desarrolladores junior'
+				'Desarrollador Full Stack con 4 años de experiencia en integraciones de facturación electrónica.',
+			startDate: '2021',
+			location: 'Santiago, Chile',
+			tech: [
+				'PHP',
+				'PostgreSQL',
+				'JavaScript',
+				'jQuery',
+				'Ajax',
+				'GraphQL',
+				'Node.js',
+				'Git',
+				'WebPay REST'
 			],
-			isCurrent: false,
-			companyUrl: 'https://techcorp.com'
+			achievements: [
+				'Creación y modificación de interfaces con PHP, PostgreSQL, JavaScript, Ajax, jQuery',
+				'Desarrollo de componentes internos de la empresa',
+				'Implementación de infraestructura WebPay REST',
+				'Gestión del carro de compras de la empresa',
+				'Uso de herramientas Git, Node.js, Insomnia, GraphQL',
+				'Gestión de requerimientos y documentación técnica'
+			],
+			isCurrent: true,
+			companyUrl: 'https://www.desis.cl'
 		},
 		{
 			id: 2,
-			company: 'Digital Innovations',
-			position: 'Full Stack Developer',
-			description: 'Desarrollo full-stack con tecnologías modernas',
-			startDate: '2022',
-			endDate: '2023',
-			location: 'Barcelona, España',
-			tech: ['JavaScript', 'Python', 'Django', 'PostgreSQL'],
+			company: 'Anida Tecnología a su medida',
+			position: 'Desarrollador Back-end y Front-end',
+			description:
+				'Desarrollo Back-end y Front-end para procesos de automatización y portal de auto atención.',
+			startDate: '2020',
+			endDate: '2020',
+			location: 'Santiago, Chile',
+			tech: ['Laravel', 'Angular', 'PHP', 'JavaScript'],
 			achievements: [
-				'Desarrollé 5 APIs RESTful',
-				'Implementé sistema de autenticación',
-				'Optimicé consultas de base de datos'
+				'Desarrollo Back-end con Framework Laravel para automatización de operaciones',
+				'Apoyo en el desarrollo del portal de auto atención de Anida Consultores',
+				'Desarrollo Front-end con Framework Angular'
 			],
 			isCurrent: false,
-			companyUrl: 'https://digitalinnovations.com'
-		},
-		{
-			id: 3,
-			company: 'StartUpXYZ',
-			position: 'Frontend Developer',
-			description: 'Desarrollo de interfaces de usuario modernas y responsivas',
-			startDate: '2021',
-			endDate: '2022',
-			location: 'Valencia, España',
-			tech: ['Vue.js', 'CSS3', 'HTML5', 'JavaScript'],
-			achievements: [
-				'Creé 10+ componentes reutilizables',
-				'Implementé diseño responsive',
-				'Reduje tiempo de carga en 30%'
-			],
-			isCurrent: false,
-			companyUrl: 'https://startupxyz.com'
-		},
-		{
-			id: 4,
-			company: 'Innovation Labs',
-			position: 'Software Engineer',
-			description: 'Desarrollo de soluciones innovadoras para clientes',
-			startDate: '2024',
-			location: 'Madrid, España',
-			tech: ['Angular', 'TypeScript', 'RxJS', 'Firebase'],
-			achievements: [
-				'Desarrollo de aplicaciones escalables',
-				'Implementación de arquitectura limpia',
-				'Colaboración en equipo ágil'
-			],
-			isCurrent: true,
-			companyUrl: 'https://innovationlabs.com'
+			companyUrl: 'https://www.anidalatam.com'
 		}
 	];
 
