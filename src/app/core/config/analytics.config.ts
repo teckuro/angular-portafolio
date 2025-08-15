@@ -1,5 +1,5 @@
 /**
- * Configuración para Vercel Analytics
+ * Configuración para Analytics
  */
 export const ANALYTICS_CONFIG = {
 	// Eventos de navegación

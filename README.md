@@ -17,7 +17,7 @@ Portfolio personal desarrollado con Angular 11 que muestra mi experiencia profes
 - **Animaciones**: CSS Transitions, Intersection Observer API
 - **SEO**: Meta tags, Open Graph, Twitter Cards, Schema.org
 - **PWA**: Web App Manifest, Service Worker
-- **Analytics**: Sistema manual de tracking + Vercel Analytics
+- **Analytics**: Sistema manual de tracking
 - **Testing**: Jasmine, Karma
 - **Herramientas**: Angular CLI, ESLint, Prettier
 
@@ -52,18 +52,17 @@ npm install
 npm start
 ```
 
-### Despliegue en Vercel
+### Despliegue
 
-El proyecto está configurado para despliegue automático en Vercel:
+El proyecto está configurado para despliegue en cualquier plataforma:
 
-1. **Configuración automática**: El archivo `vercel.json` maneja la configuración
-2. **Build optimizado**: Usa `ng build --prod` para producción
-3. **Routing**: Configurado para SPA (Single Page Application)
-4. **Node.js**: Configurado para usar Node.js 16
+1. **Build optimizado**: Usa `ng build --prod` para producción
+2. **Routing**: Configurado para SPA (Single Page Application)
+3. **Node.js**: Configurado para usar Node.js 16
 
 ```bash
-# Despliegue manual (si es necesario)
-vercel --prod
+# Construir para producción
+npm run build
 ```
 
 ### Comandos Disponibles
@@ -163,7 +162,7 @@ El proyecto incluye tests unitarios completos para:
 - ✅ Tracking de clicks en redes sociales
 - ✅ Tracking de profundidad de scroll
 - ✅ Tracking de tiempo en página
-- ✅ Compatible con Vercel Analytics (script externo)
+- ✅ Analytics personalizado implementado
 
 ## 👨‍💻 Autor
 

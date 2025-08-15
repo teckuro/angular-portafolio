@@ -1,0 +1,270 @@
+<app-admin-layout>
+	<div class="project-form-container">
+		<app-admin-breadcrumb></app-admin-breadcrumb>
+
+		<div class="page-header">
+			<h1 class="page-title">
+				{{ isEditMode ? 'Editar' : 'Nuevo' }} Proyecto
+			</h1>
+		</div>
+
+		<!-- Loading State -->
+		<div class="loading-container" *ngIf="loading">
+			<div class="loading-spinner"></div>
+			<p>Cargando proyecto...</p>
+		</div>
+
+		<!-- Error State -->
+		<div class="error-container" *ngIf="error && !loading">
+			<div class="error-message">
+				<span class="error-icon">⚠️</span>
+				<p>{{ error }}</p>
+				<button class="btn btn-secondary" (click)="onCancel()">Volver</button>
+			</div>
+		</div>
+
+		<!-- Form -->
+		<div class="form-content" *ngIf="!loading">
+			<form [formGroup]="projectForm" (ngSubmit)="onSubmit()" class="project-form">
+				<div class="form-grid">
+					<!-- Title -->
+					<div class="form-group full-width">
+						<label for="title" class="form-label">
+							Título del Proyecto <span class="required">*</span>
+						</label>
+						<input
+							type="text"
+							id="title"
+							formControlName="title"
+							class="form-control"
+							[class.invalid]="isFieldInvalid('title')"
+							placeholder="Ej: Portfolio Personal"
+						/>
+						<div class="error-message" *ngIf="isFieldInvalid('title')">
+							{{ getFieldError('title') }}
+						</div>
+					</div>
+
+					<!-- Short Description -->
+					<div class="form-group full-width">
+						<label for="short_description" class="form-label">
+							Descripción Corta <span class="required">*</span>
+						</label>
+						<input
+							type="text"
+							id="short_description"
+							formControlName="short_description"
+							class="form-control"
+							[class.invalid]="isFieldInvalid('short_description')"
+							placeholder="Ej: Portfolio personal con panel de administración"
+						/>
+						<div class="error-message" *ngIf="isFieldInvalid('short_description')">
+							{{ getFieldError('short_description') }}
+						</div>
+					</div>
+
+					<!-- Image URL -->
+					<div class="form-group full-width">
+						<label for="image_url" class="form-label">
+							URL de la Imagen <span class="required">*</span>
+						</label>
+						<input
+							type="url"
+							id="image_url"
+							formControlName="image_url"
+							class="form-control"
+							[class.invalid]="isFieldInvalid('image_url')"
+							placeholder="https://ejemplo.com/imagen.jpg"
+						/>
+						<div class="error-message" *ngIf="isFieldInvalid('image_url')">
+							{{ getFieldError('image_url') }}
+						</div>
+					</div>
+
+					<!-- Project URL -->
+					<div class="form-group">
+						<label for="project_url" class="form-label">
+							URL del Proyecto
+						</label>
+						<input
+							type="url"
+							id="project_url"
+							formControlName="project_url"
+							class="form-control"
+							[class.invalid]="isFieldInvalid('project_url')"
+							placeholder="https://proyecto.com"
+						/>
+						<div class="error-message" *ngIf="isFieldInvalid('project_url')">
+							{{ getFieldError('project_url') }}
+						</div>
+					</div>
+
+					<!-- GitHub URL -->
+					<div class="form-group">
+						<label for="github_url" class="form-label">
+							URL de GitHub
+						</label>
+						<input
+							type="url"
+							id="github_url"
+							formControlName="github_url"
+							class="form-control"
+							[class.invalid]="isFieldInvalid('github_url')"
+							placeholder="https://github.com/user/project"
+						/>
+						<div class="error-message" *ngIf="isFieldInvalid('github_url')">
+							{{ getFieldError('github_url') }}
+						</div>
+					</div>
+
+					<!-- Status -->
+					<div class="form-group">
+						<label for="status" class="form-label">
+							Estado
+						</label>
+						<select
+							id="status"
+							formControlName="status"
+							class="form-control"
+							[class.invalid]="isFieldInvalid('status')"
+						>
+							<option value="active">Activo</option>
+							<option value="inactive">Inactivo</option>
+							<option value="draft">Borrador</option>
+						</select>
+						<div class="error-message" *ngIf="isFieldInvalid('status')">
+							{{ getFieldError('status') }}
+						</div>
+					</div>
+
+					<!-- Order -->
+					<div class="form-group">
+						<label for="order" class="form-label">
+							Orden
+						</label>
+						<input
+							type="number"
+							id="order"
+							formControlName="order"
+							class="form-control"
+							[class.invalid]="isFieldInvalid('order')"
+							min="1"
+						/>
+						<div class="error-message" *ngIf="isFieldInvalid('order')">
+							{{ getFieldError('order') }}
+						</div>
+					</div>
+
+					<!-- Featured -->
+					<div class="form-group checkbox-group">
+						<label class="checkbox-label">
+							<input
+								type="checkbox"
+								formControlName="is_featured"
+								class="checkbox-input"
+							/>
+							<span class="checkbox-text">Proyecto destacado</span>
+						</label>
+					</div>
+				</div>
+
+				<!-- Description -->
+				<div class="form-group full-width">
+					<label for="description" class="form-label">
+						Descripción Completa <span class="required">*</span>
+					</label>
+					<textarea
+						id="description"
+						formControlName="description"
+						class="form-control"
+						[class.invalid]="isFieldInvalid('description')"
+						rows="6"
+						placeholder="Describe detalladamente el proyecto, sus funcionalidades, tecnologías utilizadas..."
+					></textarea>
+					<div class="error-message" *ngIf="isFieldInvalid('description')">
+						{{ getFieldError('description') }}
+					</div>
+				</div>
+
+				<!-- Tech Stack -->
+				<div class="form-group full-width">
+					<label class="form-label">
+						Stack Tecnológico
+					</label>
+					<div class="array-input-container">
+						<div class="array-items" formArrayName="tech_stack">
+							<div class="array-item" *ngFor="let tech of techStackArray.controls; let i = index">
+								<input
+									[formControlName]="i"
+									type="text"
+									class="form-control"
+									placeholder="Ej: Angular, React, Node.js"
+								/>
+								<button
+									type="button"
+									class="btn btn-danger btn-sm"
+									(click)="removeTechStack(i)"
+								>
+									🗑️
+								</button>
+							</div>
+						</div>
+						<button
+							type="button"
+							class="btn btn-outline btn-sm"
+							(click)="addTechStack()"
+						>
+							➕ Agregar Tecnología
+						</button>
+					</div>
+				</div>
+
+				<!-- Features -->
+				<div class="form-group full-width">
+					<label class="form-label">
+						Características del Proyecto
+					</label>
+					<div class="array-input-container">
+						<div class="array-items" formArrayName="features">
+							<div class="array-item" *ngFor="let feature of featuresArray.controls; let i = index">
+								<input
+									[formControlName]="i"
+									type="text"
+									class="form-control"
+									placeholder="Ej: Panel de administración, CRUD completo"
+								/>
+								<button
+									type="button"
+									class="btn btn-danger btn-sm"
+									(click)="removeFeature(i)"
+								>
+									🗑️
+								</button>
+							</div>
+						</div>
+						<button
+							type="button"
+							class="btn btn-outline btn-sm"
+							(click)="addFeature()"
+						>
+							➕ Agregar Característica
+						</button>
+					</div>
+				</div>
+
+				<!-- Form Actions -->
+				<div class="form-actions">
+					<button type="button" class="btn btn-secondary" (click)="onCancel()">
+						Cancelar
+					</button>
+					<button type="submit" class="btn btn-primary" [disabled]="saving">
+						<span class="btn-icon" *ngIf="saving">⏳</span>
+						<span class="btn-text">
+							{{ saving ? 'Guardando...' : (isEditMode ? 'Actualizar' : 'Crear') }}
+						</span>
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</app-admin-layout>

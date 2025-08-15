@@ -1,0 +1,116 @@
+<app-admin-layout>
+	<div class="works-list-container">
+		<app-admin-breadcrumb></app-admin-breadcrumb>
+
+		<div class="page-header">
+			<div class="header-content">
+				<h1 class="page-title">Experiencia Laboral</h1>
+				<button class="btn btn-primary" (click)="createNewWork()">
+					<span class="btn-icon">➕</span>
+					<span class="btn-text">Nueva Experiencia</span>
+				</button>
+			</div>
+		</div>
+
+		<!-- Loading State -->
+		<div class="loading-container" *ngIf="loading">
+			<div class="loading-spinner"></div>
+			<p>Cargando experiencias laborales...</p>
+		</div>
+
+		<!-- Error State -->
+		<div class="error-container" *ngIf="error && !loading">
+			<div class="error-message">
+				<span class="error-icon">⚠️</span>
+				<p>{{ error }}</p>
+				<button class="btn btn-secondary" (click)="loadWorks()">
+					Reintentar
+				</button>
+			</div>
+		</div>
+
+		<!-- Works List -->
+		<div class="works-content" *ngIf="!loading && !error">
+			<div class="works-grid" *ngIf="works.length > 0">
+				<div class="work-card" *ngFor="let work of works">
+					<div class="work-header">
+						<div class="work-title">
+							<h3>{{ work.position }}</h3>
+							<span class="company-name">{{ work.company }}</span>
+						</div>
+						<div class="work-status">
+							<span
+								class="status-badge"
+								[class.active]="work.status === 'active'"
+							>
+								{{ work.status === 'active' ? 'Activa' : 'Inactiva' }}
+							</span>
+						</div>
+					</div>
+
+					<div class="work-details">
+						<div class="work-period">
+							<span class="period-label">Período:</span>
+							<span class="period-value">
+								{{ work.start_date | date: 'MMM yyyy' }} -
+								{{
+									work.end_date
+										? (work.end_date | date: 'MMM yyyy')
+										: 'Actualidad'
+								}}
+							</span>
+						</div>
+						<div class="work-location">
+							<span class="location-label">Ubicación:</span>
+							<span class="location-value">{{ work.location }}</span>
+						</div>
+					</div>
+
+					<div class="work-description" *ngIf="work.description">
+						<p>
+							{{ work.description | slice: 0 : 150
+							}}{{ work.description.length > 150 ? '...' : '' }}
+						</p>
+					</div>
+
+					<div class="work-actions">
+						<button
+							class="btn btn-secondary btn-sm"
+							(click)="editWork(work.id)"
+						>
+							<span class="btn-icon">✏️</span>
+							<span class="btn-text">Editar</span>
+						</button>
+						<button
+							class="btn btn-outline btn-sm"
+							(click)="toggleWorkStatus(work)"
+						>
+							<span class="btn-icon">{{
+								work.status === 'active' ? '⏸️' : '▶️'
+							}}</span>
+							<span class="btn-text">{{
+								work.status === 'active' ? 'Pausar' : 'Activar'
+							}}</span>
+						</button>
+						<button class="btn btn-danger btn-sm" (click)="deleteWork(work.id)">
+							<span class="btn-icon">🗑️</span>
+							<span class="btn-text">Eliminar</span>
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- Empty State -->
+			<div class="empty-state" *ngIf="works.length === 0">
+				<div class="empty-content">
+					<span class="empty-icon">💼</span>
+					<h3>No hay experiencias laborales</h3>
+					<p>Comienza agregando tu primera experiencia laboral</p>
+					<button class="btn btn-primary" (click)="createNewWork()">
+						Agregar Experiencia
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</app-admin-layout>

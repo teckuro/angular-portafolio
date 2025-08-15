@@ -76,11 +76,6 @@ export class AnalyticsService {
 		// Log to console for development
 		console.log('Analytics Event:', eventName, properties);
 
-		// Send to Vercel Analytics if available
-		if (typeof window !== 'undefined' && (window as any).va) {
-			(window as any).va(eventName, properties);
-		}
-
 		// Send to Google Analytics if available
 		if (typeof window !== 'undefined' && (window as any).gtag) {
 			(window as any).gtag('event', eventName, properties);
@@ -97,9 +92,8 @@ export class AnalyticsService {
 		eventName: string,
 		properties?: Record<string, any>
 	): void {
-		// Vercel Analytics
+		// Custom analytics endpoint
 		if (typeof window !== 'undefined') {
-			// Try to send to Vercel Analytics
 			try {
 				const data = {
 					event: eventName,
@@ -109,7 +103,7 @@ export class AnalyticsService {
 					userAgent: navigator.userAgent
 				};
 
-				// Send to Vercel Analytics endpoint
+				// Send to custom analytics endpoint
 				fetch('/api/analytics', {
 					method: 'POST',
 					headers: {

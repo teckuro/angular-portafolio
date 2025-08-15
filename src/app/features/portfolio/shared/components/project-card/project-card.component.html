@@ -1,0 +1,46 @@
+<div class="project-card">
+	<div class="project-card-left">
+		<div class="project-card-left-image">
+			<div class="project-image">
+				<img [src]="project.image_url" [alt]="project.title" />
+			</div>
+		</div>
+	</div>
+	<div class="project-card-right">
+		<h3 class="project-card-right-title">{{ project.title }}</h3>
+		<p class="project-card-right-description">
+			{{ project.short_description }}
+		</p>
+		<div
+			class="project-card-right-tech"
+			*ngIf="project.tech_stack && project.tech_stack.length > 0"
+		>
+			<span
+				class="project-card-right-tech-item"
+				*ngFor="let tech of project.tech_stack"
+			>
+				{{ tech }}
+			</span>
+		</div>
+		<div class="project-card-right-links">
+			<a
+				class="project-card-right-link"
+				*ngIf="project.project_url"
+				[href]="project.project_url"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				Ver Demo
+			</a>
+			<a
+				class="project-card-right-link"
+				*ngIf="project.github_url"
+				[href]="project.github_url"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				Ver Código
+			</a>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,150 @@
+<app-admin-layout>
+	<div class="projects-list-container">
+		<app-admin-breadcrumb></app-admin-breadcrumb>
+
+		<div class="page-header">
+			<div class="header-content">
+				<h1 class="page-title">Proyectos</h1>
+				<button class="btn btn-primary" (click)="createNewProject()">
+					<span class="btn-icon">➕</span>
+					<span class="btn-text">Nuevo Proyecto</span>
+				</button>
+			</div>
+		</div>
+
+		<!-- Loading State -->
+		<div class="loading-container" *ngIf="loading">
+			<div class="loading-spinner"></div>
+			<p>Cargando proyectos...</p>
+		</div>
+
+		<!-- Error State -->
+		<div class="error-container" *ngIf="error && !loading">
+			<div class="error-message">
+				<span class="error-icon">⚠️</span>
+				<p>{{ error }}</p>
+				<button class="btn btn-secondary" (click)="loadProjects()">
+					Reintentar
+				</button>
+			</div>
+		</div>
+
+		<!-- Projects List -->
+		<div class="projects-content" *ngIf="!loading && !error">
+			<div class="projects-grid" *ngIf="projects.length > 0">
+				<div class="project-card" *ngFor="let project of projects">
+					<div class="project-header">
+						<div class="project-image">
+							<img [src]="project.image_url" [alt]="project.title" />
+						</div>
+						<div class="project-status">
+							<span
+								class="status-badge"
+								[class]="getStatusClass(project.status)"
+							>
+								{{ getStatusLabel(project.status) }}
+							</span>
+							<span class="featured-badge" *ngIf="project.is_featured">
+								⭐ Destacado
+							</span>
+						</div>
+					</div>
+
+					<div class="project-content">
+						<div class="project-title">
+							<h3>{{ project.title }}</h3>
+							<p class="project-short-desc">{{ project.short_description }}</p>
+						</div>
+
+						<div class="project-tech" *ngIf="project.tech_stack.length > 0">
+							<div class="tech-tags">
+								<span
+									class="tech-tag"
+									*ngFor="let tech of project.tech_stack.slice(0, 3)"
+								>
+									{{ tech }}
+								</span>
+								<span class="tech-more" *ngIf="project.tech_stack.length > 3">
+									+{{ project.tech_stack.length - 3 }}
+								</span>
+							</div>
+						</div>
+
+						<div
+							class="project-links"
+							*ngIf="project.project_url || project.github_url"
+						>
+							<a
+								[href]="project.project_url"
+								target="_blank"
+								class="project-link"
+								*ngIf="project.project_url"
+							>
+								🌐 Demo
+							</a>
+							<a
+								[href]="project.github_url"
+								target="_blank"
+								class="project-link"
+								*ngIf="project.github_url"
+							>
+								📁 GitHub
+							</a>
+						</div>
+					</div>
+
+					<div class="project-actions">
+						<button
+							class="btn btn-secondary btn-sm"
+							(click)="editProject(project.id)"
+						>
+							<span class="btn-icon">✏️</span>
+							<span class="btn-text">Editar</span>
+						</button>
+						<button
+							class="btn btn-outline btn-sm"
+							(click)="toggleProjectStatus(project)"
+						>
+							<span class="btn-icon">{{
+								project.status === 'active' ? '⏸️' : '▶️'
+							}}</span>
+							<span class="btn-text">{{
+								project.status === 'active' ? 'Pausar' : 'Activar'
+							}}</span>
+						</button>
+						<button
+							class="btn btn-outline btn-sm"
+							(click)="toggleProjectFeatured(project)"
+						>
+							<span class="btn-icon">{{
+								project.is_featured ? '⭐' : '☆'
+							}}</span>
+							<span class="btn-text">{{
+								project.is_featured ? 'Quitar Destacado' : 'Destacar'
+							}}</span>
+						</button>
+						<button
+							class="btn btn-danger btn-sm"
+							(click)="deleteProject(project.id)"
+						>
+							<span class="btn-icon">🗑️</span>
+							<span class="btn-text">Eliminar</span>
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- Empty State -->
+			<div class="empty-state" *ngIf="projects.length === 0">
+				<div class="empty-content">
+					<span class="empty-icon">📁</span>
+					<h3>No hay proyectos</h3>
+					<p>Comienza agregando tu primer proyecto</p>
+					<button class="btn btn-primary" (click)="createNewProject()">
+						Agregar Proyecto
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</app-admin-layout>

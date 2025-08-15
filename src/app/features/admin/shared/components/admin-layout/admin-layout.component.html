@@ -1,0 +1,92 @@
+<div class="admin-layout" [class.sidebar-collapsed]="sidebarCollapsed">
+	<!-- Sidebar -->
+	<aside class="admin-sidebar" [class.sidebar-collapsed]="sidebarCollapsed">
+		<div class="sidebar-header">
+			<div class="logo">
+				<span class="logo-icon">⚡</span>
+				<span class="logo-text" *ngIf="!sidebarCollapsed">Admin Panel</span>
+			</div>
+			<button class="sidebar-toggle" (click)="toggleSidebar()">
+				<span class="toggle-icon">☰</span>
+			</button>
+		</div>
+
+		<nav class="sidebar-nav">
+			<ul class="nav-list">
+				<li class="nav-item">
+					<a
+						routerLink="/admin/dashboard"
+						routerLinkActive="active"
+						class="nav-link"
+					>
+						<span class="nav-icon">📊</span>
+						<span class="nav-text" *ngIf="!sidebarCollapsed">Dashboard</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a
+						routerLink="/admin/works"
+						routerLinkActive="active"
+						class="nav-link"
+					>
+						<span class="nav-icon">💼</span>
+						<span class="nav-text" *ngIf="!sidebarCollapsed">Experiencia</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a
+						routerLink="/admin/projects"
+						routerLinkActive="active"
+						class="nav-link"
+					>
+						<span class="nav-icon">📁</span>
+						<span class="nav-text" *ngIf="!sidebarCollapsed">Proyectos</span>
+					</a>
+				</li>
+			</ul>
+		</nav>
+
+		<!-- User info at the bottom -->
+		<div class="sidebar-footer">
+			<div class="user-info">
+				<div class="user-avatar">
+					<span class="avatar-text">{{
+						currentUser?.name?.charAt(0) || 'A'
+					}}</span>
+				</div>
+				<div class="user-details" *ngIf="!sidebarCollapsed">
+					<div class="user-name">{{ currentUser?.name }}</div>
+					<div class="user-role">{{ getUserRoleLabel() }}</div>
+				</div>
+			</div>
+		</div>
+	</aside>
+
+	<!-- Main Content -->
+	<main class="admin-main" [class.sidebar-collapsed]="sidebarCollapsed">
+		<!-- Header -->
+		<header class="admin-header">
+			<div class="header-left">
+				<button class="mobile-menu-toggle" (click)="toggleSidebar()">
+					<span class="toggle-icon">☰</span>
+				</button>
+				<div class="page-title">
+					<h1>{{ getPageTitle() }}</h1>
+				</div>
+			</div>
+			<div class="header-right">
+				<div class="header-actions">
+					<button class="action-button" (click)="logout()">
+						<span class="action-icon">🚪</span>
+						<span class="action-text">Cerrar Sesión</span>
+					</button>
+				</div>
+			</div>
+		</header>
+
+		<!-- Content Area -->
+		<div class="admin-content">
+			<ng-content></ng-content>
+		</div>
+	</main>
+</div>

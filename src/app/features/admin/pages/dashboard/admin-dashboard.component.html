@@ -1,0 +1,50 @@
+<app-admin-layout>
+	<div class="dashboard-container">
+		<app-admin-breadcrumb></app-admin-breadcrumb>
+
+		<div class="stats-section" *ngIf="!loading">
+			<div class="stats-grid">
+				<app-admin-stats-card
+					title="Experiencia Laboral"
+					icon="💼"
+					[stats]="workStatsArray"
+					actionText="Gestionar Experiencia"
+					actionLink="/admin/works"
+					theme="success">
+				</app-admin-stats-card>
+
+				<app-admin-stats-card
+					title="Proyectos"
+					icon="📁"
+					[stats]="projectStatsArray"
+					actionText="Gestionar Proyectos"
+					actionLink="/admin/projects"
+					theme="primary">
+				</app-admin-stats-card>
+			</div>
+		</div>
+
+		<div class="loading-section" *ngIf="loading">
+			<div class="loading-container">
+				<div class="loading-spinner"></div>
+				<p>Cargando estadísticas...</p>
+			</div>
+		</div>
+
+		<div class="quick-actions-section">
+			<h3 class="section-title">Acciones Rápidas</h3>
+			<div class="actions-grid">
+				<a routerLink="/admin/works/new" class="action-card">
+					<span class="action-icon">💼</span>
+					<h4 class="action-title">Nueva Experiencia</h4>
+					<p class="action-description">Agregar experiencia laboral</p>
+				</a>
+				<a routerLink="/admin/projects/new" class="action-card">
+					<span class="action-icon">📁</span>
+					<h4 class="action-title">Nuevo Proyecto</h4>
+					<p class="action-description">Agregar proyecto al portfolio</p>
+				</a>
+			</div>
+		</div>
+	</div>
+</app-admin-layout>

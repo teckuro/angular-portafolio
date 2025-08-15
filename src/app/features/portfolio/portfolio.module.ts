@@ -1,19 +1,33 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Routes } from '@angular/router';
-import { PortfolioPageComponent } from './portfolio-page/portfolio-page.component';
-import { ProjectCardComponent } from './project-card/project-card.component';
-import { WorkCardComponent } from './work-card/work-card.component';
-import { SharedModule } from '../../shared/shared.module';
+import { RouterModule } from '@angular/router';
 
-const routes: Routes = [{ path: '', component: PortfolioPageComponent }];
+// Components
+import { PortfolioPageComponent } from './pages/home/portfolio-page.component';
+
+// Shared Components
+import { PortfolioComponentsModule } from './shared/components/portfolio-components.module';
+
+// Services
+import { WorksService } from './shared/services/works.service';
+import { ProjectsService } from './shared/services/projects.service';
+
+// Routes
+import { PortfolioRoutingModule } from './portfolio-routing.module';
 
 @NgModule({
 	declarations: [
-		PortfolioPageComponent,
-		ProjectCardComponent,
-		WorkCardComponent
+		PortfolioPageComponent
 	],
-	imports: [CommonModule, RouterModule.forChild(routes), SharedModule]
+	imports: [
+		CommonModule,
+		RouterModule,
+		PortfolioRoutingModule,
+		PortfolioComponentsModule
+	],
+	providers: [
+		WorksService,
+		ProjectsService
+	]
 })
 export class PortfolioModule {}

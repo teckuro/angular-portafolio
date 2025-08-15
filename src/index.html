@@ -1,98 +1,141 @@
 <!doctype html>
 <html lang="es">
-	<head>
-		<meta charset="utf-8" />
-		<title>Juan Pablo Huerta - Desarrollador Full Stack | Portfolio Angular</title>
-		<base href="/" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="theme-color" content="#3b82f6" />
-		<link rel="icon" type="image/x-icon" href="favicon.ico" />
-		<link rel="manifest" href="manifest.webmanifest" />
+<head>
+  <meta charset="utf-8">
+  <title>Juan Pablo Huerta - Desarrollador Full Stack</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<!-- Google Fonts - Inter -->
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Desarrollador Full Stack con 4 años de experiencia en PHP, Laravel, JavaScript y Angular. Especializado en integraciones de facturación electrónica y desarrollo web moderno.">
+  <meta name="keywords" content="desarrollador full stack, PHP, Laravel, Angular, JavaScript, facturación electrónica, desarrollo web, Chile">
+  <meta name="author" content="Juan Pablo Huerta">
+  <meta name="robots" content="index, follow">
 
-		<!-- Meta tags para SEO -->
-		<meta name="description" content="Portafolio profesional de Juan Pablo Huerta, Desarrollador Full Stack con 4 años de experiencia en PHP, Laravel, JavaScript, Angular y Node.js. Portfolio desarrollado con Angular 11, especializado en integraciones de facturación electrónica y desarrollo web moderno.">
-		<meta name="keywords" content="desarrollador full stack, angular, react, node.js, php, laravel, javascript, portfolio, facturación electrónica, webpay, chile, viña del mar">
-		<meta name="author" content="Juan Pablo Huerta Saavedra">
-		<meta name="robots" content="index, follow">
-		<meta name="language" content="Spanish">
-		<meta name="revisit-after" content="7 days">
-		<meta name="distribution" content="global">
-		<meta name="rating" content="general">
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Juan Pablo Huerta - Desarrollador Full Stack">
+  <meta property="og:description" content="Desarrollador Full Stack con 4 años de experiencia en PHP, Laravel, JavaScript y Angular.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://juanpablo.dev">
+  <meta property="og:image" content="assets/img/og-image.jpg">
 
-		<!-- Open Graph / Facebook -->
-		<meta property="og:type" content="website">
-		<meta property="og:url" content="https://tu-dominio.com/">
-		<meta property="og:title" content="Juan Pablo Huerta - Desarrollador Full Stack">
-		<meta property="og:description" content="Portafolio profesional de desarrollo web full stack con experiencia en integraciones de facturación electrónica y tecnologías modernas.">
-		<meta property="og:image" content="https://tu-dominio.com/assets/img/og-image.jpg">
-		<meta property="og:image:width" content="1200">
-		<meta property="og:image:height" content="630">
-		<meta property="og:site_name" content="Juan Pablo Huerta Portfolio">
-		<meta property="og:locale" content="es_ES">
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Juan Pablo Huerta - Desarrollador Full Stack">
+  <meta name="twitter:description" content="Desarrollador Full Stack con 4 años de experiencia en PHP, Laravel, JavaScript y Angular.">
+  <meta name="twitter:image" content="assets/img/og-image.jpg">
 
-		<!-- Twitter -->
-		<meta property="twitter:card" content="summary_large_image">
-		<meta property="twitter:url" content="https://tu-dominio.com/">
-		<meta property="twitter:title" content="Juan Pablo Huerta - Desarrollador Full Stack">
-		<meta property="twitter:description" content="Portafolio profesional de desarrollo web full stack con experiencia en integraciones de facturación electrónica.">
-		<meta property="twitter:image" content="https://tu-dominio.com/assets/img/twitter-image.jpg">
-		<meta property="twitter:creator" content="@tu_usuario">
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16x16.png">
+  <link rel="manifest" href="assets/img/site.webmanifest">
 
-		<!-- Canonical URL -->
-		<link rel="canonical" href="https://tu-dominio.com/">
+  <!-- Preconnect to external domains -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
 
-		<!-- Structured Data -->
-		<script type="application/ld+json">
-		{
-			"@context": "https://schema.org",
-			"@type": "Person",
-			"name": "Juan Pablo Huerta Saavedra",
-			"jobTitle": "Desarrollador Full Stack",
-			"description": "Desarrollador Full Stack con 4 años de experiencia en integraciones de facturación electrónica",
-			"url": "https://tu-dominio.com",
-			"image": "https://tu-dominio.com/assets/img/profile.jpg",
-			"email": "teckuro6@gmail.com",
-			"telephone": "+56 9 57802607",
-			"address": {
-				"@type": "PostalAddress",
-				"addressLocality": "Viña del Mar",
-				"addressCountry": "CL"
-			},
-			"sameAs": [
-				"https://www.linkedin.com/in/jphuerta1/",
-				"https://github.com/teckuro"
-			],
-			"knowsAbout": [
-				"PHP", "Laravel", "JavaScript", "Angular", "Node.js",
-				"PostgreSQL", "GraphQL", "WebPay REST", "Git"
-			],
-			"worksFor": {
-				"@type": "Organization",
-				"name": "DESIS Facturación Electrónica"
-			}
-		}
-		</script>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-		<!-- Preload critical resources -->
-		<link rel="preload" href="assets/img/linkedin.svg" as="image">
-		<link rel="preload" href="assets/img/github.svg" as="image">
+  <!-- Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 
-		<!-- PWA Apple touch icons -->
-		<link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="default">
-		<meta name="apple-mobile-web-app-title" content="JP Portfolio">
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#3b82f6">
+  <meta name="msapplication-TileColor" content="#3b82f6">
 
-		<!-- Vercel Analytics -->
-		<script defer src="/_vercel/insights/script.js"></script>
-	</head>
-	<body>
-		<app-root></app-root>
-		<noscript>Please enable JavaScript to continue.</noscript>
-	</body>
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Juan Pablo Huerta",
+    "jobTitle": "Desarrollador Full Stack",
+    "description": "Desarrollador Full Stack con 4 años de experiencia en PHP, Laravel, JavaScript y Angular",
+    "url": "https://juanpablo.dev",
+    "sameAs": [
+      "https://www.linkedin.com/in/jphuerta1/",
+      "https://github.com/teckuro"
+    ],
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Freelance"
+    },
+    "knowsAbout": [
+      "PHP",
+      "Laravel",
+      "JavaScript",
+      "Angular",
+      "Node.js",
+      "PostgreSQL",
+      "Facturación Electrónica"
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Viña del Mar",
+      "addressCountry": "Chile"
+    },
+    "email": "teckuro6@gmail.com",
+    "telephone": "+56957802607"
+  }
+  </script>
+</head>
+<body>
+  <app-root></app-root>
+
+  <!-- Loading indicator -->
+  <div id="loading" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%); display: flex; justify-content: center; align-items: center; z-index: 9999;">
+    <div style="text-align: center; color: white;">
+      <div style="width: 40px; height: 40px; border: 3px solid #3b82f6; border-top: 3px solid transparent; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 1rem;"></div>
+      <p style="font-family: 'Inter', sans-serif; font-size: 1rem; margin: 0;">Cargando portafolio...</p>
+    </div>
+  </div>
+
+  <style>
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    #loading {
+      transition: opacity 0.3s ease;
+    }
+
+    #loading.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+  </style>
+
+  <script>
+    // Hide loading indicator when Angular app is ready
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        const loading = document.getElementById('loading');
+        if (loading) {
+          loading.classList.add('hidden');
+          setTimeout(function() {
+            loading.style.display = 'none';
+          }, 300);
+        }
+      }, 1000);
+    });
+
+    // Service Worker registration for PWA capabilities
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js')
+          .then(function(registration) {
+            console.log('SW registered: ', registration);
+          })
+          .catch(function(registrationError) {
+            console.log('SW registration failed: ', registrationError);
+          });
+      });
+    }
+  </script>
+</body>
 </html>

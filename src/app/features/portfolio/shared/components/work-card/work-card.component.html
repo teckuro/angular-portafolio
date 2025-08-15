@@ -1,0 +1,36 @@
+<div class="work-card">
+	<div class="work-header">
+		<h3 class="work-company">{{ work.company }}</h3>
+		<div class="work-period">
+			{{ work.start_date }} -
+			{{ work.is_current ? 'Actualidad' : work.end_date }}
+		</div>
+	</div>
+	<div class="company-link" *ngIf="work.company_url">
+		<a [href]="work.company_url" target="_blank" rel="noopener noreferrer">
+			{{ work.company_url.replace('https://', '').replace('http://', '') }}
+		</a>
+	</div>
+	<div class="work-description">
+		<p>{{ work.description }}</p>
+	</div>
+	<div
+		class="work-highlights"
+		*ngIf="work.achievements && work.achievements.length > 0"
+	>
+		<h4>Logros Principales:</h4>
+		<ul>
+			<li *ngFor="let achievement of work.achievements">
+				{{ achievement }}
+			</li>
+		</ul>
+	</div>
+	<div class="tech-stack" *ngIf="work.tech && work.tech.length > 0">
+		<h4>Tecnologías:</h4>
+		<div class="tech-tags">
+			<span class="tech-tag" *ngFor="let tech of work.tech">
+				{{ tech }}
+			</span>
+		</div>
+	</div>
+</div>

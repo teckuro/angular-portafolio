@@ -1,52 +1,33 @@
 import { Injectable } from '@angular/core';
 import {
-	HttpInterceptor,
 	HttpRequest,
 	HttpHandler,
 	HttpEvent,
-	HttpErrorResponse
+	HttpInterceptor
 } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { Router } from '@angular/router';
-import { AdminAuthService } from '../../features/admin/services/admin-auth.service';
+import { Observable } from 'rxjs';
+import { AdminAuthService } from '../../features/admin/shared/services/admin-auth.service';
 
 @Injectable()
 export class AdminAuthInterceptor implements HttpInterceptor {
-	constructor(
-		private authService: AdminAuthService,
-		private router: Router
-	) {}
+	constructor(private authService: AdminAuthService) {}
 
 	intercept(
 		request: HttpRequest<any>,
 		next: HttpHandler
 	): Observable<HttpEvent<any>> {
-		// Solo interceptar requests a la API de admin
+		// Solo interceptar requests a la API del admin
 		if (request.url.includes('/admin/')) {
 			const token = this.authService.getToken();
-
 			if (token) {
 				request = request.clone({
 					setHeaders: {
-						Authorization: `Bearer ${token}`,
-						'Content-Type': 'application/json',
-						Accept: 'application/json'
+						Authorization: `Bearer ${token}`
 					}
 				});
 			}
 		}
 
-		return next.handle(request).pipe(
-			catchError((error: HttpErrorResponse) => {
-				if (error.status === 401) {
-					// Token expirado o inválido
-					this.authService.logout().subscribe(() => {
-						this.router.navigate(['/admin/login']);
-					});
-				}
-				return throwError(() => error);
-			})
-		);
+		return next.handle(request);
 	}
 }

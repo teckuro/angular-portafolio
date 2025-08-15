@@ -1,19 +1,17 @@
 import { Injectable } from '@angular/core';
 import {
 	CanActivate,
-	CanActivateChild,
-	Router,
 	ActivatedRouteSnapshot,
-	RouterStateSnapshot
+	RouterStateSnapshot,
+	Router
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
-import { AdminAuthService } from '../../features/admin/services/admin-auth.service';
+import { AdminAuthService } from '../../features/admin/shared/services/admin-auth.service';
 
 @Injectable({
 	providedIn: 'root'
 })
-export class AdminAuthGuard implements CanActivate, CanActivateChild {
+export class AdminAuthGuard implements CanActivate {
 	constructor(
 		private authService: AdminAuthService,
 		private router: Router
@@ -22,26 +20,15 @@ export class AdminAuthGuard implements CanActivate, CanActivateChild {
 	canActivate(
 		route: ActivatedRouteSnapshot,
 		state: RouterStateSnapshot
-	): Observable<boolean> {
-		return this.authService.currentUser$.pipe(
-			take(1),
-			map((user: any) => {
-				if (user && this.authService.isAuthenticated()) {
-					return true;
-				} else {
-					this.router.navigate(['/admin/login'], {
-						queryParams: { returnUrl: state.url }
-					});
-					return false;
-				}
-			})
-		);
-	}
+	): Observable<boolean> | Promise<boolean> | boolean {
+		if (this.authService.isAuthenticated()) {
+			return true;
+		}
 
-	canActivateChild(
-		childRoute: ActivatedRouteSnapshot,
-		state: RouterStateSnapshot
-	): Observable<boolean> {
-		return this.canActivate(childRoute, state);
+		// No autenticado, redirigir al login
+		this.router.navigate(['/admin/login'], {
+			queryParams: { returnUrl: state.url }
+		});
+		return false;
 	}
 }

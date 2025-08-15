@@ -36,6 +36,10 @@
 	box-sizing: border-box;
 }
 
+html {
+	scroll-behavior: smooth;
+}
+
 body {
 	font-family: var(--font-family);
 	line-height: 1.6;
@@ -43,4 +47,174 @@ body {
 	font-weight: var(--font-weight-normal);
 	background: var(--background-color);
 	min-height: 100vh;
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+	width: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: rgba(255, 255, 255, 0.05);
+	border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--accent-blue);
+	border-radius: 4px;
+	transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: var(--accent-blue-hover);
+}
+
+/* Selección de texto */
+::selection {
+	background: var(--accent-blue);
+	color: white;
+}
+
+::-moz-selection {
+	background: var(--accent-blue);
+	color: white;
+}
+
+/* Enlaces */
+a {
+	color: var(--accent-blue);
+	text-decoration: none;
+	transition: all 0.3s ease;
+}
+
+a:hover {
+	color: var(--accent-blue-hover);
+}
+
+/* Botones base */
+button {
+	font-family: var(--font-family);
+	border: none;
+	outline: none;
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+/* Utilidades */
+.text-gradient {
+	background: linear-gradient(135deg, var(--accent-blue), #4fd1c7);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+.glass-effect {
+	background: rgba(255, 255, 255, 0.05);
+	backdrop-filter: blur(10px);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hover-lift {
+	transition: transform 0.3s ease;
+}
+
+.hover-lift:hover {
+	transform: translateY(-4px);
+}
+
+/* Animaciones globales */
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(30px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes fadeInLeft {
+	from {
+		opacity: 0;
+		transform: translateX(-30px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+@keyframes fadeInRight {
+	from {
+		opacity: 0;
+		transform: translateX(30px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+@keyframes pulse {
+	0%,
+	100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.7;
+	}
+}
+
+/* Clases de utilidad para animaciones */
+.animate-fade-in-up {
+	animation: fadeInUp 0.6s ease forwards;
+}
+
+.animate-fade-in-left {
+	animation: fadeInLeft 0.6s ease forwards;
+}
+
+.animate-fade-in-right {
+	animation: fadeInRight 0.6s ease forwards;
+}
+
+.animate-pulse {
+	animation: pulse 2s infinite;
+}
+
+/* Responsive utilities */
+@media (max-width: 768px) {
+	:root {
+		--spacing-xl: 1.5rem;
+		--spacing-2xl: 2rem;
+	}
+}
+
+/* Modo oscuro por defecto (ya está configurado) */
+@media (prefers-color-scheme: light) {
+	:root {
+		--background-color: linear-gradient(
+			135deg,
+			#f8fafc 0%,
+			#e2e8f0 50%,
+			#cbd5e1 100%
+		);
+		--text-primary: #1e293b;
+		--text-secondary: #475569;
+		--border-color: #cbd5e1;
+		--shadow-color: rgba(0, 0, 0, 0.1);
+	}
+}
+
+/* Preferencias de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
 }
