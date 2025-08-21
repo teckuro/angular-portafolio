@@ -27,16 +27,34 @@ export class AdminDashboardComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
+		console.log('AdminDashboardComponent initialized');
 		this.currentUser = this.authService.getCurrentUser();
+		console.log('Current user:', this.currentUser);
 		this.loadStats();
+		this.testApiConnection();
+	}
+
+	testApiConnection(): void {
+		console.log('Testing API connection...');
+		// Probar conexión directa a la API
+		fetch('http://127.0.0.1:8000/api/admin/projects/stats')
+			.then((response) => response.json())
+			.then((data) => {
+				console.log('Direct API test successful:', data);
+			})
+			.catch((error) => {
+				console.error('Direct API test failed:', error);
+			});
 	}
 
 	loadStats(): void {
+		console.log('Loading stats...');
 		this.loading = true;
 
 		// Cargar estadísticas de trabajos
 		this.worksService.getWorkStats().subscribe({
 			next: (stats) => {
+				console.log('Work stats received:', stats);
 				this.workStats = stats;
 				this.updateWorkStatsArray();
 			},
@@ -44,6 +62,7 @@ export class AdminDashboardComponent implements OnInit {
 				console.error('Error loading work stats:', error);
 			},
 			complete: () => {
+				console.log('Work stats loading completed');
 				this.loading = false;
 			}
 		});
@@ -51,11 +70,15 @@ export class AdminDashboardComponent implements OnInit {
 		// Cargar estadísticas de proyectos
 		this.projectsService.getProjectStats().subscribe({
 			next: (stats) => {
+				console.log('Project stats received:', stats);
 				this.projectStats = stats;
 				this.updateProjectStatsArray();
 			},
 			error: (error) => {
 				console.error('Error loading project stats:', error);
+			},
+			complete: () => {
+				console.log('Project stats loading completed');
 			}
 		});
 	}

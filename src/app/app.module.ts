@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
-import { AdminAuthInterceptor } from './core/interceptors/admin-auth.interceptor';
 
 @NgModule({
 	declarations: [AppComponent],
@@ -17,13 +16,7 @@ import { AdminAuthInterceptor } from './core/interceptors/admin-auth.interceptor
 		CoreModule,
 		SharedModule
 	],
-	providers: [
-		{
-			provide: HTTP_INTERCEPTORS,
-			useClass: AdminAuthInterceptor,
-			multi: true
-		}
-	],
+	providers: [],
 	bootstrap: [AppComponent]
 })
 export class AppModule {}

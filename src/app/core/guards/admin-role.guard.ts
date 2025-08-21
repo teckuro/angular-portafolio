@@ -7,7 +7,7 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import { AdminAuthService } from '../../features/admin/services/admin-auth.service';
+import { AdminAuthService } from '../../features/admin/shared/services/admin-auth.service';
 
 @Injectable({
 	providedIn: 'root'

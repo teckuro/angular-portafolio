@@ -16,7 +16,6 @@ export class PortfolioPageComponent implements OnInit {
 	error: string | null = null;
 	headerVisible = true; // Siempre visible desde el inicio
 	activeSection = 'about';
-	showCurriculumModal = false;
 
 	constructor(
 		private worksService: WorksService,
@@ -32,29 +31,57 @@ export class PortfolioPageComponent implements OnInit {
 		this.loading = true;
 		this.error = null;
 
+		let worksLoaded = false;
+		let projectsLoaded = false;
+
+		const checkAllLoaded = () => {
+			if (worksLoaded && projectsLoaded) {
+				this.loading = false;
+			}
+		};
+
 		// Cargar experiencias laborales
 		this.worksService.getWorks().subscribe({
 			next: (works) => {
 				this.works = works;
+				worksLoaded = true;
+				checkAllLoaded();
 			},
 			error: (error) => {
 				console.error('Error loading works:', error);
-				this.error = 'Error al cargar las experiencias laborales';
+				this.error = this.getErrorMessage(error, 'experiencias laborales');
+				worksLoaded = true;
+				checkAllLoaded();
 			}
 		});
 
 		// Cargar proyectos
 		this.projectsService.getProjects().subscribe({
 			next: (projects) => {
+				console.log('Projects loaded:', projects);
 				this.projects = projects;
-				this.loading = false;
+				projectsLoaded = true;
+				checkAllLoaded();
 			},
 			error: (error) => {
 				console.error('Error loading projects:', error);
-				this.error = 'Error al cargar los proyectos';
-				this.loading = false;
+				this.error = this.getErrorMessage(error, 'proyectos');
+				projectsLoaded = true;
+				checkAllLoaded();
 			}
 		});
+	}
+
+	private getErrorMessage(error: any, dataType: string): string {
+		if (error.status === 0) {
+			return `No se pudo conectar con el servidor. Verifica que la API esté ejecutándose en ${error.url}`;
+		} else if (error.status === 404) {
+			return `No se encontró el endpoint para ${dataType}. Verifica la configuración de la API.`;
+		} else if (error.status === 500) {
+			return `Error interno del servidor al cargar ${dataType}. Intenta más tarde.`;
+		} else {
+			return `Error al cargar ${dataType}: ${error.message || 'Error desconocido'}`;
+		}
 	}
 
 	getActiveWorks(): Work[] {
@@ -62,9 +89,12 @@ export class PortfolioPageComponent implements OnInit {
 	}
 
 	getFeaturedProjects(): Project[] {
-		return this.projects.filter(
+		console.log('All projects:', this.projects);
+		const featured = this.projects.filter(
 			(project) => project.is_featured && project.status === 'active'
 		);
+		console.log('Featured projects:', featured);
+		return featured;
 	}
 
 	getAllProjects(): Project[] {
@@ -182,15 +212,16 @@ export class PortfolioPageComponent implements OnInit {
 		console.log(`Social click tracked: ${platform}`);
 	}
 
-	openCurriculumModal(): void {
-		this.showCurriculumModal = true;
-	}
-
-	closeCurriculumModal(): void {
-		this.showCurriculumModal = false;
-	}
-
 	downloadPDF(): void {
 		console.log('Descargando PDF del curriculum...');
+		// Aquí puedes implementar la lógica de descarga del PDF
+		// Por ejemplo, crear un enlace temporal y hacer clic en él
+		const link = document.createElement('a');
+		link.href = '/assets/cv-juan-pablo-huerta.pdf'; // Ruta al archivo PDF
+		link.download = 'CV-Juan-Pablo-Huerta.pdf';
+		link.target = '_blank';
+		document.body.appendChild(link);
+		link.click();
+		document.body.removeChild(link);
 	}
 }

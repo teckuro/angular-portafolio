@@ -52,11 +52,13 @@
 						<div class="work-period">
 							<span class="period-label">Período:</span>
 							<span class="period-value">
-								{{ work.start_date | date: 'MMM yyyy' }} -
+								{{ work.start_date | date: 'yyyy' }} -
 								{{
 									work.end_date
-										? (work.end_date | date: 'MMM yyyy')
-										: 'Actualidad'
+										? (work.end_date | date: 'yyyy')
+										: work.is_current
+											? 'Presente'
+											: 'Actualidad'
 								}}
 							</span>
 						</div>
@@ -83,13 +85,11 @@
 						</button>
 						<button
 							class="btn btn-outline btn-sm"
-							(click)="toggleWorkStatus(work)"
+							(click)="toggleWorkCurrent(work)"
 						>
-							<span class="btn-icon">{{
-								work.status === 'active' ? '⏸️' : '▶️'
-							}}</span>
+							<span class="btn-icon">{{ work.is_current ? '⭐' : '☆' }}</span>
 							<span class="btn-text">{{
-								work.status === 'active' ? 'Pausar' : 'Activar'
+								work.is_current ? 'Quitar Actual' : 'Marcar Actual'
 							}}</span>
 						</button>
 						<button class="btn btn-danger btn-sm" (click)="deleteWork(work.id)">

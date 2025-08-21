@@ -106,9 +106,10 @@ export class AdminWorkFormComponent implements OnInit {
 			const formData = this.workForm.value;
 			console.log('Form data:', formData);
 
-			// Si es trabajo actual, no incluir fecha de fin
+			// Si es trabajo actual, no incluir fecha de fin y debe ser activo
 			if (formData.is_current) {
 				formData.end_date = null;
+				formData.status = 'active';
 			}
 
 			const workData: AdminWorkCreate = {
@@ -159,10 +160,13 @@ export class AdminWorkFormComponent implements OnInit {
 	toggleCurrentWork(): void {
 		const isCurrent = this.workForm.get('is_current')?.value;
 		const endDateControl = this.workForm.get('end_date');
+		const statusControl = this.workForm.get('status');
 
 		if (isCurrent) {
 			endDateControl?.disable();
 			endDateControl?.setValue('');
+			// Si es trabajo actual, automáticamente debe ser activo
+			statusControl?.setValue('active');
 		} else {
 			endDateControl?.enable();
 		}

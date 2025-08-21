@@ -15,9 +15,6 @@ import { AdminAuthService } from './shared/services/admin-auth.service';
 import { AdminWorksService } from './shared/services/admin-works.service';
 import { AdminProjectsService } from './shared/services/admin-projects.service';
 
-// Guards
-import { AdminAuthGuard } from '../../core/guards/admin-auth.guard';
-
 // Routes
 import { AdminRoutingModule } from './admin-routing.module';
 
@@ -30,11 +27,6 @@ import { AdminRoutingModule } from './admin-routing.module';
 		AdminRoutingModule,
 		AdminComponentsModule
 	],
-	providers: [
-		AdminAuthService,
-		AdminWorksService,
-		AdminProjectsService,
-		AdminAuthGuard
-	]
+	providers: [AdminAuthService, AdminWorksService, AdminProjectsService]
 })
 export class AdminModule {}

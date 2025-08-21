@@ -13,28 +13,169 @@ html {
 }
 
 .container {
-	max-width: 1200px;
+	max-width: 1400px;
 	margin: 0 auto;
 	padding: 0 2rem;
 	width: 100%;
 	min-height: 100vh;
-	background: var(--background-color);
-	color: var(--text-primary);
+	color: #ffffff;
+	padding-top: 2rem;
+	/* Mejoras visuales */
+	position: relative;
+	overflow-x: hidden;
+}
+
+/* Efecto de partículas de fondo */
+.container::before {
+	content: '';
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-image:
+		radial-gradient(
+			circle at 20% 30%,
+			rgba(102, 126, 234, 0.1) 0%,
+			transparent 50%
+		),
+		radial-gradient(
+			circle at 80% 70%,
+			rgba(118, 75, 162, 0.08) 0%,
+			transparent 50%
+		),
+		radial-gradient(
+			circle at 50% 50%,
+			rgba(79, 172, 254, 0.05) 0%,
+			transparent 50%
+		);
+	pointer-events: none;
+	z-index: -1;
+}
+
+/* Content wrapper mejorado */
+.content-wrapper {
 	display: flex;
 	flex-direction: row;
-	gap: 4rem;
+	gap: 5rem;
 	align-items: flex-start;
-	padding-top: 2rem;
+	width: 100%;
+	position: relative;
+	z-index: 1;
+}
+
+/* Loading and Error Styles */
+.loading-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-height: 50vh;
+	padding: 2rem;
+	text-align: center;
+}
+
+.loading-container p {
+	margin-top: 1rem;
+	color: #8892b0;
+	font-size: 1.1rem;
+}
+
+.error-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 50vh;
+	padding: 2rem;
+}
+
+.error-message {
+	text-align: center;
+	max-width: 500px;
+	padding: 2rem;
+	background: linear-gradient(
+		135deg,
+		rgba(255, 255, 255, 0.05) 0%,
+		rgba(255, 255, 255, 0.02) 100%
+	);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 20px;
+	backdrop-filter: blur(10px);
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.error-message h3 {
+	background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	margin-bottom: 1rem;
+	font-weight: 700;
+}
+
+.error-message p {
+	color: #cbd5e1;
+	margin-bottom: 1.5rem;
+}
+
+.retry-btn {
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	color: white;
+	border: none;
+	padding: 0.75rem 1.5rem;
+	border-radius: 12px;
+	cursor: pointer;
+	font-size: 1rem;
+	font-weight: 600;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.retry-btn:hover {
+	box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+	transform: translateY(-2px);
+}
+
+.no-data-message {
+	text-align: center;
+	padding: 2rem;
+	color: #8892b0;
+	font-style: italic;
+	background: linear-gradient(
+		135deg,
+		rgba(255, 255, 255, 0.03) 0%,
+		rgba(255, 255, 255, 0.01) 100%
+	);
+	border-radius: 16px;
+	border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.no-data-message p {
+	margin: 0;
+	font-size: 1.1rem;
+}
+
+/* Current Badge for Work Cards */
+.current-badge {
+	background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+	color: white;
+	padding: 0.25rem 0.5rem;
+	border-radius: 12px;
+	font-size: 0.75rem;
+	font-weight: 600;
+	margin-left: 0.5rem;
+	box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
 }
 
 header {
-	flex: 0 0 280px;
+	flex: 0 0 320px;
 	position: sticky;
-	top: 2rem;
-	height: 80vh;
+	height: 85vh;
 	display: flex;
 	align-items: flex-start;
 	justify-content: flex-start;
+	/* Alineado con el contenido */
+	padding: 0;
 }
 
 .header-content {
@@ -51,7 +192,10 @@ header {
 .header-content-info h1 {
 	font-size: 2.5rem;
 	font-weight: 700;
-	color: var(--text-primary);
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
 	margin-bottom: 0.5rem;
 	letter-spacing: -0.02em;
 	text-align: left;
@@ -59,8 +203,8 @@ header {
 
 .header-content-info p {
 	font-size: 1.25rem;
-	color: var(--accent-blue);
-	font-weight: 500;
+	color: #a8b2d1;
+	font-weight: 600;
 	margin-bottom: 1rem;
 	text-align: left;
 }
@@ -94,14 +238,14 @@ header {
 
 .main-nav a {
 	text-decoration: none;
-	color: var(--text-primary);
+	color: #cbd5e1;
 	font-size: 1rem;
-	font-weight: var(--font-weight-medium);
-	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	font-weight: 500;
 	position: relative;
 	display: inline-block;
 	cursor: pointer;
 	padding: 0.5rem 0;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .main-nav a::after {
@@ -111,13 +255,13 @@ header {
 	left: 0;
 	width: 0;
 	height: 2px;
-	background-color: var(--accent-blue);
+	background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
 	transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 	border-radius: 1px;
 }
 
 .main-nav a:hover {
-	color: var(--accent-blue);
+	color: #ffffff;
 }
 
 .main-nav a:hover::after {
@@ -130,7 +274,7 @@ header {
 }
 
 .main-nav a.active {
-	color: var(--accent-blue) !important;
+	color: #ffffff !important;
 }
 
 .header-social-media {
@@ -148,10 +292,15 @@ header {
 	display: inline-block;
 	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 	position: relative;
+	padding: 0.5rem;
+	border-radius: 12px;
+	background: transparent;
+	border: none;
 }
 
 .social-media-content a:hover {
-	transform: translateY(-2px) scale(1.05);
+	background: transparent;
+	box-shadow: none;
 }
 
 .social-media-content img {
@@ -159,16 +308,9 @@ header {
 	height: 24px;
 }
 
-/* Efecto hover para LinkedIn */
-.social-media-content a:first-child:hover img {
-	filter: brightness(0) saturate(100%) invert(31%) sepia(83%) saturate(2873%)
-		hue-rotate(187deg) brightness(104%) contrast(97%);
-}
-
-/* Efecto hover para GitHub */
-.social-media-content a:last-child:hover img {
-	filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%)
-		hue-rotate(93deg) brightness(103%) contrast(103%);
+/* Sin efectos hover para los iconos */
+.social-media-content a:hover img {
+	filter: none;
 }
 
 main {
@@ -188,7 +330,7 @@ main {
 
 .about-content h2 {
 	font-size: 2rem;
-	color: var(--text-primary);
+	color: #cbd5e1;
 	margin-bottom: 2rem;
 	font-weight: 600;
 	letter-spacing: -0.01em;
@@ -202,19 +344,20 @@ main {
 	bottom: -8px;
 	left: 0;
 	width: 0;
-	height: 2px;
-	background-color: var(--accent-blue);
+	height: 3px;
+	background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
 	transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+	border-radius: 2px;
 }
 
 .about-content h2:hover::after {
-	width: 60px;
+	width: 80px;
 }
 
 .about-content p {
 	font-size: 1rem;
 	line-height: 1.6;
-	color: var(--text-primary);
+	color: #cbd5e1;
 }
 
 /* Estilos para la sección Sobre Mí */
@@ -233,7 +376,7 @@ main {
 	font-size: 1.1rem;
 	line-height: 1.7;
 	margin-bottom: 1rem;
-	color: var(--text-primary);
+	color: #cbd5e1;
 }
 
 .work-experience {
@@ -247,7 +390,7 @@ main {
 
 .work-experience-content h2 {
 	font-size: 2rem;
-	color: var(--text-primary);
+	color: #cbd5e1;
 	margin-bottom: 2rem;
 	font-weight: 600;
 	letter-spacing: -0.01em;
@@ -261,13 +404,14 @@ main {
 	bottom: -8px;
 	left: 0;
 	width: 0;
-	height: 2px;
-	background-color: var(--accent-blue);
+	height: 3px;
+	background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
 	transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+	border-radius: 2px;
 }
 
 .work-experience-content h2:hover::after {
-	width: 60px;
+	width: 80px;
 }
 
 .projects {
@@ -281,7 +425,7 @@ main {
 
 .projects-content h2 {
 	font-size: 2rem;
-	color: var(--text-primary);
+	color: #cbd5e1;
 	margin-bottom: 2rem;
 	font-weight: 600;
 	letter-spacing: -0.01em;
@@ -295,13 +439,14 @@ main {
 	bottom: -8px;
 	left: 0;
 	width: 0;
-	height: 2px;
-	background-color: var(--accent-blue);
+	height: 3px;
+	background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
 	transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+	border-radius: 2px;
 }
 
 .projects-content h2:hover::after {
-	width: 60px;
+	width: 80px;
 }
 
 /* Estilos para el enlace del curriculum */
@@ -309,24 +454,25 @@ main {
 	text-align: center;
 	margin-top: 2.5rem;
 	padding-top: 1.5rem;
-	border-top: 1px solid var(--border-color);
+	border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .curriculum-link {
 	display: inline-block;
-	color: var(--accent-blue);
+	color: #667eea;
 	font-size: 0.875rem;
-	font-weight: 500;
+	font-weight: 600;
 	cursor: pointer;
 	padding: 0.75rem 1.5rem;
-	border: 1px solid var(--accent-blue);
-	border-radius: 8px;
-	transition: all 0.3s ease;
+	border: 1px solid rgba(102, 126, 234, 0.3);
+	border-radius: 12px;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 	text-decoration: none;
 	position: relative;
 	overflow: hidden;
 	text-transform: uppercase;
 	letter-spacing: 0.05em;
+	background: rgba(102, 126, 234, 0.1);
 }
 
 .curriculum-link::before {
@@ -350,10 +496,10 @@ main {
 }
 
 .curriculum-link:hover {
-	background-color: var(--accent-blue);
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 	color: white;
-	transform: translateY(-2px);
-	box-shadow: 0 8px 25px var(--shadow-color);
+	box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+	border-color: transparent;
 }
 
 /* Estilos para el modal */
@@ -709,12 +855,25 @@ main {
 	text-shadow: 0 0 8px rgba(49, 130, 206, 0.3);
 }
 
-/* Responsive design */
+/* Responsive design mejorado */
+@media (max-width: 1200px) {
+	.content-wrapper {
+		gap: 4rem;
+	}
+
+	header {
+		flex: 0 0 300px;
+	}
+}
+
 @media (max-width: 1024px) {
 	.container {
-		flex-direction: column;
-		gap: 2rem;
 		padding-top: 1rem;
+	}
+
+	.content-wrapper {
+		flex-direction: column;
+		gap: 3rem;
 	}
 
 	header {
@@ -722,6 +881,8 @@ main {
 		width: 100%;
 		position: static;
 		height: auto;
+		max-width: 600px;
+		margin: 0 auto;
 	}
 
 	.header-content {
@@ -940,13 +1101,11 @@ main {
 /* Animaciones de entrada para el header */
 header {
 	opacity: 0;
-	transform: translateY(-20px);
 	transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 header.header-visible {
 	opacity: 1;
-	transform: translateY(0);
 }
 
 /* Animaciones para secciones */
@@ -1015,27 +1174,6 @@ app-project-card {
 /* Animaciones para elementos de navegación */
 .main-nav a {
 	position: relative;
-	overflow: hidden;
-}
-
-.main-nav a::before {
-	content: '';
-	position: absolute;
-	top: 0;
-	left: -100%;
-	width: 100%;
-	height: 100%;
-	background: linear-gradient(
-		90deg,
-		transparent,
-		rgba(59, 130, 246, 0.1),
-		transparent
-	);
-	transition: left 0.5s;
-}
-
-.main-nav a:hover::before {
-	left: 100%;
 }
 
 /* Animaciones para tech tags */
@@ -1084,7 +1222,7 @@ app-project-card {
 }
 
 .header-social-media a:hover {
-	transform: translateY(-3px) scale(1.1);
+	opacity: 0.8;
 }
 
 /* Animaciones para scroll suave mejorado */
@@ -1128,7 +1266,7 @@ app-work-card:hover {
 
 /* Efectos de parallax suave */
 header {
-	will-change: transform;
+	will-change: opacity;
 }
 
 /* Optimizaciones para rendimiento */

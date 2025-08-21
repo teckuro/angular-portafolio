@@ -138,6 +138,7 @@
 							formControlName="status"
 							class="form-control"
 							[class.invalid]="isFieldInvalid('status')"
+							[disabled]="workForm.get('is_current')?.value"
 						>
 							<option value="active">Activa</option>
 							<option value="inactive">Inactiva</option>

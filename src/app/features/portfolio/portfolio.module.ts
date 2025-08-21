@@ -16,18 +16,13 @@ import { ProjectsService } from './shared/services/projects.service';
 import { PortfolioRoutingModule } from './portfolio-routing.module';
 
 @NgModule({
-	declarations: [
-		PortfolioPageComponent
-	],
+	declarations: [PortfolioPageComponent],
 	imports: [
 		CommonModule,
 		RouterModule,
 		PortfolioRoutingModule,
 		PortfolioComponentsModule
 	],
-	providers: [
-		WorksService,
-		ProjectsService
-	]
+	providers: [WorksService, ProjectsService]
 })
 export class PortfolioModule {}

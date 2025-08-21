@@ -63,15 +63,14 @@ export class AdminWorksListComponent implements OnInit {
 		}
 	}
 
-	toggleWorkStatus(work: AdminWork): void {
-		const newStatus = work.status === 'active' ? 'inactive' : 'active';
-		this.worksService.toggleWorkStatus(work.id, newStatus).subscribe({
-			next: () => {
-				work.status = newStatus;
+	toggleWorkCurrent(work: AdminWork): void {
+		this.worksService.toggleWorkCurrent(work.id).subscribe({
+			next: (updatedWork: AdminWork) => {
+				work.is_current = updatedWork.is_current;
 			},
 			error: (error: any) => {
-				console.error('Error updating work status:', error);
-				alert('Error al actualizar el estado');
+				console.error('Error updating work current status:', error);
+				alert('Error al actualizar el estado actual');
 			}
 		});
 	}

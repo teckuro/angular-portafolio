@@ -1,10 +1,12 @@
 /* Estilos específicos del componente admin-project-form */
 
 .project-form-container {
-	width: 80%;
-	max-width: 1200px;
+	width: 85%;
+	max-width: 1400px;
 	margin: 0 auto;
 	padding: 0 1rem;
+	/* Mejoras visuales */
+	position: relative;
 }
 
 .page-header {
@@ -99,17 +101,20 @@
 	font-weight: 500;
 }
 
-/* Form Styles */
+/* Form Styles mejorado */
 .project-form {
-	background: rgba(255, 255, 255, 0.02);
-	border: 1px solid rgba(255, 255, 255, 0.1);
-	border-radius: 16px;
-	padding: 3rem;
-	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-	backdrop-filter: blur(10px);
-	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	background: rgba(255, 255, 255, 0.03);
+	border: 1px solid rgba(255, 255, 255, 0.12);
+	border-radius: 24px;
+	padding: 3.5rem;
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+	backdrop-filter: blur(25px);
+	transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 	position: relative;
 	overflow: hidden;
+	/* Mejoras de rendimiento */
+	will-change: transform, box-shadow;
+	transform: translateZ(0);
 }
 
 .project-form::before {
@@ -133,16 +138,16 @@
 }
 
 .project-form:hover {
-	transform: translateY(-2px);
-	box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+	transform: translateY(-4px) scale(1.005);
+	box-shadow: 0 25px 80px rgba(0, 0, 0, 0.2);
 	border-color: var(--accent-blue);
 }
 
 .form-grid {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-	gap: 2rem;
-	margin-bottom: 2rem;
+	grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+	gap: 2.5rem;
+	margin-bottom: 2.5rem;
 }
 
 .form-group {
@@ -178,16 +183,18 @@
 }
 
 .form-control {
-	padding: 1.25rem 1.5rem;
-	border: 1px solid rgba(255, 255, 255, 0.1);
-	border-radius: 12px;
+	padding: 1.4rem 1.8rem;
+	border: 1px solid rgba(255, 255, 255, 0.12);
+	border-radius: 16px;
 	font-size: 1rem;
-	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-	background: rgba(255, 255, 255, 0.05);
+	transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+	background: rgba(255, 255, 255, 0.06);
 	color: var(--text-primary);
-	backdrop-filter: blur(10px);
+	backdrop-filter: blur(15px);
 	position: relative;
 	overflow: hidden;
+	/* Mejoras visuales */
+	will-change: transform, box-shadow, background;
 }
 
 .form-control::placeholder {
@@ -198,9 +205,11 @@
 .form-control:focus {
 	outline: none;
 	border-color: var(--accent-blue);
-	box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
-	background: rgba(255, 255, 255, 0.1);
-	transform: translateY(-1px);
+	box-shadow:
+		0 0 0 4px rgba(49, 130, 206, 0.15),
+		0 8px 25px rgba(0, 0, 0, 0.1);
+	background: rgba(255, 255, 255, 0.12);
+	transform: translateY(-2px) scale(1.02);
 }
 
 .form-control.invalid {

@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://your-production-api.com/api'
+  apiUrl: 'https://api.portafolio.com/api',
+  appUrl: 'https://portafolio.com'
 };

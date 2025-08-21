@@ -1,0 +1,92 @@
+<div class="image-upload-wrapper">
+	<label class="form-label" *ngIf="label">
+		{{ label }} <span class="required" *ngIf="required">*</span>
+	</label>
+
+	<div [class]="getContainerClasses()">
+		<!-- Área de drag & drop -->
+		<div
+			class="upload-area"
+			(click)="openFileSelector()"
+			(dragover)="onDragOver($event)"
+			(drop)="onFileDrop($event)"
+		>
+			<!-- Vista previa de la imagen -->
+			<div class="image-preview" *ngIf="previewUrl && !uploading">
+				<img [src]="previewUrl" alt="Vista previa" class="preview-image" />
+				<div class="preview-overlay">
+					<button
+						type="button"
+						class="btn btn-danger btn-sm"
+						(click)="removeImage(); $event.stopPropagation()"
+						title="Eliminar imagen"
+					>
+						<svg
+							width="16"
+							height="16"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						>
+							<path d="M3 6h18"></path>
+							<path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+							<path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+						</svg>
+					</button>
+				</div>
+			</div>
+
+			<!-- Estado de carga -->
+			<div class="upload-state" *ngIf="uploading">
+				<div class="upload-spinner"></div>
+				<p class="upload-text">Subiendo imagen...</p>
+				<div class="progress-bar">
+					<div class="progress-fill" [style.width.%]="uploadProgress"></div>
+				</div>
+			</div>
+
+			<!-- Estado vacío -->
+			<div class="empty-state" *ngIf="!previewUrl && !uploading">
+				<div class="upload-icon">📷</div>
+				<p class="upload-text">{{ placeholder }}</p>
+				<p class="upload-hint">
+					Arrastra una imagen aquí o haz clic para seleccionar
+				</p>
+				<p class="upload-requirements">
+					Formatos: JPG, PNG, GIF, WebP • Máximo: {{ maxSize }}MB
+				</p>
+			</div>
+
+			<!-- Input de archivo oculto -->
+			<input
+				type="file"
+				[accept]="accept"
+				[multiple]="multiple"
+				(change)="onFileSelected($event)"
+				class="file-input"
+				#fileInput
+			/>
+		</div>
+
+		<!-- Mensaje de error -->
+		<div class="error-message" *ngIf="error">
+			<span class="error-icon">⚠️</span>
+			{{ error }}
+		</div>
+
+		<!-- Botón de acción -->
+		<div class="upload-actions" *ngIf="!uploading">
+			<button
+				type="button"
+				class="btn btn-primary"
+				(click)="openFileSelector()"
+				[disabled]="uploading"
+			>
+				{{ getButtonText() }}
+			</button>
+		</div>
+	</div>
+</div>

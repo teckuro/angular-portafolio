@@ -1,46 +1,114 @@
 <div class="project-card">
-	<div class="project-card-left">
-		<div class="project-card-left-image">
-			<div class="project-image">
-				<img [src]="project.image_url" [alt]="project.title" />
+	<!-- Overlay de gradiente de fondo -->
+	<div class="project-card-bg-overlay"></div>
+
+	<!-- Contenido principal -->
+	<div class="project-card-content">
+		<!-- Sección de imagen -->
+		<div class="project-card-image-section">
+			<div class="project-image-container">
+				<div class="project-image-wrapper" [class.loading]="imageLoading">
+					<img
+						[src]="getImageUrl()"
+						[alt]="project.title"
+						class="project-image"
+						(load)="onImageLoad()"
+						(error)="onImageError()"
+					/>
+					<div class="project-image-overlay">
+						<div class="project-status-badge" *ngIf="isFeatured()">
+							<svg class="star-icon" viewBox="0 0 24 24" fill="currentColor">
+								<path
+									d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+								/>
+							</svg>
+							Destacado
+						</div>
+					</div>
+				</div>
+				<div class="project-image-shine"></div>
+			</div>
+		</div>
+
+		<!-- Sección de información -->
+		<div class="project-card-info-section">
+			<!-- Header con título y estado -->
+			<div class="project-header">
+				<h3 class="project-title">{{ project.title }}</h3>
+				<div class="project-status" [class.featured]="isFeatured()">
+					<span class="status-dot"></span>
+					<span class="status-text">{{ getProjectStatus() }}</span>
+				</div>
+			</div>
+
+			<!-- Descripción -->
+			<p class="project-description">
+				{{ project.short_description }}
+			</p>
+
+			<!-- Stack tecnológico -->
+			<div class="project-tech-stack" *ngIf="getLimitedTechStack().length > 0">
+				<div class="tech-stack-label">Tecnologías:</div>
+				<div class="tech-tags">
+					<span class="tech-tag" *ngFor="let tech of getLimitedTechStack()">
+						{{ tech }}
+					</span>
+					<span class="tech-tag more" *ngIf="getAdditionalTechCount() > 0">
+						+{{ getAdditionalTechCount() }}
+					</span>
+				</div>
+			</div>
+
+			<!-- Características destacadas -->
+			<div class="project-features" *ngIf="getLimitedFeatures().length > 0">
+				<div class="features-label">Características:</div>
+				<ul class="features-list">
+					<li class="feature-item" *ngFor="let feature of getLimitedFeatures()">
+						<svg class="check-icon" viewBox="0 0 24 24" fill="currentColor">
+							<path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+						</svg>
+						{{ feature }}
+					</li>
+				</ul>
+			</div>
+
+			<!-- Enlaces de acción -->
+			<div class="project-actions">
+				<a
+					class="action-btn primary"
+					*ngIf="project.project_url"
+					[href]="project.project_url"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					<svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+						<path
+							d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
+						/>
+					</svg>
+					Ver Demo
+				</a>
+				<a
+					class="action-btn secondary"
+					*ngIf="project.github_url"
+					[href]="project.github_url"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					<svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+						<path
+							d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"
+						/>
+					</svg>
+					Ver Código
+				</a>
 			</div>
 		</div>
 	</div>
-	<div class="project-card-right">
-		<h3 class="project-card-right-title">{{ project.title }}</h3>
-		<p class="project-card-right-description">
-			{{ project.short_description }}
-		</p>
-		<div
-			class="project-card-right-tech"
-			*ngIf="project.tech_stack && project.tech_stack.length > 0"
-		>
-			<span
-				class="project-card-right-tech-item"
-				*ngFor="let tech of project.tech_stack"
-			>
-				{{ tech }}
-			</span>
-		</div>
-		<div class="project-card-right-links">
-			<a
-				class="project-card-right-link"
-				*ngIf="project.project_url"
-				[href]="project.project_url"
-				target="_blank"
-				rel="noopener noreferrer"
-			>
-				Ver Demo
-			</a>
-			<a
-				class="project-card-right-link"
-				*ngIf="project.github_url"
-				[href]="project.github_url"
-				target="_blank"
-				rel="noopener noreferrer"
-			>
-				Ver Código
-			</a>
-		</div>
+
+	<!-- Efectos de hover -->
+	<div class="project-card-hover-effects">
+		<div class="hover-glow"></div>
+		<div class="hover-particles"></div>
 	</div>
 </div>

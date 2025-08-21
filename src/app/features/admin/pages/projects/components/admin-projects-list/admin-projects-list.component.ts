@@ -61,31 +61,16 @@ export class AdminProjectsListComponent implements OnInit {
 		}
 	}
 
-	toggleProjectStatus(project: AdminProject): void {
-		const newStatus = project.status === 'active' ? 'inactive' : 'active';
-		this.projectsService.toggleProjectStatus(project.id, newStatus).subscribe({
-			next: () => {
-				project.status = newStatus;
+	toggleProjectFeatured(project: AdminProject): void {
+		this.projectsService.toggleProjectFeatured(project.id).subscribe({
+			next: (updatedProject: AdminProject) => {
+				project.is_featured = updatedProject.is_featured;
 			},
 			error: (error: any) => {
-				console.error('Error updating project status:', error);
-				alert('Error al actualizar el estado');
+				console.error('Error updating project featured status:', error);
+				alert('Error al actualizar el estado destacado');
 			}
 		});
-	}
-
-	toggleProjectFeatured(project: AdminProject): void {
-		this.projectsService
-			.toggleProjectFeatured(project.id, !project.is_featured)
-			.subscribe({
-				next: () => {
-					project.is_featured = !project.is_featured;
-				},
-				error: (error: any) => {
-					console.error('Error updating project featured status:', error);
-					alert('Error al actualizar el estado destacado');
-				}
-			});
 	}
 
 	getStatusLabel(status: string): string {

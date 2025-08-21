@@ -103,17 +103,6 @@
 						</button>
 						<button
 							class="btn btn-outline btn-sm"
-							(click)="toggleProjectStatus(project)"
-						>
-							<span class="btn-icon">{{
-								project.status === 'active' ? '⏸️' : '▶️'
-							}}</span>
-							<span class="btn-text">{{
-								project.status === 'active' ? 'Pausar' : 'Activar'
-							}}</span>
-						</button>
-						<button
-							class="btn btn-outline btn-sm"
 							(click)="toggleProjectFeatured(project)"
 						>
 							<span class="btn-icon">{{

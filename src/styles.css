@@ -1,21 +1,23 @@
 /* Variables CSS globales */
 :root {
 	/* Colores principales */
-	--background-color: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+	--background-color: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
 	--background-secondary: #ffffff;
-	--text-primary: #f7fafc;
-	--text-secondary: #e2e8f0;
+	--text-primary: #ffffff;
+	--text-secondary: #cbd5e1;
 
-	/* Colores de acento minimalistas */
-	--accent-pink: #e53e3e;
-	--accent-blue: #3182ce;
+	/* Colores de acento modernos */
+	--accent-pink: #ef4444;
+	--accent-blue: #667eea;
+	--accent-purple: #764ba2;
+	--accent-cyan: #4facfe;
 
 	/* Estados y variaciones */
-	--accent-pink-hover: #c53030;
-	--accent-blue-hover: #2c5aa0;
-	--text-muted: #718096;
-	--border-color: #e2e8f0;
-	--shadow-color: rgba(0, 0, 0, 0.1);
+	--accent-pink-hover: #dc2626;
+	--accent-blue-hover: #5a67d8;
+	--text-muted: #8892b0;
+	--border-color: rgba(255, 255, 255, 0.1);
+	--shadow-color: rgba(0, 0, 0, 0.15);
 
 	/* Tipografía */
 	--font-family:
@@ -60,23 +62,23 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-	background: var(--accent-blue);
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 	border-radius: 4px;
 	transition: background 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-	background: var(--accent-blue-hover);
+	background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
 }
 
 /* Selección de texto */
 ::selection {
-	background: var(--accent-blue);
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 	color: white;
 }
 
 ::-moz-selection {
-	background: var(--accent-blue);
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 	color: white;
 }
 
@@ -84,11 +86,11 @@ body {
 a {
 	color: var(--accent-blue);
 	text-decoration: none;
-	transition: all 0.3s ease;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 a:hover {
-	color: var(--accent-blue-hover);
+	color: #ffffff;
 }
 
 /* Botones base */
@@ -97,7 +99,7 @@ button {
 	border: none;
 	outline: none;
 	cursor: pointer;
-	transition: all 0.3s ease;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Utilidades */

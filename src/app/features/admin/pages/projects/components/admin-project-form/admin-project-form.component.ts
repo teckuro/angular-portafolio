@@ -211,4 +211,21 @@ export class AdminProjectFormComponent implements OnInit {
 		}
 		return '';
 	}
+
+	/**
+	 * Maneja el éxito de la carga de imagen
+	 */
+	onImageUploadSuccess(imageUrl: string): void {
+		console.log('Imagen subida exitosamente:', imageUrl);
+		// La URL de la imagen ya se establece automáticamente en el formulario
+		// gracias al ControlValueAccessor del componente ImageUpload
+	}
+
+	/**
+	 * Maneja el error de la carga de imagen
+	 */
+	onImageUploadError(error: string): void {
+		console.error('Error al subir imagen:', error);
+		// El error se muestra automáticamente en el componente ImageUpload
+	}
 }

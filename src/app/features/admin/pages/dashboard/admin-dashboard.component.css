@@ -159,10 +159,6 @@ html {
 	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.action-card:hover .action-title {
-	color: var(--accent-blue);
-}
-
 .action-description {
 	margin: 0;
 	color: var(--text-secondary);
@@ -253,8 +249,17 @@ html {
 		gap: 1rem;
 	}
 
+	.loading-section {
+		padding: 3rem 0.5rem;
+	}
+
+	.loading-spinner {
+		width: 2.5rem;
+		height: 2.5rem;
+	}
+
 	.action-card {
-		padding: 1.5rem;
+		padding: 1.25rem;
 	}
 
 	.action-icon {
