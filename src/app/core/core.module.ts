@@ -7,6 +7,7 @@ import { LoggerService } from './logger.service';
 
 // Interceptors
 import { AdminAuthInterceptor } from './interceptors/admin-auth.interceptor';
+import { ErrorHandlerInterceptor } from './interceptors/error-handler.interceptor';
 
 // Guards
 import { AdminAuthGuard } from './guards/admin-auth.guard';
@@ -20,6 +21,11 @@ import { AdminRoleGuard } from './guards/admin-role.guard';
 		LoggerService,
 
 		// Interceptors
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: ErrorHandlerInterceptor,
+			multi: true
+		},
 		{
 			provide: HTTP_INTERCEPTORS,
 			useClass: AdminAuthInterceptor,
