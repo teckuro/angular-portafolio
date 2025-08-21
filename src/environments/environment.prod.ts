@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://api.portafolio.com/api',
-  appUrl: 'https://portafolio.com'
+  apiUrl: 'https://web-production-eeecb.up.railway.app/api',
+  appUrl: 'https://angular-portafolio.vercel.app'
 };

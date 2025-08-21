@@ -1,0 +1,42 @@
+# Dependencias
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Archivos de desarrollo
+src/
+e2e/
+.editorconfig
+.gitignore
+karma.conf.js
+protractor.conf.js
+tsconfig*.json
+*.spec.ts
+*.e2e-spec.ts
+
+# Documentación y archivos no necesarios
+*.md
+*.pdf
+REVISION-PROYECTO.md
+MEJORAS-DISEÑO-PROYECTOS.md
+SOLUCION-IMAGENES.md
+buenas-practicas-*.md
+buenas-practicas-*.pdf
+
+# Scripts locales
+start-servers.bat
+
+# Logs
+logs/
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
