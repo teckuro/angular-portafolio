@@ -20,15 +20,29 @@ export abstract class BaseApiService<T> {
 	 * Transforma strings JSON a arrays de manera segura
 	 */
 	protected transformJsonField(data: any, fieldName: string): void {
-		if (typeof data[fieldName] === 'string') {
+		// Si el campo no existe, inicializarlo como array vacío
+		if (!(fieldName in data)) {
+			data[fieldName] = [];
+			return;
+		}
+
+		const fieldValue = data[fieldName];
+
+		// Si ya es un array, no hacer nada
+		if (Array.isArray(fieldValue)) {
+			return;
+		}
+
+		// Si es string, intentar parsearlo como JSON
+		if (typeof fieldValue === 'string') {
 			try {
-				const parsed = JSON.parse(data[fieldName]);
+				const parsed = JSON.parse(fieldValue);
 				data[fieldName] = Array.isArray(parsed) ? parsed : [];
 			} catch (e) {
 				console.warn(`Error parsing ${fieldName}:`, e);
 				data[fieldName] = [];
 			}
-		} else if (!Array.isArray(data[fieldName])) {
+		} else {
 			// Si no es string ni array, asegurar que sea array
 			data[fieldName] = [];
 		}
@@ -40,7 +54,9 @@ export abstract class BaseApiService<T> {
 	getAll(): Observable<T[]> {
 		return this.http
 			.get<{ success: boolean; data: T[] }>(this.apiUrl)
-			.pipe(map((response) => response.data.map((item) => this.transformData(item))));
+			.pipe(
+				map((response) => response.data.map((item) => this.transformData(item)))
+			);
 	}
 
 	/**
@@ -58,7 +74,9 @@ export abstract class BaseApiService<T> {
 	getByStatus(status: string): Observable<T[]> {
 		return this.http
 			.get<{ success: boolean; data: T[] }>(`${this.apiUrl}?status=${status}`)
-			.pipe(map((response) => response.data.map((item) => this.transformData(item))));
+			.pipe(
+				map((response) => response.data.map((item) => this.transformData(item)))
+			);
 	}
 
 	/**
