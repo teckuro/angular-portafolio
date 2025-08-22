@@ -90,7 +90,15 @@ export class SafeImageComponent implements OnInit {
 			return;
 		}
 
-		this.imageSrc = this.src;
+		// Si es una URL relativa, convertirla a absoluta
+		if (this.src.startsWith('/assets/') || this.src.startsWith('assets/')) {
+			// Para desarrollo local, usar la URL de Railway
+			this.imageSrc = `https://web-production-eeecb.up.railway.app${this.src.startsWith('/') ? this.src : '/' + this.src}`;
+		} else {
+			this.imageSrc = this.src;
+		}
+
+		console.log('Cargando imagen:', this.imageSrc);
 	}
 
 	onImageError() {

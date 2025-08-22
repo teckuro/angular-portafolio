@@ -214,7 +214,8 @@ export class AdminUploadService {
 
 		// Si no está en localStorage, usar la URL del servidor Laravel
 		const category = this.getCategoryFromFilename(filename);
-		const imageUrl = `${environment.apiUrl}/files/${category}/${filename}`;
+		const imageUrl = `${environment.apiUrl.replace('/api', '')}/files/${category}/${filename}`;
+		console.log('URL de imagen:', imageUrl);
 		return of(imageUrl);
 	}
 
@@ -290,6 +291,8 @@ export class AdminUploadService {
 	 * @returns Observable con la imagen base64 o URL
 	 */
 	loadExistingImage(imageUrl: string): Observable<string> {
+		console.log('Cargando imagen existente:', imageUrl);
+		
 		// Si ya es una URL completa válida, usarla directamente
 		if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
 			return of(imageUrl);
@@ -309,7 +312,8 @@ export class AdminUploadService {
 
 				// Si no está en localStorage, construir URL del servidor
 				const category = this.getCategoryFromFilename(filename);
-				const serverUrl = `${environment.apiUrl}/files/${category}/${filename}`;
+				const serverUrl = `${environment.apiUrl.replace('/api', '')}/files/${category}/${filename}`;
+				console.log('URL del servidor:', serverUrl);
 				return of(serverUrl);
 			}
 		}

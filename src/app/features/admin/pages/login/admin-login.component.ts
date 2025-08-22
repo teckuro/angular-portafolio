@@ -42,11 +42,16 @@ export class AdminLoginComponent implements OnInit {
 			this.loading = true;
 			this.error = '';
 
+			console.log('Intentando login con:', this.loginForm.value);
+
 			this.authService.login(this.loginForm.value).subscribe({
-				next: () => {
+				next: (response) => {
+					console.log('Login exitoso, redirigiendo a:', this.returnUrl);
+					this.loading = false;
 					this.router.navigate([this.returnUrl]);
 				},
 				error: (error) => {
+					console.error('Error en login:', error);
 					this.loading = false;
 					this.error = error.error?.message || 'Error al iniciar sesión';
 				}

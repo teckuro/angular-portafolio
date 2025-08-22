@@ -30,6 +30,7 @@ export class AdminAuthService {
 			.post<AdminLoginResponse>(`${this.API_URL}/login`, credentials)
 			.pipe(
 				tap((response: AdminLoginResponse) => {
+					console.log('Login exitoso:', response);
 					this.setCurrentUser(response.user, response.token);
 				})
 			);
@@ -74,7 +75,10 @@ export class AdminAuthService {
 	 * Verificar si el usuario está autenticado
 	 */
 	isAuthenticated(): boolean {
-		return !!this.getToken() && !!this.currentUserSubject.value;
+		const token = this.getToken();
+		const user = this.currentUserSubject.value;
+		console.log('Verificando autenticación:', { token: !!token, user: !!user });
+		return !!token && !!user;
 	}
 
 	/**
@@ -103,6 +107,8 @@ export class AdminAuthService {
 	 * Establecer usuario actual y token
 	 */
 	private setCurrentUser(user: AdminUser, token: string): void {
+		console.log('Estableciendo usuario:', user);
+		console.log('Token:', token);
 		localStorage.setItem('admin_token', token);
 		localStorage.setItem('admin_user', JSON.stringify(user));
 		this.currentUserSubject.next(user);
