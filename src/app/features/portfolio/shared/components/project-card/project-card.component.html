@@ -7,13 +7,14 @@
 		<!-- Sección de imagen -->
 		<div class="project-card-image-section">
 			<div class="project-image-container">
-				<div class="project-image-wrapper" [class.loading]="imageLoading">
-					<img
+				<div class="project-image-wrapper">
+					<app-safe-image
 						[src]="getImageUrl()"
 						[alt]="project.title"
-						class="project-image"
-						(load)="onImageLoad()"
-						(error)="onImageError()"
+						cssClass="project-image"
+						placeholderText="Cargando proyecto..."
+						errorText="Imagen no disponible"
+						placeholderColor="#2563eb"
 					/>
 					<div class="project-image-overlay">
 						<div class="project-status-badge" *ngIf="isFeatured()">

@@ -7,6 +7,7 @@ import { PortfolioPageComponent } from './pages/home/portfolio-page.component';
 
 // Shared Components
 import { PortfolioComponentsModule } from './shared/components/portfolio-components.module';
+import { SharedModule } from '../../shared/shared.module';
 
 // Services
 import { WorksService } from './shared/services/works.service';
@@ -21,7 +22,8 @@ import { PortfolioRoutingModule } from './portfolio-routing.module';
 		CommonModule,
 		RouterModule,
 		PortfolioRoutingModule,
-		PortfolioComponentsModule
+		PortfolioComponentsModule,
+		SharedModule
 	],
 	providers: [WorksService, ProjectsService]
 })
