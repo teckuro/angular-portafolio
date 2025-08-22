@@ -1,0 +1,17 @@
+{
+  "name": "Juan Pablo Huerta - Desarrollador Full Stack",
+  "short_name": "JP Portfolio",
+  "description": "Portafolio profesional de Juan Pablo Huerta",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#3b82f6",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    }
+  ]
+}
