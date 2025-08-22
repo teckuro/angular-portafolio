@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AdminAuthService } from '../../shared/services/admin-auth.service';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
 	selector: 'app-admin-login',
@@ -42,18 +43,31 @@ export class AdminLoginComponent implements OnInit {
 			this.loading = true;
 			this.error = '';
 
-			console.log('Intentando login con:', this.loginForm.value);
+			const credentials = this.loginForm.value;
+			console.log('Intentando login con:', credentials);
+			console.log('URL de la API:', `${environment.apiUrl}/admin/login`);
 
-			this.authService.login(this.loginForm.value).subscribe({
+			this.authService.login(credentials).subscribe({
 				next: (response) => {
 					console.log('Login exitoso, redirigiendo a:', this.returnUrl);
+					console.log('Respuesta completa:', response);
 					this.loading = false;
 					this.router.navigate([this.returnUrl]);
 				},
 				error: (error) => {
 					console.error('Error en login:', error);
+					console.error('Error completo:', JSON.stringify(error, null, 2));
 					this.loading = false;
-					this.error = error.error?.message || 'Error al iniciar sesión';
+					
+					if (error.status === 0) {
+						this.error = 'No se pudo conectar con el servidor. Verifica tu conexión a internet.';
+					} else if (error.status === 422) {
+						this.error = error.error?.message || 'Credenciales inválidas';
+					} else if (error.status === 500) {
+						this.error = 'Error interno del servidor. Intenta más tarde.';
+					} else {
+						this.error = error.error?.message || 'Error al iniciar sesión';
+					}
 				}
 			});
 		}
