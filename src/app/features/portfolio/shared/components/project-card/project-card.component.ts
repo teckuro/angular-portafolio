@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Project } from '../../models/project.model';
+import { ImageUrlService } from '../../../../../shared/services/image-url.service';
 
 @Component({
 	selector: 'app-project-card',
@@ -14,8 +15,8 @@ export class ProjectCardComponent implements OnInit {
 	imageError = false;
 	imageLoaded = false;
 
-	constructor() {
-		// Constructor vacío intencional
+	constructor(private imageUrlService: ImageUrlService) {
+		// Constructor con inyección de dependencias
 	}
 
 	ngOnInit(): void {
@@ -48,10 +49,11 @@ export class ProjectCardComponent implements OnInit {
 	 */
 	getImageUrl(): string {
 		if (this.project?.image_url) {
-			return this.project.image_url;
+			// Usar el servicio para transformar la URL si es necesario
+			return this.imageUrlService.transformImageUrl(this.project.image_url);
 		}
 		// URL de placeholder si no hay imagen
-		return 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI4MCIgdmlld0JveD0iMCAwIDQwMCAyODAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMjgwIiBmaWxsPSJ1cmwoI2dyYWRpZW50KSIvPgo8ZGVmcz4KPGxpbmVhckdyYWRpZW50IGlkPSJncmFkaWVudCIgeDE9IjAiIHkxPSIwIiB4Mj0iNDAwIiB5Mj0iMjgwIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiM2NjdlZWE7c3RvcC1vcGFjaXR5OjEiIC8+CjxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6Izc2NGJhMjtzdG9wLW9wYWNpdHk6MSIgLz4KPC9saW5lYXJHcmFkaWVudD4KPC9kZWZzPgo8L3N2Zz4K';
+		return this.imageUrlService.getDefaultPlaceholderUrl();
 	}
 
 	/**

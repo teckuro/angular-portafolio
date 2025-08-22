@@ -58,9 +58,10 @@ export class AdminLoginComponent implements OnInit {
 					console.error('Error en login:', error);
 					console.error('Error completo:', JSON.stringify(error, null, 2));
 					this.loading = false;
-					
+
 					if (error.status === 0) {
-						this.error = 'No se pudo conectar con el servidor. Verifica tu conexión a internet.';
+						this.error =
+							'No se pudo conectar con el servidor. Verifica tu conexión a internet.';
 					} else if (error.status === 422) {
 						this.error = error.error?.message || 'Credenciales inválidas';
 					} else if (error.status === 500) {

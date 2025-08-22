@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { BaseApiService } from '../../../../core/services/base-api.service';
 import { Project } from '../models/project.model';
+import { ImageUrlService } from '../../../../shared/services/image-url.service';
 
 @Injectable({
 	providedIn: 'root'
@@ -11,7 +12,10 @@ import { Project } from '../models/project.model';
 export class ProjectsService extends BaseApiService<Project> {
 	protected readonly endpoint = 'projects';
 
-	constructor(http: HttpClient) {
+	constructor(
+		http: HttpClient,
+		private imageUrlService: ImageUrlService
+	) {
 		super(http);
 	}
 
@@ -22,6 +26,11 @@ export class ProjectsService extends BaseApiService<Project> {
 		// Transformar campos JSON a arrays
 		this.transformJsonField(project, 'tech_stack');
 		this.transformJsonField(project, 'features');
+
+		// Transformar la URL de la imagen para que funcione en Railway
+		if (project.image_url) {
+			project.image_url = this.imageUrlService.transformImageUrl(project.image_url);
+		}
 
 		return project as Project;
 	}

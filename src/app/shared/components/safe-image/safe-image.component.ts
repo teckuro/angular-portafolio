@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ImageUrlService } from '../../services/image-url.service';
 
 @Component({
 	selector: 'app-safe-image',
@@ -71,6 +72,8 @@ export class SafeImageComponent implements OnInit {
 	imageLoaded: boolean = false;
 	hasError: boolean = false;
 
+	constructor(private imageUrlService: ImageUrlService) {}
+
 	ngOnInit() {
 		this.loadImage();
 	}
@@ -90,13 +93,8 @@ export class SafeImageComponent implements OnInit {
 			return;
 		}
 
-		// Si es una URL relativa, convertirla a absoluta
-		if (this.src.startsWith('/assets/') || this.src.startsWith('assets/')) {
-			// Para desarrollo local, usar la URL de Railway
-			this.imageSrc = `https://web-production-eeecb.up.railway.app${this.src.startsWith('/') ? this.src : '/' + this.src}`;
-		} else {
-			this.imageSrc = this.src;
-		}
+		// Usar el servicio para transformar la URL
+		this.imageSrc = this.imageUrlService.transformImageUrl(this.src);
 
 		console.log('Cargando imagen:', this.imageSrc);
 	}
