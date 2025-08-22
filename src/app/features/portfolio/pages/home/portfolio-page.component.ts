@@ -40,9 +40,19 @@ export class PortfolioPageComponent implements OnInit {
 			}
 		};
 
+		// Timeout para evitar que se quede cargando indefinidamente
+		setTimeout(() => {
+			if (this.loading) {
+				console.log('Timeout reached, stopping loading');
+				this.loading = false;
+				this.error = 'Tiempo de espera agotado. Verifica tu conexión a internet.';
+			}
+		}, 10000); // 10 segundos de timeout
+
 		// Cargar experiencias laborales
 		this.worksService.getWorks().subscribe({
 			next: (works) => {
+				console.log('Works loaded successfully:', works);
 				this.works = works;
 				worksLoaded = true;
 				checkAllLoaded();
