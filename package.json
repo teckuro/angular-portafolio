@@ -6,9 +6,9 @@
 	"scripts": {
 		"ng": "ng",
 		"start": "ng serve",
-		"build": "ng build --prod",
+		"build": "ng build --configuration production",
 		"build:dev": "ng build",
-		"vercel-build": "ng build --prod",
+		"vercel-build": "ng build --configuration production",
 		"test": "ng test",
 		"lint": "ng lint",
 		"e2e": "ng e2e"
