@@ -61,33 +61,33 @@ export class PortfolioPageComponent implements OnInit, OnDestroy {
 			}
 		}, 10000);
 
-		// Cargar experiencias laborales
-		this.worksService.getWorks().subscribe({
-			next: (works) => {
-				this.works = works;
-				worksLoaded = true;
-				checkAllLoaded();
-			},
-			error: (error) => {
-				this.error = this.getErrorMessage(error, 'experiencias laborales');
-				worksLoaded = true;
-				checkAllLoaded();
-			}
-		});
+			// Cargar experiencias laborales
+	this.worksService.getAll().subscribe({
+		next: (works) => {
+			this.works = works;
+			worksLoaded = true;
+			checkAllLoaded();
+		},
+		error: (error) => {
+			this.error = this.getErrorMessage(error, 'experiencias laborales');
+			worksLoaded = true;
+			checkAllLoaded();
+		}
+	});
 
-		// Cargar proyectos
-		this.projectsService.getProjects().subscribe({
-			next: (projects) => {
-				this.projects = projects;
-				projectsLoaded = true;
-				checkAllLoaded();
-			},
-			error: (error) => {
-				this.error = this.getErrorMessage(error, 'proyectos');
-				projectsLoaded = true;
-				checkAllLoaded();
-			}
-		});
+	// Cargar proyectos
+	this.projectsService.getAll().subscribe({
+		next: (projects) => {
+			this.projects = projects;
+			projectsLoaded = true;
+			checkAllLoaded();
+		},
+		error: (error) => {
+			this.error = this.getErrorMessage(error, 'proyectos');
+			projectsLoaded = true;
+			checkAllLoaded();
+		}
+	});
 	}
 
 	// Métodos de filtrado de datos

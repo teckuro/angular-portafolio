@@ -2,89 +2,70 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { environment } from '../../../../../environments/environment';
+import { BaseApiService } from '../../../../core/services/base-api.service';
 import { Work } from '../models/work.model';
-
-// Función para transformar strings JSON a arrays
-function transformWorkData(work: any): Work {
-	if (typeof work.technologies === 'string') {
-		try {
-			work.technologies = JSON.parse(work.technologies);
-		} catch (e) {
-			work.technologies = [];
-		}
-	}
-
-	if (typeof work.achievements === 'string') {
-		try {
-			work.achievements = JSON.parse(work.achievements);
-		} catch (e) {
-			work.achievements = [];
-		}
-	}
-
-	if (typeof work.responsibilities === 'string') {
-		try {
-			work.responsibilities = JSON.parse(work.responsibilities);
-		} catch (e) {
-			work.responsibilities = [];
-		}
-	}
-
-	return work;
-}
 
 @Injectable({
 	providedIn: 'root'
 })
-export class WorksService {
-	private readonly API_URL = `${environment.apiUrl}/works`;
+export class WorksService extends BaseApiService<Work> {
+	protected readonly endpoint = 'works';
 
-	constructor(private http: HttpClient) {}
-
-	getWorks(): Observable<Work[]> {
-		return this.http
-			.get<{ success: boolean; data: Work[] }>(this.API_URL)
-			.pipe(map((response) => response.data.map(transformWorkData)));
+	constructor(http: HttpClient) {
+		super(http);
 	}
 
-	getWorkById(id: number): Observable<Work> {
-		return this.http
-			.get<{ success: boolean; data: Work }>(`${this.API_URL}/${id}`)
-			.pipe(map((response) => transformWorkData(response.data)));
+	/**
+	 * Transforma los datos específicos de Work
+	 */
+	protected transformData(work: any): Work {
+		// Transformar campos JSON a arrays
+		this.transformJsonField(work, 'technologies');
+		this.transformJsonField(work, 'achievements');
+		this.transformJsonField(work, 'responsibilities');
+
+		return work as Work;
 	}
 
+	/**
+	 * Obtiene trabajos activos
+	 */
 	getActiveWorks(): Observable<Work[]> {
-		return this.http
-			.get<{ success: boolean; data: Work[] }>(`${this.API_URL}?status=active`)
-			.pipe(map((response) => response.data.map(transformWorkData)));
+		return this.getByStatus('active');
 	}
 
+	/**
+	 * Obtiene el trabajo actual
+	 */
 	getCurrentWork(): Observable<Work | null> {
 		return this.http
-			.get<{ success: boolean; data: Work[] }>(`${this.API_URL}/current`)
+			.get<{ success: boolean; data: Work[] }>(`${this.apiUrl}/current`)
 			.pipe(
 				map((response) =>
-					response.data.length > 0 ? transformWorkData(response.data[0]) : null
+					response.data.length > 0 ? this.transformData(response.data[0]) : null
 				)
 			);
 	}
 
+	/**
+	 * Obtiene trabajos por empresa
+	 */
 	getWorksByCompany(company: string): Observable<Work[]> {
 		return this.http
-			.get<{
-				success: boolean;
-				data: Work[];
-			}>(`${this.API_URL}?company=${encodeURIComponent(company)}`)
-			.pipe(map((response) => response.data.map(transformWorkData)));
+			.get<{ success: boolean; data: Work[] }>(
+				`${this.apiUrl}?company=${encodeURIComponent(company)}`
+			)
+			.pipe(map((response) => response.data.map((item) => this.transformData(item))));
 	}
 
+	/**
+	 * Obtiene trabajos por tecnología
+	 */
 	getWorksByTech(tech: string): Observable<Work[]> {
 		return this.http
-			.get<{
-				success: boolean;
-				data: Work[];
-			}>(`${this.API_URL}?tech=${encodeURIComponent(tech)}`)
-			.pipe(map((response) => response.data.map(transformWorkData)));
+			.get<{ success: boolean; data: Work[] }>(
+				`${this.apiUrl}?tech=${encodeURIComponent(tech)}`
+			)
+			.pipe(map((response) => response.data.map((item) => this.transformData(item))));
 	}
 }
