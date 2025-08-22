@@ -69,13 +69,39 @@ export class AdminProjectFormComponent implements OnInit {
 				// Limpiar arrays existentes
 				this.clearFormArrays();
 
+				// Procesar tech_stack - convertir string JSON a array si es necesario
+				let techStack: string[] = [];
+				if (typeof project.tech_stack === 'string') {
+					try {
+						techStack = JSON.parse(project.tech_stack);
+					} catch (e) {
+						console.error('Error parsing tech_stack JSON:', e);
+						techStack = [];
+					}
+				} else if (Array.isArray(project.tech_stack)) {
+					techStack = project.tech_stack;
+				}
+
+				// Procesar features - convertir string JSON a array si es necesario
+				let features: string[] = [];
+				if (typeof project.features === 'string') {
+					try {
+						features = JSON.parse(project.features);
+					} catch (e) {
+						console.error('Error parsing features JSON:', e);
+						features = [];
+					}
+				} else if (Array.isArray(project.features)) {
+					features = project.features;
+				}
+
 				// Agregar tech_stack
-				project.tech_stack.forEach((tech: string) => {
+				techStack.forEach((tech: string) => {
 					this.addTechStack(tech);
 				});
 
 				// Agregar features
-				project.features.forEach((feature: string) => {
+				features.forEach((feature: string) => {
 					this.addFeature(feature);
 				});
 

@@ -15,6 +15,7 @@ export class AdminDashboardComponent implements OnInit {
 	workStats: any = null;
 	projectStats: any = null;
 	loading = true;
+	error: string | null = null;
 
 	// Arrays for stats cards
 	workStatsArray: StatItem[] = [];
@@ -31,25 +32,12 @@ export class AdminDashboardComponent implements OnInit {
 		this.currentUser = this.authService.getCurrentUser();
 		console.log('Current user:', this.currentUser);
 		this.loadStats();
-		this.testApiConnection();
-	}
-
-	testApiConnection(): void {
-		console.log('Testing API connection...');
-		// Probar conexión directa a la API
-		fetch('http://127.0.0.1:8000/api/admin/projects/stats')
-			.then((response) => response.json())
-			.then((data) => {
-				console.log('Direct API test successful:', data);
-			})
-			.catch((error) => {
-				console.error('Direct API test failed:', error);
-			});
 	}
 
 	loadStats(): void {
 		console.log('Loading stats...');
 		this.loading = true;
+		this.error = null;
 
 		// Cargar estadísticas de trabajos
 		this.worksService.getWorkStats().subscribe({
@@ -60,6 +48,8 @@ export class AdminDashboardComponent implements OnInit {
 			},
 			error: (error) => {
 				console.error('Error loading work stats:', error);
+				this.error = 'Error al cargar estadísticas de experiencia laboral';
+				this.loading = false;
 			},
 			complete: () => {
 				console.log('Work stats loading completed');
@@ -76,6 +66,8 @@ export class AdminDashboardComponent implements OnInit {
 			},
 			error: (error) => {
 				console.error('Error loading project stats:', error);
+				this.error = 'Error al cargar estadísticas de proyectos';
+				this.loading = false;
 			},
 			complete: () => {
 				console.log('Project stats loading completed');
