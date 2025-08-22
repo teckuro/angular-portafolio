@@ -14,7 +14,7 @@ function transformProjectData(project: any): Project {
 			project.technologies = [];
 		}
 	}
-	
+
 	if (typeof project.achievements === 'string') {
 		try {
 			project.achievements = JSON.parse(project.achievements);
@@ -22,7 +22,7 @@ function transformProjectData(project: any): Project {
 			project.achievements = [];
 		}
 	}
-	
+
 	if (typeof project.responsibilities === 'string') {
 		try {
 			project.responsibilities = JSON.parse(project.responsibilities);
@@ -30,7 +30,7 @@ function transformProjectData(project: any): Project {
 			project.responsibilities = [];
 		}
 	}
-	
+
 	return project;
 }
 

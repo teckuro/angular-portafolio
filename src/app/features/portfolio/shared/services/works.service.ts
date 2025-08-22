@@ -14,7 +14,7 @@ function transformWorkData(work: any): Work {
 			work.technologies = [];
 		}
 	}
-	
+
 	if (typeof work.achievements === 'string') {
 		try {
 			work.achievements = JSON.parse(work.achievements);
@@ -22,7 +22,7 @@ function transformWorkData(work: any): Work {
 			work.achievements = [];
 		}
 	}
-	
+
 	if (typeof work.responsibilities === 'string') {
 		try {
 			work.responsibilities = JSON.parse(work.responsibilities);
@@ -30,7 +30,7 @@ function transformWorkData(work: any): Work {
 			work.responsibilities = [];
 		}
 	}
-	
+
 	return work;
 }
 
@@ -64,7 +64,9 @@ export class WorksService {
 		return this.http
 			.get<{ success: boolean; data: Work[] }>(`${this.API_URL}/current`)
 			.pipe(
-				map((response) => (response.data.length > 0 ? transformWorkData(response.data[0]) : null))
+				map((response) =>
+					response.data.length > 0 ? transformWorkData(response.data[0]) : null
+				)
 			);
 	}
 
