@@ -7,7 +7,7 @@
 		</div>
 	</div>
 
-	<!-- Mensaje de error cuando hay problemas al cargar datos -->
+	<!-- Mensaje de error -->
 	<div class="error-container" *ngIf="error">
 		<div class="error-message">
 			<h3>Error al cargar el portfolio</h3>
@@ -16,9 +16,9 @@
 		</div>
 	</div>
 
-	<!-- Contenido principal del portfolio -->
+	<!-- Contenido principal -->
 	<div class="content-wrapper" *ngIf="!loading && !error">
-		<!-- Encabezado con información personal y navegación -->
+		<!-- Header con navegación -->
 		<header [class.header-visible]="headerVisible">
 			<div class="header-content">
 				<!-- Información personal -->
@@ -26,7 +26,8 @@
 					<h1>Juan Pablo</h1>
 					<p>Desarrollador Full Stack</p>
 				</div>
-				<!-- Menú de navegación por secciones -->
+
+				<!-- Navegación principal -->
 				<nav class="main-nav">
 					<ul>
 						<li>
@@ -55,7 +56,8 @@
 						</li>
 					</ul>
 				</nav>
-				<!-- Enlaces a redes sociales -->
+
+				<!-- Redes sociales -->
 				<div class="header-social-media">
 					<div class="social-media-content">
 						<a
@@ -77,9 +79,10 @@
 			</div>
 		</header>
 
+		<!-- Contenido principal -->
 		<main>
 			<!-- Sección Sobre Mí -->
-			<div id="about" class="about" #section>
+			<section id="about" class="about" #section>
 				<div class="about-content" [class]="getAnimationClasses('about')">
 					<h2>Sobre Mí</h2>
 					<div class="about-description">
@@ -93,63 +96,65 @@
 						</p>
 					</div>
 				</div>
-			</div>
+			</section>
 
 			<!-- Sección de Experiencia Laboral -->
-			<div id="work" class="work-experience" #section>
+			<section id="work" class="work-experience" #section>
 				<div
 					class="work-experience-content"
 					[class]="getAnimationClasses('work')"
 				>
 					<h2>Experiencia Laboral</h2>
 
-					<!-- Mensaje cuando no hay experiencias disponibles -->
+					<!-- Mensaje cuando no hay experiencias -->
 					<div class="no-data-message" *ngIf="getActiveWorks().length === 0">
 						<p>No hay experiencias laborales disponibles en este momento.</p>
 					</div>
 
-					<!-- Lista de experiencias laborales con animación escalonada -->
+					<!-- Lista de experiencias -->
 					<ng-container *ngFor="let work of getActiveWorks(); let i = index">
 						<app-work-card
 							[work]="work"
 							[style.animation-delay]="i * 0.2 + 's'"
-						></app-work-card>
+						>
+						</app-work-card>
 					</ng-container>
 
-					<!-- Enlace para descargar curriculum completo -->
+					<!-- Enlace para descargar CV -->
 					<div class="curriculum-section">
 						<span class="curriculum-link" (click)="downloadPDF()">
 							📄 Descargar Curriculum PDF
 						</span>
 					</div>
 				</div>
-			</div>
+			</section>
 
 			<!-- Sección de Proyectos -->
-			<div id="projects" class="projects" #section>
+			<section id="projects" class="projects" #section>
 				<div class="projects-content" [class]="getAnimationClasses('projects')">
 					<h2>Proyectos</h2>
 
-					<!-- Mensaje cuando no hay proyectos disponibles -->
+					<!-- Mensaje cuando no hay proyectos -->
 					<div class="no-data-message" *ngIf="getAllProjects().length === 0">
 						<p>No hay proyectos disponibles en este momento.</p>
 					</div>
 
-					<!-- Lista de proyectos con animación escalonada -->
+					<!-- Lista de proyectos -->
 					<ng-container *ngFor="let project of getAllProjects(); let i = index">
 						<app-project-card
 							[project]="project"
 							[style.animation-delay]="i * 0.15 + 's'"
-						></app-project-card>
+						>
+						</app-project-card>
 					</ng-container>
 				</div>
-			</div>
+			</section>
 
-			<!-- Pie de página con información técnica -->
-			<div class="footer-content">
+			<!-- Footer -->
+			<footer class="footer-content">
 				Diseñado y codificado en Visual Studio Code por mí mismo. Construido con
 				Angular y CSS. Todo el texto está configurado en la tipografía Inter.
-			</div>
+			</footer>
 		</main>
 	</div>
 </div>
