@@ -7,27 +7,21 @@ import { Project } from '../models/project.model';
 
 // Función para transformar strings JSON a arrays
 function transformProjectData(project: any): Project {
-	if (typeof project.technologies === 'string') {
+	if (typeof project.tech_stack === 'string') {
 		try {
-			project.technologies = JSON.parse(project.technologies);
+			project.tech_stack = JSON.parse(project.tech_stack);
 		} catch (e) {
-			project.technologies = [];
+			console.error('Error parsing tech_stack:', e);
+			project.tech_stack = [];
 		}
 	}
 
-	if (typeof project.achievements === 'string') {
+	if (typeof project.features === 'string') {
 		try {
-			project.achievements = JSON.parse(project.achievements);
+			project.features = JSON.parse(project.features);
 		} catch (e) {
-			project.achievements = [];
-		}
-	}
-
-	if (typeof project.responsibilities === 'string') {
-		try {
-			project.responsibilities = JSON.parse(project.responsibilities);
-		} catch (e) {
-			project.responsibilities = [];
+			console.error('Error parsing features:', e);
+			project.features = [];
 		}
 	}
 

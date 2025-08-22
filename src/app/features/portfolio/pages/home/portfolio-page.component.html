@@ -1,4 +1,12 @@
 <div class="container">
+	<!-- Indicador de carga -->
+	<div class="loading-container" *ngIf="loading">
+		<div class="loading-message">
+			<h3>Cargando portafolio...</h3>
+			<div class="loading-spinner"></div>
+		</div>
+	</div>
+
 	<!-- Mensaje de error cuando hay problemas al cargar datos -->
 	<div class="error-container" *ngIf="error">
 		<div class="error-message">
@@ -9,7 +17,7 @@
 	</div>
 
 	<!-- Contenido principal del portfolio -->
-	<div class="content-wrapper" *ngIf="!error">
+	<div class="content-wrapper" *ngIf="!loading && !error">
 		<!-- Encabezado con información personal y navegación -->
 		<header [class.header-visible]="headerVisible">
 			<div class="header-content">
