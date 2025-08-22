@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -113,15 +113,15 @@ export class ImageUrlService {
     return this.getPlaceholderUrl('projects', 1);
   }
 
-  /**
-   * Verifica si una URL es válida y accesible
-   */
-  isImageUrlValid(url: string): boolean {
-    return url && (
-      url.includes('/api/placeholder/') ||
-      url.includes('/api/serve-file') ||
-      url.startsWith('http') ||
-      url.startsWith('data:')
-    );
-  }
+  	/**
+	 * Verifica si una URL es válida y accesible
+	 */
+	isImageUrlValid(url: string): boolean {
+		return !!url && (
+			url.includes('/api/placeholder/') ||
+			url.includes('/api/serve-file') ||
+			url.startsWith('http') ||
+			url.startsWith('data:')
+		);
+	}
 }
