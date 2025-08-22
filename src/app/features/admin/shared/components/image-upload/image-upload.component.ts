@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { AdminUploadService } from '../../services/admin-upload.service';
+import { ImageUrlService } from '../../../../../shared/services/image-url.service';
 
 @Component({
 	selector: 'app-image-upload',
@@ -46,15 +47,17 @@ export class ImageUploadComponent implements ControlValueAccessor {
 	error: string | null = null;
 	uploadProgress = 0;
 
-	constructor(private uploadService: AdminUploadService) {}
+	constructor(
+		private uploadService: AdminUploadService,
+		private imageUrlService: ImageUrlService
+	) {}
 
 	// ControlValueAccessor implementation
 	writeValue(value: string): void {
 		if (value) {
-			// Cargar imagen existente
-			this.uploadService.loadExistingImage(value).subscribe((imageUrl) => {
-				this.previewUrl = imageUrl;
-			});
+			// Transformar la URL para que funcione en Railway
+			const transformedUrl = this.imageUrlService.transformImageUrl(value);
+			this.previewUrl = transformedUrl;
 		}
 	}
 
@@ -150,17 +153,14 @@ export class ImageUploadComponent implements ControlValueAccessor {
 						if (response.success) {
 							this.uploadProgress = 100;
 
-							// Obtener la imagen guardada para mostrar
-							this.uploadService
-								.getImage(response.data.filename)
-								.subscribe((imageUrl) => {
-									this.uploading = false;
-									this.previewUrl = imageUrl; // Usar la imagen base64 para mostrar
+							// Transformar la URL para mostrar en el preview
+							const transformedUrl = this.imageUrlService.transformImageUrl(response.data.url);
+							this.uploading = false;
+							this.previewUrl = transformedUrl;
 
-									// Usar la URL del servidor para el formulario
-									this.onChange(response.data.url);
-									this.uploadSuccess.emit(response.data.url);
-								});
+							// Usar la URL del servidor para el formulario
+							this.onChange(response.data.url);
+							this.uploadSuccess.emit(response.data.url);
 						} else {
 							this.uploading = false;
 							this.error = response.message || 'Error al subir la imagen';

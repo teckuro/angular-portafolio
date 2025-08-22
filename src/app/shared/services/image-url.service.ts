@@ -11,7 +11,10 @@ export class ImageUrlService {
 	 * Transforma una URL de imagen del backend a una URL que funciona en Railway
 	 */
 	transformImageUrl(imageUrl: string): string {
+		console.log('🔧 ImageUrlService: Transformando URL:', imageUrl);
+		
 		if (!imageUrl) {
+			console.log('🔧 ImageUrlService: URL vacía, usando placeholder');
 			return this.getPlaceholderUrl('projects', 1);
 		}
 
@@ -20,31 +23,36 @@ export class ImageUrlService {
 			imageUrl.includes('/api/placeholder/') ||
 			imageUrl.includes('/api/serve-file')
 		) {
+			console.log('🔧 ImageUrlService: URL ya funciona, devolviendo tal como está');
 			return imageUrl;
 		}
 
 		// Si es una URL relativa que comienza con /api/files/, transformarla
 		if (imageUrl.startsWith('/api/files/')) {
+			console.log('🔧 ImageUrlService: Transformando URL relativa /api/files/');
 			return this.transformApiFilesUrl(imageUrl);
 		}
 
 		// Si es una URL completa que incluye la API de Railway pero con /api/files/
 		if (imageUrl.includes('/api/files/')) {
+			console.log('🔧 ImageUrlService: Transformando URL completa con /api/files/');
 			return this.transformApiFilesUrl(imageUrl);
 		}
 
 		// Si es una URL relativa que comienza con /storage/, convertirla a la API
 		if (imageUrl.startsWith('/storage/')) {
+			console.log('🔧 ImageUrlService: Transformando URL /storage/');
 			return this.transformStorageUrl(imageUrl);
 		}
 
 		// Si es una URL completa que incluye /storage/, convertirla a la API
 		if (imageUrl.includes('/storage/')) {
+			console.log('🔧 ImageUrlService: Transformando URL completa con /storage/');
 			return this.transformStorageUrl(imageUrl);
 		}
 
 		// Para cualquier otra URL, usar placeholder por ahora
-		// return this.getServeFileUrl(imageUrl);
+		console.log('🔧 ImageUrlService: URL no reconocida, usando placeholder');
 		return this.getPlaceholderUrl('projects', 1);
 	}
 
