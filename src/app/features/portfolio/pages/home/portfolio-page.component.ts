@@ -45,7 +45,8 @@ export class PortfolioPageComponent implements OnInit {
 			if (this.loading) {
 				console.log('Timeout reached, stopping loading');
 				this.loading = false;
-				this.error = 'Tiempo de espera agotado. Verifica tu conexión a internet.';
+				this.error =
+					'Tiempo de espera agotado. Verifica tu conexión a internet.';
 			}
 		}, 10000); // 10 segundos de timeout
 
