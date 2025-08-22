@@ -292,7 +292,7 @@ export class AdminUploadService {
 	 */
 	loadExistingImage(imageUrl: string): Observable<string> {
 		console.log('Cargando imagen existente:', imageUrl);
-		
+
 		// Si ya es una URL completa válida, usarla directamente
 		if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
 			return of(imageUrl);

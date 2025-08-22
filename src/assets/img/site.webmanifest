@@ -13,88 +13,31 @@
 	"categories": ["business", "productivity", "utilities"],
 	"icons": [
 		{
-			"src": "favicon-16x16.png",
-			"sizes": "16x16",
-			"type": "image/png",
-			"purpose": "any maskable"
-		},
-		{
-			"src": "favicon-32x32.png",
-			"sizes": "32x32",
-			"type": "image/png",
-			"purpose": "any maskable"
-		},
-		{
-			"src": "apple-touch-icon.png",
-			"sizes": "180x180",
-			"type": "image/png",
-			"purpose": "any maskable"
-		},
-		{
-			"src": "android-chrome-192x192.png",
-			"sizes": "192x192",
-			"type": "image/png",
-			"purpose": "any maskable"
-		},
-		{
-			"src": "android-chrome-512x512.png",
-			"sizes": "512x512",
-			"type": "image/png",
+			"src": "favicon.ico",
+			"sizes": "any",
+			"type": "image/x-icon",
 			"purpose": "any maskable"
 		}
 	],
-	"screenshots": [
-		{
-			"src": "screenshot-desktop.png",
-			"sizes": "1280x720",
-			"type": "image/png",
-			"form_factor": "wide",
-			"label": "Vista de escritorio del portafolio"
-		},
-		{
-			"src": "screenshot-mobile.png",
-			"sizes": "375x667",
-			"type": "image/png",
-			"form_factor": "narrow",
-			"label": "Vista móvil del portafolio"
-		}
-	],
+
 	"shortcuts": [
 		{
 			"name": "Sobre Mí",
 			"short_name": "Sobre Mí",
 			"description": "Ver información sobre Juan Pablo",
-			"url": "/#about",
-			"icons": [
-				{
-					"src": "icon-about.png",
-					"sizes": "96x96"
-				}
-			]
+			"url": "/#about"
 		},
 		{
 			"name": "Experiencia",
 			"short_name": "Experiencia",
 			"description": "Ver experiencia laboral",
-			"url": "/#work",
-			"icons": [
-				{
-					"src": "icon-work.png",
-					"sizes": "96x96"
-				}
-			]
+			"url": "/#work"
 		},
 		{
 			"name": "Proyectos",
 			"short_name": "Proyectos",
 			"description": "Ver proyectos realizados",
-			"url": "/#projects",
-			"icons": [
-				{
-					"src": "icon-projects.png",
-					"sizes": "96x96"
-				}
-			]
+			"url": "/#projects"
 		}
 	]
 }

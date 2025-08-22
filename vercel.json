@@ -10,36 +10,44 @@
 			}
 		}
 	],
-	"rewrites": [
+	"routes": [
 		{
-			"source": "/(.*)",
-			"destination": "/index.html"
+			"src": "/sw.js",
+			"headers": {
+				"Content-Type": "application/javascript"
+			}
+		},
+		{
+			"src": "/assets/img/site.webmanifest",
+			"headers": {
+				"Content-Type": "application/manifest+json"
+			}
+		},
+		{
+			"src": "/(.*)",
+			"dest": "/index.html"
 		}
 	],
 	"headers": [
 		{
-			"source": "/assets/(.*)",
+			"source": "/sw.js",
 			"headers": [
 				{
+					"key": "Content-Type",
+					"value": "application/javascript"
+				},
+				{
 					"key": "Cache-Control",
-					"value": "public, max-age=31536000, immutable"
+					"value": "no-cache"
 				}
 			]
 		},
 		{
-			"source": "/(.*)",
+			"source": "/assets/img/site.webmanifest",
 			"headers": [
 				{
-					"key": "X-Content-Type-Options",
-					"value": "nosniff"
-				},
-				{
-					"key": "X-Frame-Options",
-					"value": "DENY"
-				},
-				{
-					"key": "X-XSS-Protection",
-					"value": "1; mode=block"
+					"key": "Content-Type",
+					"value": "application/manifest+json"
 				}
 			]
 		}
