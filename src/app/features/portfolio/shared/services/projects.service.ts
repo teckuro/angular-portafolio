@@ -39,7 +39,9 @@ export class ProjectsService extends BaseApiService<Project> {
 	getFeaturedProjects(): Observable<Project[]> {
 		return this.http
 			.get<{ success: boolean; data: Project[] }>(`${this.apiUrl}/featured`)
-			.pipe(map((response) => response.data.map((item) => this.transformData(item))));
+			.pipe(
+				map((response) => response.data.map((item) => this.transformData(item)))
+			);
 	}
 
 	/**
@@ -47,9 +49,12 @@ export class ProjectsService extends BaseApiService<Project> {
 	 */
 	getProjectsByTech(tech: string): Observable<Project[]> {
 		return this.http
-			.get<{ success: boolean; data: Project[] }>(
-				`${this.apiUrl}?tech=${encodeURIComponent(tech)}`
-			)
-			.pipe(map((response) => response.data.map((item) => this.transformData(item))));
+			.get<{
+				success: boolean;
+				data: Project[];
+			}>(`${this.apiUrl}?tech=${encodeURIComponent(tech)}`)
+			.pipe(
+				map((response) => response.data.map((item) => this.transformData(item)))
+			);
 	}
 }

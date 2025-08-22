@@ -19,16 +19,19 @@ export abstract class BaseApiService<T> {
 	/**
 	 * Transforma strings JSON a arrays de manera segura
 	 */
-	protected transformJsonField(data: any, fieldName: string): any {
+	protected transformJsonField(data: any, fieldName: string): void {
 		if (typeof data[fieldName] === 'string') {
 			try {
-				data[fieldName] = JSON.parse(data[fieldName]);
+				const parsed = JSON.parse(data[fieldName]);
+				data[fieldName] = Array.isArray(parsed) ? parsed : [];
 			} catch (e) {
 				console.warn(`Error parsing ${fieldName}:`, e);
 				data[fieldName] = [];
 			}
+		} else if (!Array.isArray(data[fieldName])) {
+			// Si no es string ni array, asegurar que sea array
+			data[fieldName] = [];
 		}
-		return data;
 	}
 
 	/**
