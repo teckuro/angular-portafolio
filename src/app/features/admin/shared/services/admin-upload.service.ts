@@ -214,7 +214,7 @@ export class AdminUploadService {
 
 		// Si no está en localStorage, usar la URL del servidor Laravel
 		const category = this.getCategoryFromFilename(filename);
-		const imageUrl = `http://127.0.0.1:8000/storage/assets/uploads/${category}/${filename}`;
+		const imageUrl = `${environment.apiUrl}/files/${category}/${filename}`;
 		return of(imageUrl);
 	}
 
@@ -309,7 +309,7 @@ export class AdminUploadService {
 
 				// Si no está en localStorage, construir URL del servidor
 				const category = this.getCategoryFromFilename(filename);
-				const serverUrl = `http://127.0.0.1:8000/storage/assets/uploads/${category}/${filename}`;
+				const serverUrl = `${environment.apiUrl}/files/${category}/${filename}`;
 				return of(serverUrl);
 			}
 		}

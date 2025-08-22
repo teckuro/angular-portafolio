@@ -111,7 +111,7 @@ export class AdminAuthService {
 	/**
 	 * Limpiar datos del usuario actual
 	 */
-	private clearCurrentUser(): void {
+	public clearCurrentUser(): void {
 		localStorage.removeItem('admin_token');
 		localStorage.removeItem('admin_user');
 		this.currentUserSubject.next(null);
