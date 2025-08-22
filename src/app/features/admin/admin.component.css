@@ -1,0 +1,138 @@
+/* Estilos específicos para el módulo admin */
+:host {
+  display: block;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: #ffffff;
+}
+
+/* Variables CSS específicas para admin */
+.admin-layout {
+  --admin-bg-primary: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  --admin-bg-secondary: #1e293b;
+  --admin-text-primary: #ffffff;
+  --admin-text-secondary: #cbd5e1;
+  --admin-accent-blue: #667eea;
+  --admin-accent-purple: #764ba2;
+  --admin-border-color: rgba(255, 255, 255, 0.1);
+  --admin-shadow-color: rgba(0, 0, 0, 0.15);
+}
+
+/* Asegurar que el fondo esté aplicado */
+.admin-layout {
+  background: var(--admin-bg-primary);
+  color: var(--admin-text-primary);
+  min-height: 100vh;
+}
+
+/* Estilos para el sidebar */
+.admin-sidebar {
+  background: linear-gradient(135deg, var(--admin-accent-blue), var(--admin-accent-purple));
+  color: white;
+}
+
+/* Estilos para el contenido principal */
+.admin-main {
+  background: var(--admin-bg-primary);
+  color: var(--admin-text-primary);
+}
+
+/* Estilos para el header */
+.admin-header {
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid var(--admin-border-color);
+  color: var(--admin-text-primary);
+}
+
+/* Estilos para botones */
+.action-button {
+  background: transparent;
+  color: var(--admin-accent-blue);
+  border: 1px solid var(--admin-accent-blue);
+}
+
+.action-button:hover {
+  background: var(--admin-accent-blue);
+  color: white;
+}
+
+/* Estilos para enlaces de navegación */
+.nav-link {
+  color: white;
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.nav-link.active {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Estilos para el contenido */
+.admin-content {
+  background: var(--admin-bg-primary);
+  color: var(--admin-text-primary);
+}
+
+/* Asegurar que todos los textos sean visibles */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--admin-text-primary);
+}
+
+p, span, div {
+  color: var(--admin-text-primary);
+}
+
+/* Estilos para formularios */
+input, textarea, select {
+  background: var(--admin-bg-secondary);
+  color: var(--admin-text-primary);
+  border: 1px solid var(--admin-border-color);
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--admin-accent-blue);
+  outline: none;
+}
+
+/* Estilos para tablas */
+table {
+  background: var(--admin-bg-secondary);
+  color: var(--admin-text-primary);
+}
+
+th, td {
+  border-color: var(--admin-border-color);
+  color: var(--admin-text-primary);
+}
+
+/* Estilos para cards */
+.card {
+  background: var(--admin-bg-secondary);
+  color: var(--admin-text-primary);
+  border: 1px solid var(--admin-border-color);
+}
+
+/* Estilos para modales */
+.modal-content {
+  background: var(--admin-bg-secondary);
+  color: var(--admin-text-primary);
+  border: 1px solid var(--admin-border-color);
+}
+
+/* Estilos para dropdowns */
+.dropdown-menu {
+  background: var(--admin-bg-secondary);
+  color: var(--admin-text-primary);
+  border: 1px solid var(--admin-border-color);
+}
+
+.dropdown-item {
+  color: var(--admin-text-primary);
+}
+
+.dropdown-item:hover {
+  background: var(--admin-accent-blue);
+  color: white;
+}
