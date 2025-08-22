@@ -21,24 +21,37 @@ export class AdminAuthInterceptor implements HttpInterceptor {
 		// Solo interceptar requests a la API del admin
 		if (request.url.includes('/admin/')) {
 			const token = this.authService.getToken();
-			console.log('AdminAuthInterceptor: URL:', request.url, 'Token:', token ? 'Presente' : 'Ausente');
-			
+			console.log(
+				'AdminAuthInterceptor: URL:',
+				request.url,
+				'Token:',
+				token ? 'Presente' : 'Ausente'
+			);
+
 			if (token) {
 				request = request.clone({
 					setHeaders: {
 						Authorization: `Bearer ${token}`
 					}
 				});
-				console.log('AdminAuthInterceptor: Headers agregados:', request.headers);
+				console.log(
+					'AdminAuthInterceptor: Headers agregados:',
+					request.headers
+				);
 			} else {
-				console.warn('AdminAuthInterceptor: No hay token disponible para:', request.url);
+				console.warn(
+					'AdminAuthInterceptor: No hay token disponible para:',
+					request.url
+				);
 			}
 		}
 
 		return next.handle(request).pipe(
 			catchError((error: HttpErrorResponse) => {
 				if (error.status === 401 && request.url.includes('/admin/')) {
-					console.error('AdminAuthInterceptor: Error 401 - Token inválido o expirado');
+					console.error(
+						'AdminAuthInterceptor: Error 401 - Token inválido o expirado'
+					);
 					// Limpiar datos de autenticación y redirigir al login
 					this.authService.clearCurrentUser();
 					// Aquí podrías redirigir al login si es necesario
