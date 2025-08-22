@@ -29,7 +29,9 @@ export class ProjectsService extends BaseApiService<Project> {
 
 		// Transformar la URL de la imagen para que funcione en Railway
 		if (project.image_url) {
-			project.image_url = this.imageUrlService.transformImageUrl(project.image_url);
+			project.image_url = this.imageUrlService.transformImageUrl(
+				project.image_url
+			);
 		}
 
 		return project as Project;
