@@ -43,8 +43,9 @@ export class ImageUrlService {
 			return this.transformStorageUrl(imageUrl);
 		}
 
-		// Para cualquier otra URL, intentar usar la ruta de serve-file
-		return this.getServeFileUrl(imageUrl);
+		// Para cualquier otra URL, usar placeholder por ahora
+		// return this.getServeFileUrl(imageUrl);
+		return this.getPlaceholderUrl('projects', 1);
 	}
 
 	/**
@@ -73,8 +74,9 @@ export class ImageUrlService {
 				}
 			}
 
-			// Para otros archivos, usar serve-file temporalmente
-			return this.getServeFileUrl(path);
+			// Para otros archivos, usar placeholder por ahora hasta que serve-file funcione
+			// return this.getServeFileUrl(path);
+			return this.getPlaceholderUrl(category, 1);
 		}
 
 		return this.getPlaceholderUrl('projects', 1);
@@ -91,7 +93,9 @@ export class ImageUrlService {
 		}
 
 		const path = pathMatch[1];
-		return this.getServeFileUrl(path);
+		// Usar placeholder por ahora hasta que serve-file funcione
+		// return this.getServeFileUrl(path);
+		return this.getPlaceholderUrl('projects', 1);
 	}
 
 	/**
