@@ -36,7 +36,9 @@ export class ImageUrlService {
 		// Si es una URL completa que incluye la API de Railway pero con /api/files/
 		if (imageUrl.includes('/api/files/')) {
 			console.log('🔧 ImageUrlService: Transformando URL completa con /api/files/');
-			return this.transformApiFilesUrl(imageUrl);
+			const result = this.transformApiFilesUrl(imageUrl);
+			console.log('🔧 ImageUrlService: Resultado de transformación:', result);
+			return result;
 		}
 
 		// Si es una URL relativa que comienza con /storage/, convertirla a la API
@@ -60,33 +62,44 @@ export class ImageUrlService {
 	 * Transforma URLs que usan /api/files/ a rutas que funcionan
 	 */
 	private transformApiFilesUrl(url: string): string {
+		console.log('🔧 transformApiFilesUrl: Procesando URL:', url);
+		
 		// Extraer la ruta después de /api/files/
 		const pathMatch = url.match(/\/api\/files\/(.+)/);
 		if (!pathMatch) {
+			console.log('🔧 transformApiFilesUrl: No se pudo extraer la ruta');
 			return this.getPlaceholderUrl('projects', 1);
 		}
 
 		const path = pathMatch[1];
+		console.log('🔧 transformApiFilesUrl: Ruta extraída:', path);
+		
 		const parts = path.split('/');
+		console.log('🔧 transformApiFilesUrl: Partes de la ruta:', parts);
 
 		if (parts.length >= 2) {
 			const category = parts[0]; // projects, works, temp
 			const filename = parts[1];
+			console.log('🔧 transformApiFilesUrl: Categoría:', category, 'Archivo:', filename);
 
 			// Si es un placeholder, usar la ruta específica
 			if (filename.startsWith('placeholder')) {
 				const numberMatch = filename.match(/placeholder(\d+)/);
 				if (numberMatch) {
 					const number = numberMatch[1];
-					return this.getPlaceholderUrl(category, parseInt(number));
+					const result = this.getPlaceholderUrl(category, parseInt(number));
+					console.log('🔧 transformApiFilesUrl: Es placeholder, resultado:', result);
+					return result;
 				}
 			}
 
 			// Para otros archivos, usar placeholder por ahora hasta que serve-file funcione
-			// return this.getServeFileUrl(path);
-			return this.getPlaceholderUrl(category, 1);
+			const result = this.getPlaceholderUrl(category, 1);
+			console.log('🔧 transformApiFilesUrl: Usando placeholder, resultado:', result);
+			return result;
 		}
 
+		console.log('🔧 transformApiFilesUrl: No hay suficientes partes, usando placeholder por defecto');
 		return this.getPlaceholderUrl('projects', 1);
 	}
 

@@ -154,7 +154,9 @@ export class ImageUploadComponent implements ControlValueAccessor {
 							this.uploadProgress = 100;
 
 							// Transformar la URL para mostrar en el preview
-							const transformedUrl = this.imageUrlService.transformImageUrl(response.data.url);
+							const transformedUrl = this.imageUrlService.transformImageUrl(
+								response.data.url
+							);
 							this.uploading = false;
 							this.previewUrl = transformedUrl;
 
