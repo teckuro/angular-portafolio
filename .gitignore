@@ -46,3 +46,8 @@ testem.log
 Thumbs.db
 
 .vercel
+
+# Documentation files (development only)
+*_SUMMARY.md
+*_CLEANUP.md
+*_REFACTOR.md
