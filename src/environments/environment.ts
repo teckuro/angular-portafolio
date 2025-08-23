@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://web-production-eeecb.up.railway.app/api',
+  apiUrl: 'https://api-portafolio.up.railway.app/api',
   appUrl: 'http://127.0.0.1:4201'
 };
 
