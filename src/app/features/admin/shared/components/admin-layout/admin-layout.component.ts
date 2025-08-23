@@ -47,15 +47,8 @@ export class AdminLayoutComponent implements OnInit, OnDestroy {
 	}
 
 	onNavClick(event: MouseEvent): void {
-		// Prevenir comportamiento por defecto para clicks del botón medio (auxclick)
+		// Solo prevenir clicks del botón medio (auxclick) para evitar apertura en nueva pestaña
 		if (event.button === 1) {
-			event.preventDefault();
-			event.stopPropagation();
-			return;
-		}
-
-		// Para clicks normales, permitir la navegación pero prevenir múltiples clicks rápidos
-		if (event.detail > 1) {
 			event.preventDefault();
 			event.stopPropagation();
 			return;
