@@ -34,6 +34,7 @@ export class AdminBreadcrumbComponent implements OnInit {
 		url = '',
 		breadcrumbs: BreadcrumbItem[] = []
 	): BreadcrumbItem[] {
+		debugger;
 		const children: ActivatedRoute[] = route.children;
 
 		if (children.length === 0) {
