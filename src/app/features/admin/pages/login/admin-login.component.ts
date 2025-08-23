@@ -52,7 +52,11 @@ export class AdminLoginComponent implements OnInit {
 					console.log('Login exitoso, redirigiendo a:', this.returnUrl);
 					console.log('Respuesta completa:', response);
 					this.loading = false;
-					this.router.navigate([this.returnUrl]);
+					
+					// Agregar un pequeño delay para asegurar que el estado se actualice
+					setTimeout(() => {
+						this.router.navigate([this.returnUrl]);
+					}, 100);
 				},
 				error: (error) => {
 					console.error('Error en login:', error);
