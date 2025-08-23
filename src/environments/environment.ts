@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: '/api',
+  apiUrl: 'https://api-portafolio.up.railway.app/api',
   appUrl: 'http://localhost:4202'
 };
 
