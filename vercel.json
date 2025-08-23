@@ -1,3 +1,11 @@
 {
-	"rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+	"rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
+	"env": {
+		"API_URL": "https://api-portafolio.up.railway.app/api"
+	},
+	"build": {
+		"env": {
+			"API_URL": "https://api-portafolio.up.railway.app/api"
+		}
+	}
 }
