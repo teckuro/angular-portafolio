@@ -1,0 +1,8 @@
+{
+	"/api": {
+		"target": "https://api-portafolio.up.railway.app",
+		"secure": true,
+		"changeOrigin": true,
+		"logLevel": "debug"
+	}
+}
