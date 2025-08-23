@@ -111,7 +111,7 @@ export class AdminAuthService {
 		console.log('Token:', token);
 		localStorage.setItem('admin_token', token);
 		localStorage.setItem('admin_user', JSON.stringify(user));
-		
+
 		// Asegurar que el estado se actualice de forma asíncrona
 		setTimeout(() => {
 			this.currentUserSubject.next(user);

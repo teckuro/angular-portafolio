@@ -18,6 +18,8 @@
 						routerLink="/admin/dashboard"
 						routerLinkActive="active"
 						class="nav-link"
+						(click)="onNavClick($event)"
+						(auxclick)="onNavClick($event)"
 					>
 						<span class="nav-icon">📊</span>
 						<span class="nav-text" *ngIf="!sidebarCollapsed">Dashboard</span>
@@ -28,6 +30,8 @@
 						routerLink="/admin/works"
 						routerLinkActive="active"
 						class="nav-link"
+						(click)="onNavClick($event)"
+						(auxclick)="onNavClick($event)"
 					>
 						<span class="nav-icon">💼</span>
 						<span class="nav-text" *ngIf="!sidebarCollapsed">Experiencia</span>
@@ -38,6 +42,8 @@
 						routerLink="/admin/projects"
 						routerLinkActive="active"
 						class="nav-link"
+						(click)="onNavClick($event)"
+						(auxclick)="onNavClick($event)"
 					>
 						<span class="nav-icon">📁</span>
 						<span class="nav-text" *ngIf="!sidebarCollapsed">Proyectos</span>

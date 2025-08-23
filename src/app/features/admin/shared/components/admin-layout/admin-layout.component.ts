@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 import { AdminAuthService } from '../../services/admin-auth.service';
 import { AdminUser } from '../../models/admin-user.model';
 
@@ -9,10 +10,11 @@ import { AdminUser } from '../../models/admin-user.model';
 	templateUrl: './admin-layout.component.html',
 	styleUrls: ['./admin-layout.component.css']
 })
-export class AdminLayoutComponent implements OnInit {
+export class AdminLayoutComponent implements OnInit, OnDestroy {
 	currentUser: AdminUser | null = null;
 	sidebarCollapsed = false;
 	currentRoute = '';
+	private userSubscription: Subscription | null = null;
 
 	constructor(
 		private authService: AdminAuthService,
@@ -20,7 +22,11 @@ export class AdminLayoutComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
-		this.currentUser = this.authService.getCurrentUser();
+		// Suscribirse a los cambios del usuario actual
+		this.userSubscription = this.authService.currentUser$.subscribe((user) => {
+			console.log('Usuario actualizado en layout:', user);
+			this.currentUser = user;
+		});
 
 		// Track current route for breadcrumbs
 		this.router.events
@@ -30,8 +36,30 @@ export class AdminLayoutComponent implements OnInit {
 			});
 	}
 
+	ngOnDestroy(): void {
+		if (this.userSubscription) {
+			this.userSubscription.unsubscribe();
+		}
+	}
+
 	toggleSidebar(): void {
 		this.sidebarCollapsed = !this.sidebarCollapsed;
+	}
+
+	onNavClick(event: MouseEvent): void {
+		// Prevenir comportamiento por defecto para clicks del botón medio (auxclick)
+		if (event.button === 1) {
+			event.preventDefault();
+			event.stopPropagation();
+			return;
+		}
+
+		// Para clicks normales, permitir la navegación pero prevenir múltiples clicks rápidos
+		if (event.detail > 1) {
+			event.preventDefault();
+			event.stopPropagation();
+			return;
+		}
 	}
 
 	logout(): void {
