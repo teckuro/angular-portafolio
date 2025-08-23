@@ -12,7 +12,7 @@ export class ImageUrlService {
 	 */
 	transformImageUrl(imageUrl: string): string {
 		console.log('🔧 ImageUrlService: Transformando URL:', imageUrl);
-		
+
 		if (!imageUrl) {
 			console.log('🔧 ImageUrlService: URL vacía, usando placeholder');
 			return this.getPlaceholderUrl('projects', 1);
@@ -21,9 +21,11 @@ export class ImageUrlService {
 		// Si ya es una URL completa que funciona, devolverla tal como está
 		if (
 			imageUrl.includes('/api/placeholder/') ||
-			imageUrl.includes('/api/serve-file')
+			imageUrl.includes('/api/files/')
 		) {
-			console.log('🔧 ImageUrlService: URL ya funciona, devolviendo tal como está');
+			console.log(
+				'🔧 ImageUrlService: URL ya funciona, devolviendo tal como está'
+			);
 			return imageUrl;
 		}
 
@@ -35,7 +37,9 @@ export class ImageUrlService {
 
 		// Si es una URL completa que incluye la API de Railway pero con /api/files/
 		if (imageUrl.includes('/api/files/')) {
-			console.log('🔧 ImageUrlService: Transformando URL completa con /api/files/');
+			console.log(
+				'🔧 ImageUrlService: Transformando URL completa con /api/files/'
+			);
 			const result = this.transformApiFilesUrl(imageUrl);
 			console.log('🔧 ImageUrlService: Resultado de transformación:', result);
 			return result;
@@ -49,7 +53,9 @@ export class ImageUrlService {
 
 		// Si es una URL completa que incluye /storage/, convertirla a la API
 		if (imageUrl.includes('/storage/')) {
-			console.log('🔧 ImageUrlService: Transformando URL completa con /storage/');
+			console.log(
+				'🔧 ImageUrlService: Transformando URL completa con /storage/'
+			);
 			return this.transformStorageUrl(imageUrl);
 		}
 
@@ -63,7 +69,7 @@ export class ImageUrlService {
 	 */
 	private transformApiFilesUrl(url: string): string {
 		console.log('🔧 transformApiFilesUrl: Procesando URL:', url);
-		
+
 		// Extraer la ruta después de /api/files/
 		const pathMatch = url.match(/\/api\/files\/(.+)/);
 		if (!pathMatch) {
@@ -73,14 +79,19 @@ export class ImageUrlService {
 
 		const path = pathMatch[1];
 		console.log('🔧 transformApiFilesUrl: Ruta extraída:', path);
-		
+
 		const parts = path.split('/');
 		console.log('🔧 transformApiFilesUrl: Partes de la ruta:', parts);
 
 		if (parts.length >= 2) {
 			const category = parts[0]; // projects, works, temp
 			const filename = parts[1];
-			console.log('🔧 transformApiFilesUrl: Categoría:', category, 'Archivo:', filename);
+			console.log(
+				'🔧 transformApiFilesUrl: Categoría:',
+				category,
+				'Archivo:',
+				filename
+			);
 
 			// Si es un placeholder, usar la ruta específica
 			if (filename.startsWith('placeholder')) {
@@ -88,18 +99,26 @@ export class ImageUrlService {
 				if (numberMatch) {
 					const number = numberMatch[1];
 					const result = this.getPlaceholderUrl(category, parseInt(number));
-					console.log('🔧 transformApiFilesUrl: Es placeholder, resultado:', result);
+					console.log(
+						'🔧 transformApiFilesUrl: Es placeholder, resultado:',
+						result
+					);
 					return result;
 				}
 			}
 
-			// Para otros archivos, usar placeholder por ahora hasta que serve-file funcione
-			const result = this.getPlaceholderUrl(category, 1);
-			console.log('🔧 transformApiFilesUrl: Usando placeholder, resultado:', result);
+			// Para archivos reales, usar la ruta serve-file
+			const result = this.getServeFileUrl(`${category}/${filename}`);
+			console.log(
+				'🔧 transformApiFilesUrl: Usando serve-file, resultado:',
+				result
+			);
 			return result;
 		}
 
-		console.log('🔧 transformApiFilesUrl: No hay suficientes partes, usando placeholder por defecto');
+		console.log(
+			'🔧 transformApiFilesUrl: No hay suficientes partes, usando placeholder por defecto'
+		);
 		return this.getPlaceholderUrl('projects', 1);
 	}
 
@@ -114,9 +133,8 @@ export class ImageUrlService {
 		}
 
 		const path = pathMatch[1];
-		// Usar placeholder por ahora hasta que serve-file funcione
-		// return this.getServeFileUrl(path);
-		return this.getPlaceholderUrl('projects', 1);
+		// Usar serve-file para archivos reales
+		return this.getServeFileUrl(path);
 	}
 
 	/**
@@ -130,7 +148,7 @@ export class ImageUrlService {
 	 * Obtiene la URL de serve-file para una ruta específica
 	 */
 	getServeFileUrl(path: string): string {
-		return `${environment.apiUrl}/serve-file/${path}`;
+		return `${environment.apiUrl}/files/${path}`;
 	}
 
 	/**
@@ -147,7 +165,7 @@ export class ImageUrlService {
 		return (
 			!!url &&
 			(url.includes('/api/placeholder/') ||
-				url.includes('/api/serve-file') ||
+				url.includes('/api/files/') ||
 				url.startsWith('http') ||
 				url.startsWith('data:'))
 		);
