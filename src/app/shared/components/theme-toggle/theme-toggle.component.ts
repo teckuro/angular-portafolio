@@ -8,6 +8,7 @@ import { ThemeService, Theme } from '../../../core/services/theme.service';
 })
 export class ThemeToggleComponent implements OnInit {
 	currentTheme: Theme = 'dark';
+	isLoaded = false;
 
 	// Inputs para personalizar las clases CSS
 	@Input() buttonClass: string = 'theme-toggle-btn';
@@ -19,6 +20,10 @@ export class ThemeToggleComponent implements OnInit {
 	ngOnInit(): void {
 		this.themeService.currentTheme$.subscribe((theme) => {
 			this.currentTheme = theme;
+			// Mostrar el toggle después de que se cargue el tema
+			setTimeout(() => {
+				this.isLoaded = true;
+			}, 100);
 		});
 	}
 

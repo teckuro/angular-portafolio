@@ -17,9 +17,9 @@
 	--transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 	--transition-fast: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 	--image-aspect-ratio: 16/10;
-	--image-height-desktop: 320px;
-	--image-height-tablet: 280px;
-	--image-height-mobile: 220px;
+	--image-height-desktop: 200px;
+	--image-height-tablet: 180px;
+	--image-height-mobile: 140px;
 }
 
 /* Card Principal mejorada */

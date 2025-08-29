@@ -1,4 +1,4 @@
-<div [class]="containerClass">
+<div [class]="containerClass" [class.theme-toggle-hidden]="!isLoaded">
 	<button
 		[class]="buttonClass"
 		(click)="toggleTheme()"
