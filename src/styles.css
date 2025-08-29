@@ -18,7 +18,7 @@
 	--text-muted: #8892b0;
 	--border-color: rgba(255, 255, 255, 0.1);
 	--shadow-color: rgba(0, 0, 0, 0.15);
-	
+
 	/* Efectos de cristal */
 	--glass-bg: rgba(255, 255, 255, 0.05);
 	--glass-bg-hover: rgba(255, 255, 255, 0.1);
@@ -37,15 +37,22 @@
 
 /* Tema Claro */
 .light-theme {
-	--background-color: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%);
+	--background-color: linear-gradient(
+		135deg,
+		#ffffff 0%,
+		#f8fafc 25%,
+		#e2e8f0 50%,
+		#cbd5e1 75%,
+		#94a3b8 100%
+	);
 	--background-secondary: #ffffff;
-	--text-primary: #1e293b;
-	--text-secondary: #475569;
+	--text-primary: #0f172a;
+	--text-secondary: #334155;
 	--text-muted: #64748b;
-	--border-color: rgba(0, 0, 0, 0.1);
-	--shadow-color: rgba(0, 0, 0, 0.1);
-	--glass-bg: rgba(0, 0, 0, 0.05);
-	--glass-bg-hover: rgba(0, 0, 0, 0.1);
+	--border-color: rgba(0, 0, 0, 0.08);
+	--shadow-color: rgba(0, 0, 0, 0.08);
+	--glass-bg: rgba(255, 255, 255, 0.7);
+	--glass-bg-hover: rgba(255, 255, 255, 0.9);
 }
 
 /* Tema Oscuro */
@@ -90,18 +97,18 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-	background: rgba(255, 255, 255, 0.05);
+	background: var(--glass-bg);
 	border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
 	border-radius: 4px;
 	transition: background 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-	background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+	background: linear-gradient(135deg, var(--accent-blue-hover) 0%, #6b46c1 100%);
 }
 
 /* Selección de texto */
@@ -120,10 +127,28 @@ a {
 	color: var(--accent-blue);
 	text-decoration: none;
 	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	position: relative;
 }
 
 a:hover {
-	color: #ffffff;
+	color: var(--accent-blue-hover);
+	transform: translateY(-1px);
+}
+
+/* Efecto de subrayado en hover para enlaces */
+a::after {
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 2px;
+	bottom: -2px;
+	left: 0;
+	background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
+	transition: width 0.3s ease;
+}
+
+a:hover::after {
+	width: 100%;
 }
 
 /* Botones base */
@@ -140,12 +165,13 @@ select {
 	background-color: var(--glass-bg) !important;
 	color: var(--text-primary) !important;
 	border: 1px solid var(--border-color);
-	border-radius: 8px;
+	border-radius: 12px;
 	padding: 0.75rem 1rem;
 	font-family: var(--font-family);
 	font-size: 1rem;
 	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 	cursor: pointer;
+	box-shadow: var(--input-shadow);
 	/* Forzar estilos del dropdown */
 	-webkit-appearance: none;
 	-moz-appearance: none;
@@ -155,13 +181,16 @@ select {
 select:focus {
 	outline: none;
 	border-color: var(--accent-blue);
-	box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
+	box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15), var(--input-shadow-hover);
 	background-color: var(--glass-bg-hover) !important;
+	transform: translateY(-1px);
 }
 
 select:hover {
 	background-color: var(--glass-bg-hover) !important;
 	border-color: var(--accent-blue);
+	transform: translateY(-1px);
+	box-shadow: var(--input-shadow-hover);
 }
 
 /* Estilos para las opciones del select */
@@ -213,13 +242,14 @@ textarea {
 	background-color: var(--glass-bg) !important;
 	color: var(--text-primary) !important;
 	border: 1px solid var(--border-color);
-	border-radius: 8px;
+	border-radius: 12px;
 	padding: 0.75rem 1rem;
 	font-size: 1rem;
 	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 	text-transform: none;
 	font-weight: 400;
 	letter-spacing: 0.01em;
+	box-shadow: var(--input-shadow);
 }
 
 /* Estilos específicos para inputs de texto */
@@ -238,8 +268,17 @@ input:focus,
 textarea:focus {
 	outline: none;
 	border-color: var(--accent-blue);
-	box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
+	box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15), var(--input-shadow-hover);
 	background-color: var(--glass-bg-hover) !important;
+	transform: translateY(-1px);
+}
+
+input:hover,
+textarea:hover {
+	background-color: var(--glass-bg-hover) !important;
+	border-color: var(--accent-blue);
+	transform: translateY(-1px);
+	box-shadow: var(--input-shadow-hover);
 }
 
 input::placeholder,
@@ -282,8 +321,17 @@ select::-moz-selection {
 
 .glass-effect {
 	background: var(--glass-bg);
-	backdrop-filter: blur(10px);
+	backdrop-filter: blur(15px);
 	border: 1px solid var(--border-color);
+	border-radius: 16px;
+	box-shadow: var(--card-shadow);
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-effect:hover {
+	transform: translateY(-2px);
+	box-shadow: var(--card-shadow-hover);
+	border-color: var(--accent-blue);
 }
 
 .hover-lift {
@@ -292,6 +340,66 @@ select::-moz-selection {
 
 .hover-lift:hover {
 	transform: translateY(-4px);
+}
+
+/* Clase para contenedores con efecto de cristal mejorado */
+.glass-container {
+	background: var(--glass-bg);
+	backdrop-filter: blur(20px);
+	border: 1px solid var(--border-color);
+	border-radius: 20px;
+	box-shadow: var(--card-shadow);
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	padding: 1.5rem;
+}
+
+.glass-container:hover {
+	transform: translateY(-3px);
+	box-shadow: var(--card-shadow-hover);
+	border-color: var(--accent-blue);
+}
+
+/* Clase para botones con estilo moderno */
+.modern-btn {
+	background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
+	color: white;
+	border: none;
+	border-radius: 12px;
+	padding: 0.75rem 1.5rem;
+	font-family: var(--font-family);
+	font-weight: var(--font-weight-medium);
+	font-size: 1rem;
+	cursor: pointer;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	box-shadow: var(--input-shadow);
+	position: relative;
+	overflow: hidden;
+}
+
+.modern-btn:hover {
+	transform: translateY(-2px);
+	box-shadow: var(--input-shadow-hover);
+	background: linear-gradient(135deg, var(--accent-blue-hover) 0%, #6b46c1 100%);
+}
+
+.modern-btn:active {
+	transform: translateY(0);
+}
+
+/* Efecto de brillo en botones */
+.modern-btn::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+	transition: left 0.5s;
+}
+
+.modern-btn:hover::before {
+	left: 100%;
 }
 
 /* Animaciones globales */
@@ -361,6 +469,24 @@ select::-moz-selection {
 		--spacing-xl: 1.5rem;
 		--spacing-2xl: 2rem;
 	}
+}
+
+/* Mejoras específicas para el tema claro */
+.light-theme {
+	/* Mejoras adicionales para inputs en tema claro */
+	--input-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+	--input-shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.1);
+	--card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+	--card-shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Mejoras específicas para el tema oscuro */
+.dark-theme {
+	/* Mejoras adicionales para inputs en tema oscuro */
+	--input-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+	--input-shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.3);
+	--card-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+	--card-shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.3);
 }
 
 /* Sistema de temas implementado - no se necesita media query automática */
