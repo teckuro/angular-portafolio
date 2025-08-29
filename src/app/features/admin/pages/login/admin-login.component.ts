@@ -60,28 +60,43 @@ export class AdminLoginComponent implements OnInit {
 					console.log('Verificando autenticación después del login:', isAuth);
 					console.log('Usuario actual:', this.authService.getCurrentUser());
 					console.log('Token presente:', !!this.authService.getToken());
-					
+
 					// Debug del estado completo
 					this.authService.debugAuthState();
-					
+
 					if (isAuth) {
-						console.log('Autenticación confirmada, redirigiendo a:', this.returnUrl);
-						
+						console.log(
+							'Autenticación confirmada, redirigiendo a:',
+							this.returnUrl
+						);
+
 						// Usar setTimeout para asegurar que el estado se haya propagado
 						setTimeout(() => {
-							this.router.navigate([this.returnUrl], { replaceUrl: true }).then(() => {
-								console.log('Navegación completada exitosamente a:', this.returnUrl);
-							}).catch((error) => {
-								console.error('Error en navegación:', error);
-								// Fallback: intentar navegar al dashboard
-								this.router.navigate(['/admin/dashboard'], { replaceUrl: true }).catch(() => {
-									console.error('Error en navegación fallback, usando navegación forzada');
-									this.authService.forceNavigation(this.returnUrl);
+							this.router
+								.navigate([this.returnUrl], { replaceUrl: true })
+								.then(() => {
+									console.log(
+										'Navegación completada exitosamente a:',
+										this.returnUrl
+									);
+								})
+								.catch((error) => {
+									console.error('Error en navegación:', error);
+									// Fallback: intentar navegar al dashboard
+									this.router
+										.navigate(['/admin/dashboard'], { replaceUrl: true })
+										.catch(() => {
+											console.error(
+												'Error en navegación fallback, usando navegación forzada'
+											);
+											this.authService.forceNavigation(this.returnUrl);
+										});
 								});
-							});
 						}, 100);
 					} else {
-						console.error('Error: Usuario no autenticado después del login exitoso');
+						console.error(
+							'Error: Usuario no autenticado después del login exitoso'
+						);
 						this.error = 'Error en la autenticación. Intente nuevamente.';
 					}
 				},

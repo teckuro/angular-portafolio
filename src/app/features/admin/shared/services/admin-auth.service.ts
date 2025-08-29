@@ -132,9 +132,18 @@ export class AdminAuthService {
 	 */
 	debugAuthState(): void {
 		console.log('=== DEBUG AUTH STATE ===');
-		console.log('Token en localStorage:', !!localStorage.getItem('admin_token'));
-		console.log('Usuario en localStorage:', !!localStorage.getItem('admin_user'));
-		console.log('Usuario actual en BehaviorSubject:', this.currentUserSubject.value);
+		console.log(
+			'Token en localStorage:',
+			!!localStorage.getItem('admin_token')
+		);
+		console.log(
+			'Usuario en localStorage:',
+			!!localStorage.getItem('admin_user')
+		);
+		console.log(
+			'Usuario actual en BehaviorSubject:',
+			this.currentUserSubject.value
+		);
 		console.log('Token válido:', this.isTokenValid());
 		console.log('Está autenticado:', this.isAuthenticated());
 		console.log('========================');
