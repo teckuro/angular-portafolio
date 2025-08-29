@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ThemeService } from './core/services/theme.service';
 
 @Component({
 	selector: 'app-root',
@@ -8,8 +9,8 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
 	title = 'angular-portafolio';
 
-	constructor() {
-		// Componente inicializado
+	constructor(private themeService: ThemeService) {
+		// Inicializar el tema al cargar la aplicación
 	}
 
 	ngOnInit(): void {

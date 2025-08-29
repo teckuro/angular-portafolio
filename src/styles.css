@@ -1,8 +1,8 @@
-/* Variables CSS globales */
+/* Variables CSS globales - Tema Oscuro (por defecto) */
 :root {
 	/* Colores principales */
 	--background-color: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-	--background-secondary: #ffffff;
+	--background-secondary: #1e293b;
 	--text-primary: #ffffff;
 	--text-secondary: #cbd5e1;
 
@@ -18,6 +18,10 @@
 	--text-muted: #8892b0;
 	--border-color: rgba(255, 255, 255, 0.1);
 	--shadow-color: rgba(0, 0, 0, 0.15);
+	
+	/* Efectos de cristal */
+	--glass-bg: rgba(255, 255, 255, 0.05);
+	--glass-bg-hover: rgba(255, 255, 255, 0.1);
 
 	/* Tipografía */
 	--font-family:
@@ -31,6 +35,32 @@
 	--font-weight-black: 900;
 }
 
+/* Tema Claro */
+.light-theme {
+	--background-color: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%);
+	--background-secondary: #ffffff;
+	--text-primary: #1e293b;
+	--text-secondary: #475569;
+	--text-muted: #64748b;
+	--border-color: rgba(0, 0, 0, 0.1);
+	--shadow-color: rgba(0, 0, 0, 0.1);
+	--glass-bg: rgba(0, 0, 0, 0.05);
+	--glass-bg-hover: rgba(0, 0, 0, 0.1);
+}
+
+/* Tema Oscuro */
+.dark-theme {
+	--background-color: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+	--background-secondary: #1e293b;
+	--text-primary: #ffffff;
+	--text-secondary: #cbd5e1;
+	--text-muted: #8892b0;
+	--border-color: rgba(255, 255, 255, 0.1);
+	--shadow-color: rgba(0, 0, 0, 0.15);
+	--glass-bg: rgba(255, 255, 255, 0.05);
+	--glass-bg-hover: rgba(255, 255, 255, 0.1);
+}
+
 /* Reset y estilos base */
 * {
 	margin: 0;
@@ -41,7 +71,7 @@
 html {
 	scroll-behavior: smooth;
 	overflow-x: hidden;
-	background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
+	background: var(--background-color);
 }
 
 body {
@@ -50,7 +80,6 @@ body {
 	color: var(--text-primary);
 	font-weight: var(--font-weight-normal);
 	background: var(--background-color);
-	background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
 	min-height: 100vh;
 	overflow-x: hidden;
 }
@@ -108,9 +137,9 @@ button {
 
 /* Estilos globales para select */
 select {
-	background-color: rgba(255, 255, 255, 0.05) !important;
+	background-color: var(--glass-bg) !important;
 	color: var(--text-primary) !important;
-	border: 1px solid rgba(255, 255, 255, 0.1);
+	border: 1px solid var(--border-color);
 	border-radius: 8px;
 	padding: 0.75rem 1rem;
 	font-family: var(--font-family);
@@ -127,17 +156,17 @@ select:focus {
 	outline: none;
 	border-color: var(--accent-blue);
 	box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
-	background-color: rgba(255, 255, 255, 0.1) !important;
+	background-color: var(--glass-bg-hover) !important;
 }
 
 select:hover {
-	background-color: rgba(255, 255, 255, 0.08) !important;
-	border-color: rgba(255, 255, 255, 0.2);
+	background-color: var(--glass-bg-hover) !important;
+	border-color: var(--accent-blue);
 }
 
 /* Estilos para las opciones del select */
 select option {
-	background-color: rgba(255, 255, 255, 0.05) !important;
+	background-color: var(--background-secondary) !important;
 	color: var(--text-primary) !important;
 	padding: 0.5rem;
 }
@@ -148,30 +177,26 @@ select option:hover,
 select option:focus,
 select option[selected],
 select option[aria-selected='true'] {
-	background-color: rgba(255, 255, 255, 0.1) !important;
+	background-color: var(--glass-bg-hover) !important;
 	color: var(--text-primary) !important;
 	background-image: none !important;
 }
 
 /* Estilos específicos para diferentes navegadores */
 select option::-moz-focus-inner {
-	background-color: rgba(255, 255, 255, 0.1) !important;
+	background-color: var(--glass-bg-hover) !important;
 }
 
 /* Forzar estilos en el dropdown completo */
 select:focus option:checked,
 select:focus option:hover {
-	background-color: rgba(255, 255, 255, 0.1) !important;
+	background-color: var(--glass-bg-hover) !important;
 	color: var(--text-primary) !important;
 }
 
 /* Estilos adicionales para Chrome/Safari */
 select option:checked {
-	background: linear-gradient(
-		0deg,
-		rgba(255, 255, 255, 0.1) 0%,
-		rgba(255, 255, 255, 0.1) 100%
-	) !important;
+	background: var(--glass-bg-hover) !important;
 	color: var(--text-primary) !important;
 }
 
@@ -185,9 +210,9 @@ select option:-moz-focusring {
 input,
 textarea {
 	font-family: var(--font-family);
-	background-color: rgba(255, 255, 255, 0.05) !important;
+	background-color: var(--glass-bg) !important;
 	color: var(--text-primary) !important;
-	border: 1px solid rgba(255, 255, 255, 0.1);
+	border: 1px solid var(--border-color);
 	border-radius: 8px;
 	padding: 0.75rem 1rem;
 	font-size: 1rem;
@@ -206,7 +231,7 @@ input[type='number'],
 input[type='date'],
 input[type='tel'] {
 	color: var(--text-primary) !important;
-	background-color: rgba(255, 255, 255, 0.05) !important;
+	background-color: var(--glass-bg) !important;
 }
 
 input:focus,
@@ -214,7 +239,7 @@ textarea:focus {
 	outline: none;
 	border-color: var(--accent-blue);
 	box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
-	background-color: rgba(255, 255, 255, 0.1) !important;
+	background-color: var(--glass-bg-hover) !important;
 }
 
 input::placeholder,
@@ -256,9 +281,9 @@ select::-moz-selection {
 }
 
 .glass-effect {
-	background: rgba(255, 255, 255, 0.05);
+	background: var(--glass-bg);
 	backdrop-filter: blur(10px);
-	border: 1px solid rgba(255, 255, 255, 0.1);
+	border: 1px solid var(--border-color);
 }
 
 .hover-lift {
@@ -338,23 +363,7 @@ select::-moz-selection {
 	}
 }
 
-/* Forzar modo oscuro por defecto - comentado para mantener modo oscuro siempre */
-/*
-@media (prefers-color-scheme: light) {
-	:root {
-		--background-color: linear-gradient(
-			135deg,
-			#f8fafc 0%,
-			#e2e8f0 50%,
-			#cbd5e1 100%
-		);
-		--text-primary: #1e293b;
-		--text-secondary: #475569;
-		--border-color: #cbd5e1;
-		--shadow-color: rgba(0, 0, 0, 0.1);
-	}
-}
-*/
+/* Sistema de temas implementado - no se necesita media query automática */
 
 /* Preferencias de movimiento reducido */
 @media (prefers-reduced-motion: reduce) {
