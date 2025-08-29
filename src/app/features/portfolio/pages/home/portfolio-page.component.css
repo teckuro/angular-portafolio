@@ -93,8 +93,12 @@ html {
 }
 
 @keyframes spin {
-	0% { transform: rotate(0deg); }
-	100% { transform: rotate(360deg); }
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
 }
 
 .loading-container p {
@@ -908,7 +912,8 @@ main {
 		text-align: center;
 		align-items: center;
 		height: auto;
-		justify-content: center;
+		justify-content: space-between;
+		position: fixed;
 	}
 
 	.header-content-info h1 {
