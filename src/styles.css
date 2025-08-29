@@ -41,6 +41,7 @@
 html {
 	scroll-behavior: smooth;
 	overflow-x: hidden;
+	background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
 }
 
 body {
@@ -49,6 +50,7 @@ body {
 	color: var(--text-primary);
 	font-weight: var(--font-weight-normal);
 	background: var(--background-color);
+	background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
 	min-height: 100vh;
 	overflow-x: hidden;
 }
@@ -336,7 +338,8 @@ select::-moz-selection {
 	}
 }
 
-/* Modo oscuro por defecto (ya está configurado) */
+/* Forzar modo oscuro por defecto - comentado para mantener modo oscuro siempre */
+/*
 @media (prefers-color-scheme: light) {
 	:root {
 		--background-color: linear-gradient(
@@ -351,6 +354,7 @@ select::-moz-selection {
 		--shadow-color: rgba(0, 0, 0, 0.1);
 	}
 }
+*/
 
 /* Preferencias de movimiento reducido */
 @media (prefers-reduced-motion: reduce) {
