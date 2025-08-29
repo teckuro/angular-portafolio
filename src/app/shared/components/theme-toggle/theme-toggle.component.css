@@ -1,56 +1,126 @@
 .theme-toggle-btn {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  width: 55px;
-  height: 55px;
-  border-radius: 50%;
-  border: none;
-  background: var(--glass-bg);
-  backdrop-filter: blur(15px);
-  border: 1px solid var(--border-color);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 10000;
-  box-shadow: var(--card-shadow);
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	width: 55px;
+	height: 55px;
+	border-radius: 50%;
+	border: none;
+	background: var(--glass-bg);
+	backdrop-filter: blur(15px);
+	border: 1px solid var(--border-color);
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	z-index: 10000;
+	box-shadow: var(--card-shadow);
+}
+
+/* Estilos específicos para el admin usando clases dinámicas */
+.admin-theme-toggle-btn {
+	position: static !important;
+	top: auto !important;
+	right: auto !important;
+	width: 40px !important;
+	height: 40px !important;
+	border-radius: 8px !important;
+	background: var(--glass-bg) !important;
+	backdrop-filter: blur(10px) !important;
+	border: 1px solid var(--border-color) !important;
+	cursor: pointer !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+	box-shadow: var(--card-shadow) !important;
+	z-index: auto !important;
+	margin-right: 0 !important;
 }
 
 .theme-toggle-btn:hover {
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: var(--card-shadow-hover);
-  background: var(--glass-bg-hover);
-  border-color: var(--accent-blue);
+	transform: translateY(-3px) scale(1.05);
+	box-shadow: var(--card-shadow-hover);
+	background: var(--glass-bg-hover);
+	border-color: var(--accent-blue);
+}
+
+.admin-theme-toggle-btn:hover {
+	transform: translateY(-2px) !important;
+	box-shadow: var(--card-shadow-hover) !important;
+	background: var(--glass-bg-hover) !important;
+	border-color: var(--accent-blue) !important;
 }
 
 .theme-toggle-btn:active {
-  transform: translateY(-1px) scale(1.02);
+	transform: translateY(-1px) scale(1.02);
+}
+
+.admin-theme-toggle-btn:active {
+	transform: translateY(0) !important;
 }
 
 .theme-icon {
-  font-size: 1.3rem;
-  color: var(--text-primary);
-  transition: all 0.3s ease;
-  filter: drop-shadow(0 2px 4px var(--shadow-color));
+	font-size: 1.3rem;
+	color: var(--text-primary);
+	transition: all 0.3s ease;
+	filter: drop-shadow(0 2px 4px var(--shadow-color));
+}
+
+.admin-theme-icon {
+	font-size: 1rem !important;
+	color: var(--text-primary) !important;
+	transition: all 0.3s ease !important;
+	filter: none !important;
 }
 
 .theme-toggle-btn:hover .theme-icon {
-  transform: rotate(180deg) scale(1.1);
-  color: var(--accent-blue);
+	transform: rotate(180deg) scale(1.1);
+	color: var(--accent-blue);
+}
+
+.admin-theme-toggle-btn:hover .admin-theme-icon {
+	transform: rotate(180deg) !important;
+	color: var(--accent-blue) !important;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-  .theme-toggle-btn {
-    top: 15px;
-    right: 15px;
-    width: 45px;
-    height: 45px;
-  }
-  
-  .theme-icon {
-    font-size: 1rem;
-  }
+	.theme-toggle-btn {
+		top: 15px;
+		right: 15px;
+		width: 45px;
+		height: 45px;
+	}
+
+	.theme-icon {
+		font-size: 1rem;
+	}
+
+	.admin-theme-toggle-btn {
+		width: 36px !important;
+		height: 36px !important;
+		margin-right: 0 !important;
+		top: auto !important;
+		right: auto !important;
+	}
+
+	.admin-theme-icon {
+		font-size: 0.875rem !important;
+	}
+}
+
+@media (max-width: 480px) {
+	.admin-theme-toggle-btn {
+		width: 32px !important;
+		height: 32px !important;
+		margin-right: 0 !important;
+		top: auto !important;
+		right: auto !important;
+	}
+
+	.admin-theme-icon {
+		font-size: 0.75rem !important;
+	}
 }

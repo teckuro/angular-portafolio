@@ -1,23 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ThemeService, Theme } from '../../../core/services/theme.service';
 
 @Component({
-  selector: 'app-theme-toggle',
-  templateUrl: './theme-toggle.component.html',
-  styleUrls: ['./theme-toggle.component.css']
+	selector: 'app-theme-toggle',
+	templateUrl: './theme-toggle.component.html',
+	styleUrls: ['./theme-toggle.component.css']
 })
 export class ThemeToggleComponent implements OnInit {
-  currentTheme: Theme = 'dark';
+	currentTheme: Theme = 'dark';
 
-  constructor(private themeService: ThemeService) {}
+	// Inputs para personalizar las clases CSS
+	@Input() buttonClass: string = 'theme-toggle-btn';
+	@Input() iconClass: string = 'theme-icon';
+	@Input() containerClass: string = '';
 
-  ngOnInit(): void {
-    this.themeService.currentTheme$.subscribe(theme => {
-      this.currentTheme = theme;
-    });
-  }
+	constructor(private themeService: ThemeService) {}
 
-  toggleTheme(): void {
-    this.themeService.toggleTheme();
-  }
+	ngOnInit(): void {
+		this.themeService.currentTheme$.subscribe((theme) => {
+			this.currentTheme = theme;
+		});
+	}
+
+	toggleTheme(): void {
+		this.themeService.toggleTheme();
+	}
 }

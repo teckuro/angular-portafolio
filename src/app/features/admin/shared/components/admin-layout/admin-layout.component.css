@@ -722,6 +722,12 @@
 	justify-content: center;
 }
 
+.admin-theme-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
 /* Sobrescribir completamente los estilos del theme-toggle en el admin */
 .admin-theme-toggle .theme-toggle-btn {
 	position: static !important;

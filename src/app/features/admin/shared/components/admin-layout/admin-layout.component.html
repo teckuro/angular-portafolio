@@ -93,7 +93,13 @@
 			</div>
 			<div class="header-right">
 				<div class="header-actions">
-					<app-theme-toggle class="admin-theme-toggle"></app-theme-toggle>
+					<app-theme-toggle
+						class="admin-theme-toggle"
+						[buttonClass]="'admin-theme-toggle-btn'"
+						[iconClass]="'admin-theme-icon'"
+						[containerClass]="'admin-theme-container'"
+					>
+					</app-theme-toggle>
 					<button class="action-button" (click)="logout()">
 						<span class="action-icon">🚪</span>
 						<span class="action-text">Cerrar Sesión</span>

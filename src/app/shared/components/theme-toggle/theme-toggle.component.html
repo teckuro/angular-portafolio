@@ -1,12 +1,21 @@
-<button 
-  class="theme-toggle-btn" 
-  (click)="toggleTheme()" 
-  [attr.aria-label]="currentTheme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'"
-  title="{{ currentTheme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro' }}">
-  
-  <!-- Icono de sol para modo oscuro -->
-  <i *ngIf="currentTheme === 'dark'" class="fas fa-sun theme-icon"></i>
-  
-  <!-- Icono de luna para modo claro -->
-  <i *ngIf="currentTheme === 'light'" class="fas fa-moon theme-icon"></i>
-</button>
+<div [class]="containerClass">
+	<button
+		[class]="buttonClass"
+		(click)="toggleTheme()"
+		[attr.aria-label]="
+			currentTheme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'
+		"
+		title="{{
+			currentTheme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'
+		}}"
+	>
+		<!-- Icono de sol para modo oscuro -->
+		<i *ngIf="currentTheme === 'dark'" [class]="iconClass + ' fas fa-sun'"></i>
+
+		<!-- Icono de luna para modo claro -->
+		<i
+			*ngIf="currentTheme === 'light'"
+			[class]="iconClass + ' fas fa-moon'"
+		></i>
+	</button>
+</div>
