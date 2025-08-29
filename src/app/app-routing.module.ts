@@ -3,11 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
 	// Redirige la ruta vacía al módulo portfolio
-	{ path: '', redirectTo: 'portfolio', pathMatch: 'full' },
+	{ path: '', redirectTo: 'index', pathMatch: 'full' },
 
 	// Lazy loading del módulo portfolio
 	{
-		path: 'portfolio',
+		path: 'index',
 		loadChildren: () =>
 			import('./features/portfolio/portfolio.module').then(
 				(m) => m.PortfolioModule
@@ -22,7 +22,7 @@ const routes: Routes = [
 	},
 
 	// Ruta fallback si la URL no coincide con ninguna ruta
-	{ path: '**', redirectTo: 'portfolio' }
+	{ path: '**', redirectTo: 'index' }
 ];
 
 @NgModule({
