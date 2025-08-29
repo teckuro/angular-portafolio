@@ -2,20 +2,22 @@
 :host {
 	display: block;
 	min-height: 100vh;
-	background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-	color: #ffffff;
+	background: var(--background-color);
+	color: var(--text-primary);
 }
 
-/* Variables CSS específicas para admin */
+/* Variables CSS específicas para admin que se adaptan al tema */
 .admin-layout {
-	--admin-bg-primary: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-	--admin-bg-secondary: #1e293b;
-	--admin-text-primary: #ffffff;
-	--admin-text-secondary: #cbd5e1;
-	--admin-accent-blue: #667eea;
-	--admin-accent-purple: #764ba2;
-	--admin-border-color: rgba(255, 255, 255, 0.1);
-	--admin-shadow-color: rgba(0, 0, 0, 0.15);
+	--admin-bg-primary: var(--background-color);
+	--admin-bg-secondary: var(--background-secondary);
+	--admin-text-primary: var(--text-primary);
+	--admin-text-secondary: var(--text-secondary);
+	--admin-accent-blue: var(--accent-blue);
+	--admin-accent-purple: var(--accent-purple);
+	--admin-border-color: var(--border-color);
+	--admin-shadow-color: var(--shadow-color);
+	--admin-glass-bg: var(--glass-bg);
+	--admin-glass-bg-hover: var(--glass-bg-hover);
 }
 
 /* Asegurar que el fondo esté aplicado */
@@ -43,7 +45,7 @@
 
 /* Estilos para el header */
 .admin-header {
-	background: rgba(255, 255, 255, 0.02);
+	background: var(--admin-glass-bg);
 	border-bottom: 1px solid var(--admin-border-color);
 	color: var(--admin-text-primary);
 }
@@ -66,11 +68,11 @@
 }
 
 .nav-link:hover {
-	background: rgba(255, 255, 255, 0.1);
+	background: var(--admin-glass-bg);
 }
 
 .nav-link.active {
-	background: rgba(255, 255, 255, 0.2);
+	background: var(--admin-glass-bg-hover);
 }
 
 /* Estilos para el contenido */

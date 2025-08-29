@@ -1,8 +1,8 @@
 /* Estilos específicos del componente admin-stats-card */
 
 .stats-card {
-	background: rgba(255, 255, 255, 0.02);
-	border: 1px solid rgba(255, 255, 255, 0.1);
+	background: var(--glass-bg);
+	border: 1px solid var(--border-color);
 	border-radius: 12px;
 	padding: 2rem;
 	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -33,9 +33,9 @@
 
 .stats-card:hover {
 	transform: translateY(-4px);
-	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+	box-shadow: var(--card-shadow-hover);
 	border-color: var(--accent-blue);
-	background: rgba(255, 255, 255, 0.05);
+	background: var(--glass-bg-hover);
 }
 
 .stats-header {
@@ -44,7 +44,7 @@
 	justify-content: space-between;
 	margin-bottom: 1.5rem;
 	padding-bottom: 1rem;
-	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	border-bottom: 1px solid var(--border-color);
 }
 
 .header-content {
@@ -87,13 +87,13 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background: rgba(255, 255, 255, 0.1);
+	background: var(--glass-bg);
 	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .stats-card:hover .card-icon {
 	transform: scale(1.1);
-	background: rgba(255, 255, 255, 0.2);
+	background: var(--glass-bg-hover);
 }
 
 .stats-icon {
@@ -123,13 +123,13 @@
 .stat-item {
 	text-align: center;
 	padding: 1rem;
-	background: rgba(255, 255, 255, 0.05);
+	background: var(--glass-bg);
 	border-radius: 8px;
 	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .stat-item:hover {
-	background: rgba(255, 255, 255, 0.1);
+	background: var(--glass-bg-hover);
 	transform: translateY(-2px);
 }
 
@@ -233,13 +233,13 @@
 	background: var(--accent-blue);
 	color: white;
 	transform: translateY(-2px);
-	box-shadow: 0 8px 25px var(--shadow-color);
+	box-shadow: var(--card-shadow-hover);
 }
 
 .loading-spinner {
 	width: 2rem;
 	height: 2rem;
-	border: 3px solid rgba(255, 255, 255, 0.1);
+	border: 3px solid var(--border-color);
 	border-top: 3px solid var(--accent-blue);
 	border-radius: 50%;
 	animation: spin 1s linear infinite;
