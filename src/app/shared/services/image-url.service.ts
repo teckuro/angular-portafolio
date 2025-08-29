@@ -11,10 +11,7 @@ export class ImageUrlService {
 	 * Transforma una URL de imagen del backend a una URL que funciona en Railway
 	 */
 	transformImageUrl(imageUrl: string): string {
-		console.log('🔧 ImageUrlService: Transformando URL:', imageUrl);
-
 		if (!imageUrl) {
-			console.log('🔧 ImageUrlService: URL vacía, usando placeholder');
 			return this.getPlaceholderUrl('projects', 1);
 		}
 
@@ -23,44 +20,31 @@ export class ImageUrlService {
 			imageUrl.includes('/api/placeholder/') ||
 			imageUrl.includes('/api/files/')
 		) {
-			console.log(
-				'🔧 ImageUrlService: URL ya funciona, devolviendo tal como está'
-			);
 			return imageUrl;
 		}
 
 		// Si es una URL relativa que comienza con /api/files/, transformarla
 		if (imageUrl.startsWith('/api/files/')) {
-			console.log('🔧 ImageUrlService: Transformando URL relativa /api/files/');
 			return this.transformApiFilesUrl(imageUrl);
 		}
 
 		// Si es una URL completa que incluye la API de Railway pero con /api/files/
 		if (imageUrl.includes('/api/files/')) {
-			console.log(
-				'🔧 ImageUrlService: Transformando URL completa con /api/files/'
-			);
 			const result = this.transformApiFilesUrl(imageUrl);
-			console.log('🔧 ImageUrlService: Resultado de transformación:', result);
 			return result;
 		}
 
 		// Si es una URL relativa que comienza con /storage/, convertirla a la API
 		if (imageUrl.startsWith('/storage/')) {
-			console.log('🔧 ImageUrlService: Transformando URL /storage/');
 			return this.transformStorageUrl(imageUrl);
 		}
 
 		// Si es una URL completa que incluye /storage/, convertirla a la API
 		if (imageUrl.includes('/storage/')) {
-			console.log(
-				'🔧 ImageUrlService: Transformando URL completa con /storage/'
-			);
 			return this.transformStorageUrl(imageUrl);
 		}
 
 		// Para cualquier otra URL, usar placeholder por ahora
-		console.log('🔧 ImageUrlService: URL no reconocida, usando placeholder');
 		return this.getPlaceholderUrl('projects', 1);
 	}
 
@@ -68,30 +52,18 @@ export class ImageUrlService {
 	 * Transforma URLs que usan /api/files/ a rutas que funcionan
 	 */
 	private transformApiFilesUrl(url: string): string {
-		console.log('🔧 transformApiFilesUrl: Procesando URL:', url);
-
 		// Extraer la ruta después de /api/files/
 		const pathMatch = url.match(/\/api\/files\/(.+)/);
 		if (!pathMatch) {
-			console.log('🔧 transformApiFilesUrl: No se pudo extraer la ruta');
 			return this.getPlaceholderUrl('projects', 1);
 		}
 
 		const path = pathMatch[1];
-		console.log('🔧 transformApiFilesUrl: Ruta extraída:', path);
-
 		const parts = path.split('/');
-		console.log('🔧 transformApiFilesUrl: Partes de la ruta:', parts);
 
 		if (parts.length >= 2) {
 			const category = parts[0]; // projects, works, temp
 			const filename = parts[1];
-			console.log(
-				'🔧 transformApiFilesUrl: Categoría:',
-				category,
-				'Archivo:',
-				filename
-			);
 
 			// Si es un placeholder, usar la ruta específica
 			if (filename.startsWith('placeholder')) {
@@ -99,26 +71,15 @@ export class ImageUrlService {
 				if (numberMatch) {
 					const number = numberMatch[1];
 					const result = this.getPlaceholderUrl(category, parseInt(number));
-					console.log(
-						'🔧 transformApiFilesUrl: Es placeholder, resultado:',
-						result
-					);
 					return result;
 				}
 			}
 
 			// Para archivos reales, usar la ruta serve-file
 			const result = this.getServeFileUrl(`${category}/${filename}`);
-			console.log(
-				'🔧 transformApiFilesUrl: Usando serve-file, resultado:',
-				result
-			);
 			return result;
 		}
 
-		console.log(
-			'🔧 transformApiFilesUrl: No hay suficientes partes, usando placeholder por defecto'
-		);
 		return this.getPlaceholderUrl('projects', 1);
 	}
 

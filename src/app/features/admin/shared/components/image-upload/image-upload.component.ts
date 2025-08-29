@@ -173,7 +173,6 @@ export class ImageUploadComponent implements ControlValueAccessor {
 						this.uploading = false;
 						this.error = 'Error al subir la imagen';
 						this.uploadError.emit(this.error);
-						console.error('Upload error:', error);
 					}
 				});
 			})
@@ -181,7 +180,6 @@ export class ImageUploadComponent implements ControlValueAccessor {
 				this.uploading = false;
 				this.error = 'Error al optimizar la imagen';
 				this.uploadError.emit(this.error);
-				console.error('Optimization error:', error);
 			});
 	}
 

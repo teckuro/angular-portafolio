@@ -34,11 +34,9 @@ export class AdminAuthService {
 			.post<AdminLoginResponse>(`${this.API_URL}/login`, credentials)
 			.pipe(
 				tap((response: AdminLoginResponse) => {
-					console.log('Login exitoso:', response);
 					this.setCurrentUser(response.user, response.token);
 				}),
 				catchError((error) => {
-					console.error('Error en login service:', error);
 					throw error;
 				})
 			);
@@ -66,7 +64,6 @@ export class AdminAuthService {
 				this.clearCurrentUser();
 			}),
 			catchError((error) => {
-				console.error('Error en logout, limpiando estado local:', error);
 				this.clearCurrentUser();
 				return of({});
 			})
@@ -82,7 +79,6 @@ export class AdminAuthService {
 				this.currentUserSubject.next(user);
 			}),
 			catchError((error) => {
-				console.error('Error obteniendo perfil:', error);
 				// Si hay error al obtener perfil, limpiar estado
 				this.clearCurrentUser();
 				throw error;
@@ -100,12 +96,6 @@ export class AdminAuthService {
 		// Verificar que tanto el token como el usuario existan
 		const isAuth = !!token && !!user;
 
-		console.log('Verificando autenticación:', {
-			token: !!token,
-			user: !!user,
-			isAuthenticated: isAuth
-		});
-
 		return isAuth;
 	}
 
@@ -122,7 +112,6 @@ export class AdminAuthService {
 			const currentTime = Date.now() / 1000;
 			return payload.exp > currentTime;
 		} catch (error) {
-			console.error('Error verificando token:', error);
 			return false;
 		}
 	}
@@ -131,29 +120,13 @@ export class AdminAuthService {
 	 * Debuggear el estado completo de la autenticación
 	 */
 	debugAuthState(): void {
-		console.log('=== DEBUG AUTH STATE ===');
-		console.log(
-			'Token en localStorage:',
-			!!localStorage.getItem('admin_token')
-		);
-		console.log(
-			'Usuario en localStorage:',
-			!!localStorage.getItem('admin_user')
-		);
-		console.log(
-			'Usuario actual en BehaviorSubject:',
-			this.currentUserSubject.value
-		);
-		console.log('Token válido:', this.isTokenValid());
-		console.log('Está autenticado:', this.isAuthenticated());
-		console.log('========================');
+		// Método para debugging del estado de autenticación
 	}
 
 	/**
 	 * Forzar navegación después del login exitoso
 	 */
 	forceNavigation(returnUrl: string): void {
-		console.log('Forzando navegación a:', returnUrl);
 		setTimeout(() => {
 			window.location.href = returnUrl;
 		}, 100);
@@ -186,33 +159,18 @@ export class AdminAuthService {
 	 * Establecer usuario actual y token
 	 */
 	private setCurrentUser(user: AdminUser, token: string): void {
-		console.log('Estableciendo usuario:', user);
-		console.log('Token:', token);
-
 		// Guardar en localStorage
 		localStorage.setItem('admin_token', token);
 		localStorage.setItem('admin_user', JSON.stringify(user));
 
 		// Actualizar el estado inmediatamente
 		this.currentUserSubject.next(user);
-
-		// Verificar que se haya guardado correctamente
-		const storedToken = localStorage.getItem('admin_token');
-		const storedUser = localStorage.getItem('admin_user');
-
-		console.log('Estado actualizado:', {
-			user: this.currentUserSubject.value,
-			tokenStored: !!storedToken,
-			userStored: !!storedUser,
-			isAuthenticated: this.isAuthenticated()
-		});
 	}
 
 	/**
 	 * Limpiar datos del usuario actual
 	 */
 	public clearCurrentUser(): void {
-		console.log('Limpiando datos del usuario');
 		localStorage.removeItem('admin_token');
 		localStorage.removeItem('admin_user');
 		this.currentUserSubject.next(null);
@@ -229,13 +187,9 @@ export class AdminAuthService {
 			try {
 				const user = JSON.parse(storedUser);
 				this.currentUserSubject.next(user);
-				console.log('Usuario cargado desde localStorage:', user);
 			} catch (error) {
-				console.error('Error parsing stored user:', error);
 				this.clearCurrentUser();
 			}
-		} else {
-			console.log('No hay usuario almacenado o token faltante');
 		}
 	}
 
@@ -265,18 +219,11 @@ export class AdminAuthService {
 	 */
 	navigateAfterLogin(returnUrl?: string): void {
 		const targetUrl = returnUrl || '/admin/dashboard';
-		console.log('Navegando después del login a:', targetUrl);
 
 		// Intentar navegación normal primero
-		this.router
-			.navigate([targetUrl], { replaceUrl: true })
-			.then(() => {
-				console.log('Navegación exitosa a:', targetUrl);
-			})
-			.catch((error) => {
-				console.error('Error en navegación, usando fallback:', error);
-				// Fallback: usar window.location para forzar recarga
-				window.location.href = targetUrl;
-			});
+		this.router.navigate([targetUrl], { replaceUrl: true }).catch((error) => {
+			// Fallback: usar window.location para forzar recarga
+			window.location.href = targetUrl;
+		});
 	}
 }

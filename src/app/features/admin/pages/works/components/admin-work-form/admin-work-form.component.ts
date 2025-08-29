@@ -72,7 +72,6 @@ export class AdminWorkFormComponent implements OnInit {
 
 		this.worksService.getWorkById(workId).subscribe({
 			next: (work: AdminWork) => {
-				console.log('Work loaded:', work);
 				this.workForm.patchValue({
 					position: work.position,
 					company: work.company,
@@ -89,7 +88,6 @@ export class AdminWorkFormComponent implements OnInit {
 				this.loading = false;
 			},
 			error: (error: any) => {
-				console.error('Error loading work:', error);
 				this.error = 'Error al cargar la experiencia laboral';
 				this.loading = false;
 			}
@@ -101,7 +99,6 @@ export class AdminWorkFormComponent implements OnInit {
 			const date = new Date(dateString);
 			return date.toISOString().split('T')[0];
 		} catch (error) {
-			console.error('Error formatting date:', dateString, error);
 			return '';
 		}
 	}
@@ -112,7 +109,6 @@ export class AdminWorkFormComponent implements OnInit {
 			this.error = null;
 
 			const formData = this.workForm.value;
-			console.log('Form data:', formData);
 
 			// Si es trabajo actual, no incluir fecha de fin y debe ser activo
 			if (formData.is_current) {
@@ -134,8 +130,6 @@ export class AdminWorkFormComponent implements OnInit {
 				status: formData.status
 			};
 
-			console.log('Work data to send:', workData);
-
 			const request =
 				this.isEditMode && this.workId
 					? this.worksService.updateWork(this.workId, {
@@ -146,12 +140,10 @@ export class AdminWorkFormComponent implements OnInit {
 
 			request.subscribe({
 				next: (response: any) => {
-					console.log('Success response:', response);
 					this.saving = false;
 					this.router.navigate(['/admin/works']);
 				},
 				error: (error: any) => {
-					console.error('Error saving work:', error);
 					this.error = 'Error al guardar la experiencia laboral';
 					this.saving = false;
 				}

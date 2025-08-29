@@ -39,7 +39,6 @@ export abstract class BaseApiService<T> {
 				const parsed = JSON.parse(fieldValue);
 				data[fieldName] = Array.isArray(parsed) ? parsed : [];
 			} catch (e) {
-				console.warn(`Error parsing ${fieldName}:`, e);
 				data[fieldName] = [];
 			}
 		} else {

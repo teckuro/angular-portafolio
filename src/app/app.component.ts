@@ -15,6 +15,5 @@ export class AppComponent implements OnInit {
 
 	ngOnInit(): void {
 		// Componente inicializado correctamente
-		console.log('Portfolio Angular inicializado');
 	}
 }

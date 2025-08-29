@@ -24,7 +24,6 @@ export class AdminLayoutComponent implements OnInit, OnDestroy {
 	ngOnInit(): void {
 		// Suscribirse a los cambios del usuario actual
 		this.userSubscription = this.authService.currentUser$.subscribe((user) => {
-			console.log('Usuario actualizado en layout:', user);
 			this.currentUser = user;
 		});
 	}

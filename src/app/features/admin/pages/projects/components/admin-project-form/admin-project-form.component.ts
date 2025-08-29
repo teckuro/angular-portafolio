@@ -64,8 +64,6 @@ export class AdminProjectFormComponent implements OnInit {
 
 		this.projectsService.getProjectById(projectId).subscribe({
 			next: (project: any) => {
-				console.log('Project loaded:', project);
-
 				this.projectForm.patchValue({
 					title: project.title,
 					short_description: project.short_description,
@@ -80,7 +78,6 @@ export class AdminProjectFormComponent implements OnInit {
 				this.isLoading = false;
 			},
 			error: (error: any) => {
-				console.error('Error loading project:', error);
 				this.errorMessage = 'Error al cargar el proyecto';
 				this.isLoading = false;
 			}
@@ -93,7 +90,6 @@ export class AdminProjectFormComponent implements OnInit {
 			this.errorMessage = '';
 
 			const formData = this.projectForm.value;
-			console.log('Form data:', formData);
 
 			const projectData: any = {
 				title: formData.title,
@@ -114,12 +110,10 @@ export class AdminProjectFormComponent implements OnInit {
 					.updateProject(this.projectId, projectData)
 					.subscribe({
 						next: (response: any) => {
-							console.log('Success response:', response);
 							this.isLoading = false;
 							this.router.navigate(['/admin/projects']);
 						},
 						error: (error: any) => {
-							console.error('Error saving project:', error);
 							this.errorMessage = 'Error al guardar el proyecto';
 							this.isLoading = false;
 						}
@@ -127,12 +121,10 @@ export class AdminProjectFormComponent implements OnInit {
 			} else {
 				this.projectsService.createProject(projectData).subscribe({
 					next: (response: any) => {
-						console.log('Success response:', response);
 						this.isLoading = false;
 						this.router.navigate(['/admin/projects']);
 					},
 					error: (error: any) => {
-						console.error('Error saving project:', error);
 						this.errorMessage = 'Error al guardar el proyecto';
 						this.isLoading = false;
 					}
@@ -191,10 +183,10 @@ export class AdminProjectFormComponent implements OnInit {
 
 	// Métodos para manejo de imágenes
 	onImageUploadSuccess(imageUrl: string): void {
-		console.log('Imagen subida exitosamente:', imageUrl);
+		// Imagen subida exitosamente
 	}
 
 	onImageUploadError(error: string): void {
-		console.error('Error al subir imagen:', error);
+		// Error al subir imagen
 	}
 }

@@ -95,8 +95,6 @@ export class SafeImageComponent implements OnInit {
 
 		// Usar el servicio para transformar la URL
 		this.imageSrc = this.imageUrlService.transformImageUrl(this.src);
-
-		console.log('Cargando imagen:', this.imageSrc);
 	}
 
 	onImageError() {

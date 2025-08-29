@@ -23,23 +23,15 @@ export class ProjectsService extends BaseApiService<Project> {
 	 * Transforma los datos específicos de Project
 	 */
 	protected transformData(project: any): Project {
-		console.log('🔧 ProjectsService: Transformando proyecto:', project.title);
-		console.log('🔧 ProjectsService: URL original:', project.image_url);
-
 		// Transformar campos JSON a arrays
 		this.transformJsonField(project, 'tech_stack');
 		this.transformJsonField(project, 'features');
 
 		// Transformar la URL de la imagen para que funcione en Railway
 		if (project.image_url) {
-			const originalUrl = project.image_url;
 			project.image_url = this.imageUrlService.transformImageUrl(
 				project.image_url
 			);
-			console.log('🔧 ProjectsService: URL transformada:', project.image_url);
-			console.log('🔧 ProjectsService: URL original vs transformada:');
-			console.log('   Original:', originalUrl);
-			console.log('   Transformada:', project.image_url);
 		}
 
 		return project as Project;

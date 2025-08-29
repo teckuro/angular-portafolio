@@ -126,16 +126,11 @@ export class AdminUploadService {
 		// Agregar la categoría al FormData
 		formData.append('category', category);
 
-		console.log('🚀 Subiendo imagen a la API...');
-
 		return this.http.post<UploadResponse>(this.API_URL, formData).pipe(
 			map((response) => {
-				console.log('✅ ¡Upload exitoso!');
 				return response;
 			}),
 			catchError((error) => {
-				console.error('❌ Error en la API:', error.status, error.message);
-
 				// Determinar el tipo de error
 				let errorMessage = 'Error al subir la imagen';
 				if (error.status === 0) {
@@ -150,7 +145,6 @@ export class AdminUploadService {
 				}
 
 				// Solo usar fallback si es absolutamente necesario
-				console.log('🔄 Usando fallback local...');
 				this.saveFileLocally(formData.get('image') as File, filename, category);
 
 				return of({
@@ -215,7 +209,6 @@ export class AdminUploadService {
 		// Si no está en localStorage, usar la URL del servidor Laravel
 		const category = this.getCategoryFromFilename(filename);
 		const imageUrl = `${environment.apiUrl.replace('/api', '')}/files/${category}/${filename}`;
-		console.log('URL de imagen:', imageUrl);
 		return of(imageUrl);
 	}
 
@@ -291,8 +284,6 @@ export class AdminUploadService {
 	 * @returns Observable con la imagen base64 o URL
 	 */
 	loadExistingImage(imageUrl: string): Observable<string> {
-		console.log('Cargando imagen existente:', imageUrl);
-
 		// Si ya es una URL completa válida, usarla directamente
 		if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
 			return of(imageUrl);
@@ -313,7 +304,6 @@ export class AdminUploadService {
 				// Si no está en localStorage, construir URL del servidor
 				const category = this.getCategoryFromFilename(filename);
 				const serverUrl = `${environment.apiUrl.replace('/api', '')}/files/${category}/${filename}`;
-				console.log('URL del servidor:', serverUrl);
 				return of(serverUrl);
 			}
 		}

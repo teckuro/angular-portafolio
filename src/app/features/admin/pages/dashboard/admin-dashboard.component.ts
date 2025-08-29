@@ -28,31 +28,25 @@ export class AdminDashboardComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
-		console.log('AdminDashboardComponent initialized');
 		this.currentUser = this.authService.getCurrentUser();
-		console.log('Current user:', this.currentUser);
 		this.loadStats();
 	}
 
 	loadStats(): void {
-		console.log('Loading stats...');
 		this.loading = true;
 		this.error = null;
 
 		// Cargar estadísticas de trabajos
 		this.worksService.getWorkStats().subscribe({
 			next: (stats) => {
-				console.log('Work stats received:', stats);
 				this.workStats = stats;
 				this.updateWorkStatsArray();
 			},
 			error: (error) => {
-				console.error('Error loading work stats:', error);
 				this.error = 'Error al cargar estadísticas de experiencia laboral';
 				this.loading = false;
 			},
 			complete: () => {
-				console.log('Work stats loading completed');
 				this.loading = false;
 			}
 		});
@@ -60,17 +54,12 @@ export class AdminDashboardComponent implements OnInit {
 		// Cargar estadísticas de proyectos
 		this.projectsService.getProjectStats().subscribe({
 			next: (stats) => {
-				console.log('Project stats received:', stats);
 				this.projectStats = stats;
 				this.updateProjectStatsArray();
 			},
 			error: (error) => {
-				console.error('Error loading project stats:', error);
 				this.error = 'Error al cargar estadísticas de proyectos';
 				this.loading = false;
-			},
-			complete: () => {
-				console.log('Project stats loading completed');
 			}
 		});
 	}

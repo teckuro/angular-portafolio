@@ -30,7 +30,6 @@ export class AdminLoginComponent implements OnInit {
 	ngOnInit(): void {
 		// Si ya está autenticado, redirigir al dashboard
 		if (this.authService.isAuthenticated()) {
-			console.log('Usuario ya autenticado, redirigiendo a:', this.returnUrl);
 			this.authService.navigateAfterLogin(this.returnUrl);
 			return;
 		}
@@ -38,7 +37,6 @@ export class AdminLoginComponent implements OnInit {
 		// Obtener URL de retorno si existe
 		this.returnUrl =
 			this.route.snapshot.queryParams['returnUrl'] || '/admin/dashboard';
-		console.log('URL de retorno configurada:', this.returnUrl);
 	}
 
 	onSubmit(): void {
@@ -47,62 +45,33 @@ export class AdminLoginComponent implements OnInit {
 			this.error = '';
 
 			const credentials = this.loginForm.value;
-			console.log('Intentando login con:', credentials);
-			console.log('URL de la API:', `${environment.apiUrl}/admin/login`);
 
 			this.authService.login(credentials).subscribe({
 				next: (response) => {
-					console.log('Login exitoso, respuesta:', response);
 					this.loading = false;
 
 					// Verificar que el estado se haya actualizado correctamente
 					const isAuth = this.authService.isAuthenticated();
-					console.log('Verificando autenticación después del login:', isAuth);
-					console.log('Usuario actual:', this.authService.getCurrentUser());
-					console.log('Token presente:', !!this.authService.getToken());
-
-					// Debug del estado completo
-					this.authService.debugAuthState();
 
 					if (isAuth) {
-						console.log(
-							'Autenticación confirmada, redirigiendo a:',
-							this.returnUrl
-						);
-
 						// Usar setTimeout para asegurar que el estado se haya propagado
 						setTimeout(() => {
 							this.router
 								.navigate([this.returnUrl], { replaceUrl: true })
-								.then(() => {
-									console.log(
-										'Navegación completada exitosamente a:',
-										this.returnUrl
-									);
-								})
 								.catch((error) => {
-									console.error('Error en navegación:', error);
 									// Fallback: intentar navegar al dashboard
 									this.router
 										.navigate(['/admin/dashboard'], { replaceUrl: true })
 										.catch(() => {
-											console.error(
-												'Error en navegación fallback, usando navegación forzada'
-											);
 											this.authService.forceNavigation(this.returnUrl);
 										});
 								});
 						}, 100);
 					} else {
-						console.error(
-							'Error: Usuario no autenticado después del login exitoso'
-						);
 						this.error = 'Error en la autenticación. Intente nuevamente.';
 					}
 				},
 				error: (error) => {
-					console.error('Error en login:', error);
-					console.error('Error completo:', JSON.stringify(error, null, 2));
 					this.loading = false;
 
 					if (error.status === 0) {

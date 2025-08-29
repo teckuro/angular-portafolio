@@ -15,11 +15,10 @@ self.addEventListener('install', (event) => {
 		caches
 			.open(CACHE_NAME)
 			.then((cache) => {
-				console.log('Cache abierto');
 				return cache.addAll(urlsToCache);
 			})
 			.catch((error) => {
-				console.log('Error al cachear archivos:', error);
+				// Error al cachear archivos
 			})
 	);
 });
@@ -31,7 +30,6 @@ self.addEventListener('activate', (event) => {
 			return Promise.all(
 				cacheNames.map((cacheName) => {
 					if (cacheName !== CACHE_NAME) {
-						console.log('Eliminando cache antiguo:', cacheName);
 						return caches.delete(cacheName);
 					}
 				})

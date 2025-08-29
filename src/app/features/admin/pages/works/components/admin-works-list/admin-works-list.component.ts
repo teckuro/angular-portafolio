@@ -32,7 +32,6 @@ export class AdminWorksListComponent implements OnInit {
 				this.loading = false;
 			},
 			error: (error: any) => {
-				console.error('Error loading works:', error);
 				this.error = 'Error al cargar las experiencias laborales';
 				this.loading = false;
 			}
@@ -56,7 +55,6 @@ export class AdminWorksListComponent implements OnInit {
 					this.loadWorks(); // Recargar la lista
 				},
 				error: (error: any) => {
-					console.error('Error deleting work:', error);
 					alert('Error al eliminar la experiencia laboral');
 				}
 			});
@@ -69,7 +67,6 @@ export class AdminWorksListComponent implements OnInit {
 				work.is_current = updatedWork.is_current;
 			},
 			error: (error: any) => {
-				console.error('Error updating work current status:', error);
 				alert('Error al actualizar el estado actual');
 			}
 		});

@@ -17,17 +17,9 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
 	): Observable<HttpEvent<any>> {
 		return next.handle(request).pipe(
 			catchError((error: HttpErrorResponse) => {
-				console.error('HTTP Error:', {
-					url: request.url,
-					status: error.status,
-					statusText: error.statusText,
-					message: error.message,
-					error: error.error
-				});
-
 				// Manejar errores específicos
 				if (error.status === 0) {
-					console.error('Error de conexión - verificar CORS y conectividad');
+					// Error de conexión - verificar CORS y conectividad
 				}
 
 				return throwError(error);

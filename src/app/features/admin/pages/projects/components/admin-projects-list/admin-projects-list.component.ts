@@ -32,7 +32,6 @@ export class AdminProjectsListComponent implements OnInit {
 				this.loading = false;
 			},
 			error: (error: any) => {
-				console.error('Error loading projects:', error);
 				this.error = 'Error al cargar los proyectos';
 				this.loading = false;
 			}
@@ -54,7 +53,6 @@ export class AdminProjectsListComponent implements OnInit {
 					this.loadProjects(); // Recargar la lista
 				},
 				error: (error: any) => {
-					console.error('Error deleting project:', error);
 					alert('Error al eliminar el proyecto');
 				}
 			});
@@ -67,7 +65,6 @@ export class AdminProjectsListComponent implements OnInit {
 				project.is_featured = updatedProject.is_featured;
 			},
 			error: (error: any) => {
-				console.error('Error updating project featured status:', error);
 				alert('Error al actualizar el estado destacado');
 			}
 		});
