@@ -112,10 +112,10 @@ export class AdminAuthService {
 		localStorage.setItem('admin_token', token);
 		localStorage.setItem('admin_user', JSON.stringify(user));
 
-		// Asegurar que el estado se actualice de forma asíncrona
-		setTimeout(() => {
-			this.currentUserSubject.next(user);
-		}, 0);
+		// Actualizar el estado inmediatamente
+		this.currentUserSubject.next(user);
+		console.log('Estado actualizado, usuario actual:', this.currentUserSubject.value);
+		console.log('¿Está autenticado?', this.isAuthenticated());
 	}
 
 	/**

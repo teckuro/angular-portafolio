@@ -53,10 +53,15 @@ export class AdminLoginComponent implements OnInit {
 					console.log('Respuesta completa:', response);
 					this.loading = false;
 
-					// Agregar un pequeño delay para asegurar que el estado se actualice
-					setTimeout(() => {
-						this.router.navigate([this.returnUrl]);
-					}, 100);
+					// Verificar que el estado se haya actualizado correctamente
+					console.log('Verificando autenticación después del login:', this.authService.isAuthenticated());
+					
+					// Redirigir inmediatamente después de confirmar que el estado está actualizado
+					this.router.navigate([this.returnUrl]).then(() => {
+						console.log('Navegación completada a:', this.returnUrl);
+					}).catch((error) => {
+						console.error('Error en navegación:', error);
+					});
 				},
 				error: (error) => {
 					console.error('Error en login:', error);

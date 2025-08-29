@@ -21,11 +21,18 @@ export class AdminAuthGuard implements CanActivate {
 		route: ActivatedRouteSnapshot,
 		state: RouterStateSnapshot
 	): Observable<boolean> | Promise<boolean> | boolean {
+		console.log('AdminAuthGuard: Verificando acceso a:', state.url);
+		console.log('AdminAuthGuard: ¿Está autenticado?', this.authService.isAuthenticated());
+		console.log('AdminAuthGuard: Usuario actual:', this.authService.getCurrentUser());
+		console.log('AdminAuthGuard: Token presente:', !!this.authService.getToken());
+
 		if (this.authService.isAuthenticated()) {
+			console.log('AdminAuthGuard: Acceso permitido');
 			return true;
 		}
 
 		// No autenticado, redirigir al login
+		console.log('AdminAuthGuard: Acceso denegado, redirigiendo al login');
 		this.router.navigate(['/admin/login'], {
 			queryParams: { returnUrl: state.url }
 		});
