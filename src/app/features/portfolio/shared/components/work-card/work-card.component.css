@@ -1,6 +1,6 @@
 .work-card {
-	background: rgba(255, 255, 255, 0.03);
-	border: 1px solid transparent;
+	background: var(--glass-bg);
+	border: 1px solid var(--border-color);
 	border-radius: 24px;
 	padding: 2rem;
 	margin-bottom: 2.5rem;
@@ -8,7 +8,7 @@
 	overflow: hidden;
 	transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 	backdrop-filter: blur(25px);
-	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+	box-shadow: var(--card-shadow);
 	cursor: pointer;
 	/* Mejor rendimiento en animaciones */
 	will-change: transform, box-shadow, background;
@@ -35,11 +35,9 @@
 }
 
 .work-card:hover {
-	box-shadow:
-		0 30px 80px rgba(0, 0, 0, 0.25),
-		0 0 40px rgba(102, 126, 234, 0.15);
-	border-color: rgba(102, 126, 234, 0.4);
-	background: rgba(255, 255, 255, 0.06);
+	box-shadow: var(--card-shadow-hover);
+	border-color: var(--accent-blue);
+	background: var(--glass-bg-hover);
 }
 
 /* Efectos de hover adicionales */
@@ -186,7 +184,7 @@
 
 .work-company {
 	font-size: 1.1rem;
-	color: #a8b2d1;
+	color: var(--text-secondary);
 	margin: 0;
 	font-weight: 600;
 	letter-spacing: 0.01em;
@@ -244,7 +242,7 @@
 }
 
 .work-dates {
-	color: #8892b0;
+	color: var(--text-muted);
 	font-size: 0.9rem;
 	font-weight: 500;
 }

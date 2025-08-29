@@ -1,20 +1,20 @@
-/* Variables CSS mejoradas para portfolio */
+/* Variables CSS específicas para project-card */
 :root {
 	--font-family:
 		'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-	--primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	--primary-gradient: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
 	--secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
 	--accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-	--glass-bg: rgba(255, 255, 255, 0.03);
-	--glass-border: rgba(255, 255, 255, 0.08);
-	--glass-hover: rgba(255, 255, 255, 0.06);
-	--text-primary: #ffffff;
-	--text-secondary: #a8b2d1;
-	--text-muted: #8892b0;
+	--glass-bg: var(--glass-bg);
+	--glass-border: var(--border-color);
+	--glass-hover: var(--glass-bg-hover);
+	--text-primary: var(--text-primary);
+	--text-secondary: var(--text-secondary);
+	--text-muted: var(--text-muted);
 	--text-accent: #64ffda;
-	--shadow-light: 0 10px 40px rgba(0, 0, 0, 0.12);
-	--shadow-medium: 0 20px 60px rgba(0, 0, 0, 0.18);
-	--shadow-heavy: 0 30px 80px rgba(0, 0, 0, 0.25);
+	--shadow-light: var(--card-shadow);
+	--shadow-medium: var(--card-shadow-hover);
+	--shadow-heavy: var(--card-shadow-hover);
 	--shadow-glow: 0 0 40px rgba(102, 126, 234, 0.15);
 	--border-radius: 20px;
 	--border-radius-lg: 28px;
