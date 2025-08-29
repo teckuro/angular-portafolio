@@ -29,18 +29,18 @@
 /* Card Principal mejorada */
 .project-card {
 	position: relative;
-	background: var(--glass-bg);
-	border: 1px solid var(--glass-border);
+	background: transparent;
+	border: 1px solid transparent;
 	border-radius: var(--border-radius-lg);
 	padding: 1.8rem;
 	margin-bottom: 2.5rem;
 	transition: var(--transition);
 	backdrop-filter: blur(25px);
-	box-shadow: var(--shadow-light);
+	box-shadow: none;
 	overflow: hidden;
 	cursor: pointer;
 	/* Mejor rendimiento en animaciones */
-	will-change: transform, box-shadow, background;
+	will-change: transform, box-shadow, background, border-color;
 	/* Mejora la calidad visual */
 	transform: translateZ(0);
 	-webkit-backface-visibility: hidden;
