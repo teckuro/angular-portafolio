@@ -193,4 +193,42 @@ export class AdminWorkFormComponent implements OnInit {
 		}
 		return '';
 	}
+
+	// Métodos para manejar tecnologías
+	addTech(input: HTMLInputElement): void {
+		const value = input.value.trim();
+		if (value) {
+			const techArray = this.workForm.get('tech')?.value || [];
+			if (!techArray.includes(value)) {
+				techArray.push(value);
+				this.workForm.get('tech')?.setValue([...techArray]);
+			}
+			input.value = '';
+		}
+	}
+
+	removeTech(index: number): void {
+		const techArray = this.workForm.get('tech')?.value || [];
+		techArray.splice(index, 1);
+		this.workForm.get('tech')?.setValue([...techArray]);
+	}
+
+	// Métodos para manejar logros
+	addAchievement(input: HTMLInputElement): void {
+		const value = input.value.trim();
+		if (value) {
+			const achievementsArray = this.workForm.get('achievements')?.value || [];
+			if (!achievementsArray.includes(value)) {
+				achievementsArray.push(value);
+				this.workForm.get('achievements')?.setValue([...achievementsArray]);
+			}
+			input.value = '';
+		}
+	}
+
+	removeAchievement(index: number): void {
+		const achievementsArray = this.workForm.get('achievements')?.value || [];
+		achievementsArray.splice(index, 1);
+		this.workForm.get('achievements')?.setValue([...achievementsArray]);
+	}
 }

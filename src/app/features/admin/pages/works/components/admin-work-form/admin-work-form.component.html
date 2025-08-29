@@ -208,6 +208,87 @@
 					</div>
 				</div>
 
+				<!-- Tecnologías utilizadas -->
+				<div class="form-section">
+					<h3 class="section-title">Tecnologías Utilizadas</h3>
+					<div class="form-group full-width">
+						<label class="form-label">Tecnologías</label>
+						<div class="tags-input-container">
+							<div class="tags-display">
+								<span
+									*ngFor="
+										let tech of workForm.get('tech')?.value;
+										let i = index
+									"
+									class="tag-item"
+								>
+									{{ tech }}
+									<button
+										type="button"
+										class="tag-remove"
+										(click)="removeTech(i)"
+									>
+										×
+									</button>
+								</span>
+							</div>
+							<div class="tag-input-wrapper">
+								<input
+									type="text"
+									#techInput
+									class="tag-input"
+									placeholder="Agregar tecnología (presiona Enter)"
+									(keyup.enter)="addTech(techInput)"
+									(keyup.space)="addTech(techInput)"
+									(keyup.comma)="addTech(techInput)"
+								/>
+							</div>
+						</div>
+						<p class="form-help">
+							Presiona Enter, Espacio o Coma para agregar una tecnología
+						</p>
+					</div>
+				</div>
+
+				<!-- Logros y logros -->
+				<div class="form-section">
+					<h3 class="section-title">Logros y Logros</h3>
+					<div class="form-group full-width">
+						<label class="form-label">Logros</label>
+						<div class="achievements-container">
+							<div
+								*ngFor="
+									let achievement of workForm.get('achievements')?.value;
+									let i = index
+								"
+								class="achievement-item"
+							>
+								<div class="achievement-content">
+									<span class="achievement-number">{{ i + 1 }}</span>
+									<span class="achievement-text">{{ achievement }}</span>
+								</div>
+								<button
+									type="button"
+									class="achievement-remove"
+									(click)="removeAchievement(i)"
+								>
+									×
+								</button>
+							</div>
+							<div class="achievement-input-wrapper">
+								<input
+									type="text"
+									#achievementInput
+									class="achievement-input"
+									placeholder="Agregar logro (presiona Enter)"
+									(keyup.enter)="addAchievement(achievementInput)"
+								/>
+							</div>
+						</div>
+						<p class="form-help">Presiona Enter para agregar un logro</p>
+					</div>
+				</div>
+
 				<!-- Form Actions -->
 				<div class="form-actions">
 					<button type="button" class="btn btn-secondary" (click)="onCancel()">
