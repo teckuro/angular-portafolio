@@ -5,7 +5,8 @@ import {
 	RouterStateSnapshot,
 	Router
 } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 import { AdminAuthService } from '../../features/admin/shared/services/admin-auth.service';
 
 @Injectable({
@@ -22,20 +23,44 @@ export class AdminAuthGuard implements CanActivate {
 		state: RouterStateSnapshot
 	): Observable<boolean> | Promise<boolean> | boolean {
 		console.log('AdminAuthGuard: Verificando acceso a:', state.url);
-		console.log('AdminAuthGuard: ¿Está autenticado?', this.authService.isAuthenticated());
-		console.log('AdminAuthGuard: Usuario actual:', this.authService.getCurrentUser());
-		console.log('AdminAuthGuard: Token presente:', !!this.authService.getToken());
-
+		
+		// Verificar autenticación local primero
 		if (this.authService.isAuthenticated()) {
-			console.log('AdminAuthGuard: Acceso permitido');
+			console.log('AdminAuthGuard: Usuario autenticado localmente, permitiendo acceso');
 			return true;
 		}
 
-		// No autenticado, redirigir al login
-		console.log('AdminAuthGuard: Acceso denegado, redirigiendo al login');
+		// Si no está autenticado localmente, verificar con el servidor
+		console.log('AdminAuthGuard: Verificando token con el servidor');
+		return this.authService.validateToken().pipe(
+			tap((isValid) => {
+				console.log('AdminAuthGuard: Validación del servidor:', isValid);
+			}),
+			map((isValid) => {
+				if (isValid) {
+					console.log('AdminAuthGuard: Token válido, permitiendo acceso');
+					return true;
+				} else {
+					console.log('AdminAuthGuard: Token inválido, redirigiendo al login');
+					this.redirectToLogin(state.url);
+					return false;
+				}
+			}),
+			catchError((error) => {
+				console.error('AdminAuthGuard: Error validando token:', error);
+				this.redirectToLogin(state.url);
+				return of(false);
+			})
+		);
+	}
+
+	/**
+	 * Redirigir al login con la URL de retorno
+	 */
+	private redirectToLogin(returnUrl: string): void {
+		console.log('AdminAuthGuard: Redirigiendo al login con returnUrl:', returnUrl);
 		this.router.navigate(['/admin/login'], {
-			queryParams: { returnUrl: state.url }
+			queryParams: { returnUrl: returnUrl }
 		});
-		return false;
 	}
 }
