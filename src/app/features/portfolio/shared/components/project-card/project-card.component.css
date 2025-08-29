@@ -2,7 +2,11 @@
 :root {
 	--font-family:
 		'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-	--primary-gradient: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
+	--primary-gradient: linear-gradient(
+		135deg,
+		var(--accent-blue) 0%,
+		var(--accent-purple) 100%
+	);
 	--secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
 	--accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
 	--glass-bg: var(--glass-bg);
@@ -126,20 +130,25 @@
 	box-shadow: var(--shadow-heavy), var(--shadow-glow);
 	border-color: rgba(102, 126, 234, 0.4);
 	background: var(--glass-hover);
+	border-radius: var(--border-radius-lg);
+	transform: translateY(-2px);
 }
 
 .project-card:hover .project-card-bg-overlay {
 	opacity: 0.15;
+	border-radius: calc(var(--border-radius-lg) - 2px);
 }
 
 .project-card:hover .hover-glow {
 	width: 400px;
 	height: 400px;
 	opacity: 1;
+	border-radius: 50%;
 }
 
 .project-card:hover .hover-particles {
 	opacity: 1;
+	border-radius: var(--border-radius-lg);
 }
 
 /* Micro-interacción de click */
