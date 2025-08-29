@@ -1,6 +1,17 @@
 <div class="admin-layout" [class.sidebar-collapsed]="sidebarCollapsed">
+	<!-- Mobile Overlay -->
+	<div
+		class="mobile-overlay"
+		*ngIf="mobileMenuOpen"
+		(click)="closeMobileMenu()"
+	></div>
+
 	<!-- Sidebar -->
-	<aside class="admin-sidebar" [class.sidebar-collapsed]="sidebarCollapsed">
+	<aside
+		class="admin-sidebar"
+		[class.sidebar-collapsed]="sidebarCollapsed"
+		[class.mobile-open]="mobileMenuOpen"
+	>
 		<div class="sidebar-header">
 			<div class="logo">
 				<span class="logo-icon">⚡</span>
@@ -77,7 +88,7 @@
 					<span class="toggle-icon">☰</span>
 				</button>
 				<div class="page-title">
-					<h1>{{ getPageTitle() }}</h1>
+					<h1>{{ pageTitle }}</h1>
 				</div>
 			</div>
 			<div class="header-right">

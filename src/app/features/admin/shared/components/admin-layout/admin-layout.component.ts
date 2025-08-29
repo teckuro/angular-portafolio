@@ -1,6 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AdminAuthService } from '../../services/admin-auth.service';
 import { AdminUser } from '../../models/admin-user.model';
@@ -13,7 +12,8 @@ import { AdminUser } from '../../models/admin-user.model';
 export class AdminLayoutComponent implements OnInit, OnDestroy {
 	currentUser: AdminUser | null = null;
 	sidebarCollapsed = false;
-	currentRoute = '';
+	mobileMenuOpen = false;
+	pageTitle = 'Panel de Administración';
 	private userSubscription: Subscription | null = null;
 
 	constructor(
@@ -27,13 +27,18 @@ export class AdminLayoutComponent implements OnInit, OnDestroy {
 			console.log('Usuario actualizado en layout:', user);
 			this.currentUser = user;
 		});
+	}
 
-		// Track current route for breadcrumbs
-		this.router.events
-			.pipe(filter((event) => event instanceof NavigationEnd))
-			.subscribe((event: any) => {
-				this.currentRoute = event.url;
-			});
+	@HostListener('window:resize', ['$event'])
+	onResize(event: any): void {
+		// Si cambia de móvil a desktop, cerrar el menú móvil
+		if (event.target.innerWidth > 1024 && this.mobileMenuOpen) {
+			this.mobileMenuOpen = false;
+		}
+		// Si cambia de desktop a móvil, expandir el sidebar
+		if (event.target.innerWidth <= 1024 && this.sidebarCollapsed) {
+			this.sidebarCollapsed = false;
+		}
 	}
 
 	ngOnDestroy(): void {
@@ -43,7 +48,21 @@ export class AdminLayoutComponent implements OnInit, OnDestroy {
 	}
 
 	toggleSidebar(): void {
-		this.sidebarCollapsed = !this.sidebarCollapsed;
+		// En móvil, alternar el menú móvil
+		if (window.innerWidth <= 1024) {
+			this.mobileMenuOpen = !this.mobileMenuOpen;
+			// En móvil, cuando se abre el menú, asegurar que no esté colapsado
+			if (this.mobileMenuOpen) {
+				this.sidebarCollapsed = false;
+			}
+		} else {
+			// En desktop, alternar el colapso
+			this.sidebarCollapsed = !this.sidebarCollapsed;
+		}
+	}
+
+	closeMobileMenu(): void {
+		this.mobileMenuOpen = false;
 	}
 
 	onNavClick(event: MouseEvent): void {
@@ -66,21 +85,5 @@ export class AdminLayoutComponent implements OnInit, OnDestroy {
 		return this.currentUser.role === 'super_admin'
 			? 'Super Administrador'
 			: 'Administrador';
-	}
-
-	getPageTitle(): string {
-		const routeMap: { [key: string]: string } = {
-			'/admin/dashboard': 'Dashboard',
-			'/admin/works': 'Experiencia Laboral',
-			'/admin/works/list': 'Lista de Experiencias',
-			'/admin/works/new': 'Nueva Experiencia',
-			'/admin/works/edit': 'Editar Experiencia',
-			'/admin/projects': 'Proyectos',
-			'/admin/projects/list': 'Lista de Proyectos',
-			'/admin/projects/new': 'Nuevo Proyecto',
-			'/admin/projects/edit': 'Editar Proyecto'
-		};
-
-		return routeMap[this.currentRoute] || 'Panel de Administración';
 	}
 }
