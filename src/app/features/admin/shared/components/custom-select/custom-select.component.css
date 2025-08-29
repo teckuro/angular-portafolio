@@ -1,0 +1,158 @@
+.custom-select-container {
+	position: relative;
+	width: 100%;
+	font-family: var(--font-family);
+	z-index: 1000;
+}
+
+.select-label {
+	display: block;
+	margin-bottom: 0.5rem;
+	font-size: 0.875rem;
+	font-weight: 500;
+	color: var(--text-primary);
+}
+
+.required {
+	color: #ef4444;
+	margin-left: 0.25rem;
+}
+
+.select-button {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	padding: 1.25rem 1.5rem;
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 12px;
+	cursor: pointer;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	backdrop-filter: blur(10px);
+	position: relative;
+	overflow: hidden;
+}
+
+.select-button:hover:not(.disabled) {
+	background: rgba(255, 255, 255, 0.08);
+	border-color: rgba(255, 255, 255, 0.2);
+}
+
+.select-button.open {
+	border-color: var(--accent-blue);
+	box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
+	background: rgba(255, 255, 255, 0.1);
+}
+
+.select-button.disabled {
+	background: rgba(255, 255, 255, 0.02);
+	cursor: not-allowed;
+	opacity: 0.6;
+}
+
+.select-button.invalid {
+	border-color: #ef4444;
+	box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.select-value {
+	color: var(--text-primary);
+	font-size: 1rem;
+	font-weight: 400;
+	text-align: left;
+}
+
+.select-arrow {
+	color: var(--text-primary);
+	font-size: 0.75rem;
+	transition: transform 0.3s ease;
+	margin-left: 0.5rem;
+}
+
+.select-arrow.rotated {
+	transform: rotate(180deg);
+}
+
+.dropdown-options {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	right: 0;
+	background: #1a1a1a;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 12px;
+	z-index: 999999;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+	max-height: 200px;
+	overflow-y: auto;
+	pointer-events: auto;
+	margin-top: 4px;
+}
+
+.option {
+	padding: 0.75rem 1rem;
+	color: var(--text-primary);
+	cursor: pointer;
+	transition: all 0.2s ease;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	font-weight: 400;
+	/* Asegurar que las opciones sean completamente clickeables */
+	pointer-events: auto;
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	/* Asegurar que el área de clic sea completa */
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.option:last-child {
+	border-bottom: none;
+}
+
+.option:hover {
+	background: rgba(255, 255, 255, 0.1);
+}
+
+.option.selected {
+	background: rgba(49, 130, 206, 0.3);
+	color: var(--text-primary);
+	font-weight: 500;
+}
+
+.option.selected:hover {
+	background: rgba(49, 130, 206, 0.4);
+}
+
+/* Scrollbar personalizada para el dropdown */
+.dropdown-options::-webkit-scrollbar {
+	width: 6px;
+}
+
+.dropdown-options::-webkit-scrollbar-track {
+	background: rgba(255, 255, 255, 0.05);
+	border-radius: 3px;
+}
+
+.dropdown-options::-webkit-scrollbar-thumb {
+	background: rgba(255, 255, 255, 0.2);
+	border-radius: 3px;
+}
+
+.dropdown-options::-webkit-scrollbar-thumb:hover {
+	background: rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+	.select-button {
+		padding: 1rem 1.25rem;
+	}
+
+	.option {
+		padding: 0.625rem 0.875rem;
+	}
+}

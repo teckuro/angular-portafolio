@@ -1,0 +1,43 @@
+<div
+	class="custom-select-container"
+	[class.disabled]="disabled"
+	[class.invalid]="invalid"
+	[class.open]="isOpen"
+>
+	<!-- Label -->
+	<label *ngIf="label" class="select-label">
+		{{ label }} <span *ngIf="required" class="required">*</span>
+	</label>
+
+	<!-- Select Button -->
+	<div
+		class="select-button"
+		[class.open]="isOpen"
+		[class.disabled]="disabled"
+		(click)="toggleDropdown()"
+		tabindex="0"
+		(keydown.enter)="toggleDropdown()"
+		(keydown.space)="toggleDropdown(); $event.preventDefault()"
+		(keydown.escape)="closeDropdown()"
+	>
+		<span class="select-value">{{ displayValue }}</span>
+		<span class="select-arrow" [class.rotated]="isOpen">▼</span>
+	</div>
+
+	<!-- Dropdown Options -->
+	<div class="dropdown-options" *ngIf="isOpen" [@dropdownAnimation]>
+		<div
+			class="option"
+			*ngFor="let option of options"
+			[class.selected]="option.value === selectedValue"
+			(click)="selectOption(option)"
+			(mouseenter)="option.hovered = true"
+			(mouseleave)="option.hovered = false"
+			tabindex="0"
+			(keydown.enter)="selectOption(option)"
+			(keydown.space)="selectOption(option); $event.preventDefault()"
+		>
+			{{ option.label }}
+		</div>
+	</div>
+</div>

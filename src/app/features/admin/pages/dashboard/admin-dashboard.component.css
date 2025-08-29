@@ -12,6 +12,31 @@ html {
 	min-height: 100vh;
 }
 
+/* Estilos del header de la página */
+.page-header {
+	margin-bottom: 3rem;
+	text-align: center;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	color: var(--text-primary);
+	margin: 0 0 0.5rem 0;
+	letter-spacing: -0.02em;
+	background: linear-gradient(135deg, var(--accent-blue), #4facfe);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+.page-subtitle {
+	font-size: 1.1rem;
+	color: var(--text-secondary);
+	margin: 0;
+	font-weight: 400;
+}
+
 .stats-section {
 	margin-bottom: 3rem;
 }
@@ -224,13 +249,17 @@ html {
 	}
 
 	.stats-grid {
-		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 		gap: 1.5rem;
 	}
 
 	.actions-grid {
 		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 		gap: 1.5rem;
+	}
+
+	.page-title {
+		font-size: 2rem;
 	}
 }
 
@@ -259,7 +288,7 @@ html {
 	}
 
 	.action-card {
-		padding: 1.25rem;
+		padding: 1.5rem;
 	}
 
 	.action-icon {
@@ -271,6 +300,14 @@ html {
 		font-size: 1.75rem;
 		margin-bottom: 1.5rem;
 	}
+
+	.page-title {
+		font-size: 1.75rem;
+	}
+
+	.page-subtitle {
+		font-size: 1rem;
+	}
 }
 
 @media (max-width: 480px) {
@@ -279,12 +316,12 @@ html {
 	}
 
 	.loading-section {
-		padding: 3rem 0.5rem;
+		padding: 2rem 0.5rem;
 	}
 
 	.loading-spinner {
-		width: 2.5rem;
-		height: 2.5rem;
+		width: 2rem;
+		height: 2rem;
 	}
 
 	.action-card {
@@ -297,6 +334,15 @@ html {
 
 	.section-title {
 		font-size: 1.5rem;
+		margin-bottom: 1rem;
+	}
+
+	.page-title {
+		font-size: 1.5rem;
+	}
+
+	.page-subtitle {
+		font-size: 0.9rem;
 	}
 }
 

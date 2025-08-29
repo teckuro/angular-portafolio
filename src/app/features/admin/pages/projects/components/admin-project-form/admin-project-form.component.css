@@ -1,16 +1,31 @@
 /* Estilos específicos del componente admin-project-form */
 
 .project-form-container {
-	width: 85%;
+	width: 100%;
 	max-width: 1400px;
 	margin: 0 auto;
 	padding: 0 1rem;
 	/* Mejoras visuales */
 	position: relative;
+	overflow-x: hidden;
 }
 
 .page-header {
 	margin-bottom: 2rem;
+	text-align: center;
+}
+
+.header-content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.header-title {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
 	text-align: center;
 }
 
@@ -22,6 +37,13 @@
 	letter-spacing: -0.02em;
 	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 	position: relative;
+}
+
+.page-subtitle {
+	margin: 0;
+	font-size: 1rem;
+	color: var(--text-secondary);
+	font-weight: 400;
 }
 
 .page-title::after {
@@ -143,17 +165,72 @@
 	border-color: var(--accent-blue);
 }
 
+/* Secciones del formulario */
+.form-section {
+	margin-bottom: 3rem;
+	position: relative;
+	overflow: visible;
+}
+
+.section-title {
+	font-size: 1.25rem;
+	font-weight: 600;
+	color: var(--text-primary);
+	margin-bottom: 1.5rem;
+	padding-bottom: 0.75rem;
+	border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+	position: relative;
+}
+
+.section-title::after {
+	content: '';
+	position: absolute;
+	bottom: -2px;
+	left: 0;
+	width: 60px;
+	height: 2px;
+	background: var(--accent-blue);
+	border-radius: 1px;
+}
+
 .form-grid {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-	gap: 2.5rem;
-	margin-bottom: 2.5rem;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	gap: 2rem;
+	margin-bottom: 2rem;
+	overflow-x: hidden;
 }
 
 .form-group {
 	display: flex;
 	flex-direction: column;
 	position: relative;
+	overflow: visible;
+}
+
+/* Z-index especial para el grupo que contiene el select */
+.form-group:has(.custom-select-wrapper) {
+	z-index: 1000;
+}
+
+.custom-select-wrapper {
+	position: relative;
+	overflow: visible;
+	z-index: 1000;
+}
+
+/* Asegurar que el dropdown del custom-select esté por encima de todo */
+.custom-select-wrapper ::ng-deep .custom-select-container {
+	position: relative;
+	z-index: 1000;
+}
+
+.custom-select-wrapper ::ng-deep .dropdown-options {
+	z-index: 999999 !important;
+	position: absolute !important;
+	top: 100% !important;
+	left: 0 !important;
+	right: 0 !important;
 }
 
 .form-group.full-width {
@@ -183,33 +260,29 @@
 }
 
 .form-control {
-	padding: 1.4rem 1.8rem;
-	border: 1px solid rgba(255, 255, 255, 0.12);
-	border-radius: 16px;
+	padding: 1.25rem 1.5rem;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 12px;
 	font-size: 1rem;
-	transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-	background: rgba(255, 255, 255, 0.06);
-	color: var(--text-primary);
-	backdrop-filter: blur(15px);
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	background: rgba(255, 255, 255, 0.05) !important;
+	color: var(--text-primary) !important;
+	backdrop-filter: blur(10px);
 	position: relative;
 	overflow: hidden;
-	/* Mejoras visuales */
-	will-change: transform, box-shadow, background;
+	text-transform: none;
 }
 
 .form-control::placeholder {
-	color: var(--text-secondary);
+	color: var(--text-secondary) !important;
 	opacity: 0.7;
 }
 
 .form-control:focus {
 	outline: none;
 	border-color: var(--accent-blue);
-	box-shadow:
-		0 0 0 4px rgba(49, 130, 206, 0.15),
-		0 8px 25px rgba(0, 0, 0, 0.1);
-	background: rgba(255, 255, 255, 0.12);
-	transform: translateY(-2px) scale(1.02);
+	box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
+	background: rgba(255, 255, 255, 0.1) !important;
 }
 
 .form-control.invalid {
@@ -223,6 +296,17 @@
 	opacity: 0.6;
 }
 
+/* Estilos de selección para inputs del formulario */
+.form-control::selection {
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	color: white;
+}
+
+.form-control::-moz-selection {
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	color: white;
+}
+
 textarea.form-control {
 	resize: vertical;
 	min-height: 160px;
@@ -232,11 +316,62 @@ textarea.form-control {
 select.form-control {
 	cursor: pointer;
 	appearance: none;
-	background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+	background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
 	background-position: right 0.75rem center;
 	background-repeat: no-repeat;
 	background-size: 1.5em 1.5em;
 	padding-right: 2.5rem;
+	background-color: rgba(255, 255, 255, 0.05) !important;
+	color: var(--text-primary) !important;
+}
+
+select.form-control:focus {
+	background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Estilos para las opciones del select */
+select.form-control option {
+	background-color: rgba(255, 255, 255, 0.05) !important;
+	color: var(--text-primary) !important;
+	padding: 0.5rem;
+}
+
+/* Estilos para opciones seleccionadas y hover - selectores más específicos */
+select.form-control option:checked,
+select.form-control option:hover,
+select.form-control option:focus,
+select.form-control option[selected],
+select.form-control option[aria-selected='true'] {
+	background-color: rgba(255, 255, 255, 0.1) !important;
+	color: var(--text-primary) !important;
+	background-image: none !important;
+}
+
+/* Estilos adicionales para Chrome/Safari */
+select.form-control option:checked {
+	background: linear-gradient(
+		0deg,
+		rgba(255, 255, 255, 0.1) 0%,
+		rgba(255, 255, 255, 0.1) 100%
+	) !important;
+	color: var(--text-primary) !important;
+}
+
+/* Estilos para el dropdown del select en diferentes navegadores */
+select.form-control::-ms-expand {
+	display: none;
+}
+
+/* Estilos específicos para Firefox */
+select.form-control:-moz-focusring {
+	color: transparent;
+	text-shadow: 0 0 0 var(--text-primary);
+}
+
+/* Estilos para el hover del select */
+select.form-control:hover {
+	background-color: rgba(255, 255, 255, 0.08) !important;
+	border-color: rgba(255, 255, 255, 0.2);
 }
 
 /* Checkbox Styles */
@@ -494,33 +629,8 @@ select.form-control {
 /* Responsive Design */
 @media (max-width: 1024px) {
 	.project-form-container {
-		width: 100%;
-		max-width: 900px;
-	}
-
-	.project-form {
-		padding: 2rem;
-	}
-
-	.form-grid {
-		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-		gap: 1.5rem;
-	}
-
-	.form-control {
-		padding: 1rem 1.25rem;
-		font-size: 0.95rem;
-	}
-
-	.btn {
-		padding: 1rem 2rem;
-		font-size: 0.95rem;
-	}
-}
-
-@media (max-width: 768px) {
-	.project-form {
-		padding: 1.5rem;
+		width: 90%;
+		padding: 0 1rem;
 	}
 
 	.form-grid {
@@ -528,61 +638,75 @@ select.form-control {
 		gap: 1.5rem;
 	}
 
-	.form-actions {
-		flex-direction: column;
+	.form-group.full-width {
+		grid-column: 1;
+	}
+}
+
+@media (max-width: 768px) {
+	.project-form-container {
+		width: 95%;
+		padding: 0 0.75rem;
 	}
 
-	.btn {
+	.form-grid {
+		gap: 1rem;
+	}
+
+	.form-group {
+		margin-bottom: 1rem;
+	}
+
+	.form-label {
+		font-size: 0.9rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.form-control {
+		padding: 0.75rem;
+		font-size: 0.9rem;
+	}
+
+	.form-actions {
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.form-actions .btn {
+		width: 100%;
 		justify-content: center;
-		padding: 0.875rem 1.5rem;
 	}
 
 	.page-title {
 		font-size: 1.75rem;
 	}
 
-	.array-item {
-		flex-direction: column;
-		align-items: stretch;
-		gap: 0.5rem;
-	}
-
-	.array-item .btn-sm {
-		align-self: flex-end;
-	}
-
-	.form-control {
-		padding: 0.875rem 1rem;
+	.page-subtitle {
 		font-size: 0.9rem;
 	}
 }
 
 @media (max-width: 480px) {
 	.project-form-container {
+		width: 100%;
 		padding: 0 0.5rem;
 	}
 
-	.project-form {
-		padding: 1.25rem;
+	.form-control {
+		padding: 0.625rem;
+		font-size: 0.875rem;
+	}
+
+	.form-label {
+		font-size: 0.875rem;
 	}
 
 	.page-title {
 		font-size: 1.5rem;
 	}
 
-	.form-control {
-		padding: 0.875rem 1rem;
-		font-size: 0.9rem;
-	}
-
-	.btn {
-		padding: 0.75rem 1.25rem;
-		font-size: 0.9rem;
-	}
-
-	.btn-sm {
-		padding: 0.4rem 0.6rem;
-		font-size: 0.75rem;
+	.page-subtitle {
+		font-size: 0.8rem;
 	}
 }
 

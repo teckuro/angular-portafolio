@@ -8,20 +8,23 @@ import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
 import { AdminBreadcrumbComponent } from './admin-breadcrumb/admin-breadcrumb.component';
 import { AdminStatsCardComponent } from './admin-stats-card/admin-stats-card.component';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
+import { CustomSelectComponent } from './custom-select/custom-select.component';
 
 @NgModule({
 	declarations: [
 		AdminLayoutComponent,
 		AdminBreadcrumbComponent,
 		AdminStatsCardComponent,
-		ImageUploadComponent
+		ImageUploadComponent,
+		CustomSelectComponent
 	],
 	imports: [CommonModule, RouterModule, ReactiveFormsModule],
 	exports: [
 		AdminLayoutComponent,
 		AdminBreadcrumbComponent,
 		AdminStatsCardComponent,
-		ImageUploadComponent
+		ImageUploadComponent,
+		CustomSelectComponent
 	]
 })
 export class AdminComponentsModule {}

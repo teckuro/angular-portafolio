@@ -40,6 +40,7 @@
 
 html {
 	scroll-behavior: smooth;
+	overflow-x: hidden;
 }
 
 body {
@@ -49,6 +50,7 @@ body {
 	font-weight: var(--font-weight-normal);
 	background: var(--background-color);
 	min-height: 100vh;
+	overflow-x: hidden;
 }
 
 /* Scrollbar personalizada */
@@ -100,6 +102,147 @@ button {
 	outline: none;
 	cursor: pointer;
 	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Estilos globales para select */
+select {
+	background-color: rgba(255, 255, 255, 0.05) !important;
+	color: var(--text-primary) !important;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 8px;
+	padding: 0.75rem 1rem;
+	font-family: var(--font-family);
+	font-size: 1rem;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	cursor: pointer;
+	/* Forzar estilos del dropdown */
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+
+select:focus {
+	outline: none;
+	border-color: var(--accent-blue);
+	box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
+	background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+select:hover {
+	background-color: rgba(255, 255, 255, 0.08) !important;
+	border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Estilos para las opciones del select */
+select option {
+	background-color: rgba(255, 255, 255, 0.05) !important;
+	color: var(--text-primary) !important;
+	padding: 0.5rem;
+}
+
+/* Estilos para opciones seleccionadas y hover - selectores más específicos */
+select option:checked,
+select option:hover,
+select option:focus,
+select option[selected],
+select option[aria-selected='true'] {
+	background-color: rgba(255, 255, 255, 0.1) !important;
+	color: var(--text-primary) !important;
+	background-image: none !important;
+}
+
+/* Estilos específicos para diferentes navegadores */
+select option::-moz-focus-inner {
+	background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Forzar estilos en el dropdown completo */
+select:focus option:checked,
+select:focus option:hover {
+	background-color: rgba(255, 255, 255, 0.1) !important;
+	color: var(--text-primary) !important;
+}
+
+/* Estilos adicionales para Chrome/Safari */
+select option:checked {
+	background: linear-gradient(
+		0deg,
+		rgba(255, 255, 255, 0.1) 0%,
+		rgba(255, 255, 255, 0.1) 100%
+	) !important;
+	color: var(--text-primary) !important;
+}
+
+/* Estilos para Firefox */
+select option:-moz-focusring {
+	color: var(--text-primary) !important;
+	text-shadow: 0 0 0 var(--text-primary) !important;
+}
+
+/* Estilos para inputs */
+input,
+textarea {
+	font-family: var(--font-family);
+	background-color: rgba(255, 255, 255, 0.05) !important;
+	color: var(--text-primary) !important;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 8px;
+	padding: 0.75rem 1rem;
+	font-size: 1rem;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	text-transform: none;
+	font-weight: 400;
+	letter-spacing: 0.01em;
+}
+
+/* Estilos específicos para inputs de texto */
+input[type='text'],
+input[type='email'],
+input[type='password'],
+input[type='url'],
+input[type='number'],
+input[type='date'],
+input[type='tel'] {
+	color: var(--text-primary) !important;
+	background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+input:focus,
+textarea:focus {
+	outline: none;
+	border-color: var(--accent-blue);
+	box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
+	background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+	color: var(--text-secondary) !important;
+	opacity: 0.7;
+}
+
+/* Estilos de selección específicos para inputs */
+input::selection,
+textarea::selection {
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	color: white;
+}
+
+input::-moz-selection,
+textarea::-moz-selection {
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	color: white;
+}
+
+/* Estilos de selección para selects */
+select::selection {
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	color: white;
+}
+
+select::-moz-selection {
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	color: white;
 }
 
 /* Utilidades */

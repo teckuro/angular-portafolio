@@ -1,6 +1,11 @@
 <app-admin-layout>
 	<div class="dashboard-container">
-		<app-admin-breadcrumb></app-admin-breadcrumb>
+		<div class="page-header">
+			<h1 class="page-title">Panel de Administración</h1>
+			<p class="page-subtitle">
+				Bienvenido, {{ currentUser?.name || 'Administrador' }}
+			</p>
+		</div>
 
 		<div class="stats-section" *ngIf="!loading">
 			<div class="stats-grid">
@@ -48,7 +53,5 @@
 				</a>
 			</div>
 		</div>
-
-
 	</div>
 </app-admin-layout>

@@ -12,7 +12,8 @@ const routes: Routes = [
 	{
 		path: 'dashboard',
 		component: AdminDashboardComponent,
-		canActivate: [AdminAuthGuard]
+		canActivate: [AdminAuthGuard],
+		data: { breadcrumb: 'Dashboard' }
 	},
 	{
 		path: 'works',
@@ -20,7 +21,8 @@ const routes: Routes = [
 			import('./pages/works/admin-works.module').then(
 				(m) => m.AdminWorksModule
 			),
-		canActivate: [AdminAuthGuard]
+		canActivate: [AdminAuthGuard],
+		data: { breadcrumb: 'Experiencia Laboral' }
 	},
 	{
 		path: 'projects',
@@ -28,7 +30,8 @@ const routes: Routes = [
 			import('./pages/projects/admin-projects.module').then(
 				(m) => m.AdminProjectsModule
 			),
-		canActivate: [AdminAuthGuard]
+		canActivate: [AdminAuthGuard],
+		data: { breadcrumb: 'Proyectos' }
 	},
 	{
 		path: '',

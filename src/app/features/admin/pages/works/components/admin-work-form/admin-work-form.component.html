@@ -1,11 +1,20 @@
 <app-admin-layout>
 	<div class="work-form-container">
-		<app-admin-breadcrumb></app-admin-breadcrumb>
-
 		<div class="page-header">
-			<h1 class="page-title">
-				{{ isEditMode ? 'Editar' : 'Nueva' }} Experiencia Laboral
-			</h1>
+			<div class="header-content">
+				<div class="header-title">
+					<h1 class="page-title">
+						{{ isEditMode ? 'Editar' : 'Nueva' }} Experiencia Laboral
+					</h1>
+					<p class="page-subtitle">
+						{{
+							isEditMode
+								? 'Modifica los datos de la experiencia laboral'
+								: 'Agrega una nueva experiencia laboral a tu portfolio'
+						}}
+					</p>
+				</div>
+			</div>
 		</div>
 
 		<!-- Loading State -->
@@ -26,163 +35,176 @@
 		<!-- Form -->
 		<div class="form-content" *ngIf="!loading">
 			<form [formGroup]="workForm" (ngSubmit)="onSubmit()" class="work-form">
-				<div class="form-grid">
-					<!-- Position -->
-					<div class="form-group">
-						<label for="position" class="form-label">
-							Cargo / Posición <span class="required">*</span>
-						</label>
-						<input
-							type="text"
-							id="position"
-							formControlName="position"
-							class="form-control"
-							[class.invalid]="isFieldInvalid('position')"
-							placeholder="Ej: Desarrollador Frontend"
-						/>
-						<div class="error-message" *ngIf="isFieldInvalid('position')">
-							{{ getFieldError('position') }}
-						</div>
-					</div>
-
-					<!-- Company -->
-					<div class="form-group">
-						<label for="company" class="form-label">
-							Empresa <span class="required">*</span>
-						</label>
-						<input
-							type="text"
-							id="company"
-							formControlName="company"
-							class="form-control"
-							[class.invalid]="isFieldInvalid('company')"
-							placeholder="Ej: Tech Company"
-						/>
-						<div class="error-message" *ngIf="isFieldInvalid('company')">
-							{{ getFieldError('company') }}
-						</div>
-					</div>
-
-					<!-- Location -->
-					<div class="form-group">
-						<label for="location" class="form-label">
-							Ubicación <span class="required">*</span>
-						</label>
-						<input
-							type="text"
-							id="location"
-							formControlName="location"
-							class="form-control"
-							[class.invalid]="isFieldInvalid('location')"
-							placeholder="Ej: Madrid, España"
-						/>
-						<div class="error-message" *ngIf="isFieldInvalid('location')">
-							{{ getFieldError('location') }}
-						</div>
-					</div>
-
-					<!-- Start Date -->
-					<div class="form-group">
-						<label for="start_date" class="form-label">
-							Fecha de Inicio <span class="required">*</span>
-						</label>
-						<input
-							type="date"
-							id="start_date"
-							formControlName="start_date"
-							class="form-control"
-							[class.invalid]="isFieldInvalid('start_date')"
-						/>
-						<div class="error-message" *ngIf="isFieldInvalid('start_date')">
-							{{ getFieldError('start_date') }}
-						</div>
-					</div>
-
-					<!-- Current Work Toggle -->
-					<div class="form-group checkbox-group">
-						<label class="checkbox-label">
+				<!-- Información básica del trabajo -->
+				<div class="form-section">
+					<h3 class="section-title">Información del Trabajo</h3>
+					<div class="form-grid">
+						<!-- Position -->
+						<div class="form-group">
+							<label for="position" class="form-label">
+								Cargo / Posición <span class="required">*</span>
+							</label>
 							<input
-								type="checkbox"
-								formControlName="is_current"
-								(change)="toggleCurrentWork()"
-								class="checkbox-input"
+								type="text"
+								id="position"
+								formControlName="position"
+								class="form-control"
+								[class.invalid]="isFieldInvalid('position')"
+								placeholder="Ej: Desarrollador Frontend"
 							/>
-							<span class="checkbox-text">Trabajo actual</span>
-						</label>
-					</div>
+							<div class="error-message" *ngIf="isFieldInvalid('position')">
+								{{ getFieldError('position') }}
+							</div>
+						</div>
 
-					<!-- End Date -->
-					<div
-						class="form-group"
-						[class.disabled]="workForm.get('is_current')?.value"
-					>
-						<label for="end_date" class="form-label"> Fecha de Fin </label>
-						<input
-							type="date"
-							id="end_date"
-							formControlName="end_date"
-							class="form-control"
-							[class.invalid]="isFieldInvalid('end_date')"
-							[disabled]="workForm.get('is_current')?.value"
-						/>
-						<div class="error-message" *ngIf="isFieldInvalid('end_date')">
-							{{ getFieldError('end_date') }}
+						<!-- Company -->
+						<div class="form-group">
+							<label for="company" class="form-label">
+								Empresa <span class="required">*</span>
+							</label>
+							<input
+								type="text"
+								id="company"
+								formControlName="company"
+								class="form-control"
+								[class.invalid]="isFieldInvalid('company')"
+								placeholder="Ej: Tech Company"
+							/>
+							<div class="error-message" *ngIf="isFieldInvalid('company')">
+								{{ getFieldError('company') }}
+							</div>
+						</div>
+
+						<!-- Location -->
+						<div class="form-group">
+							<label for="location" class="form-label">
+								Ubicación <span class="required">*</span>
+							</label>
+							<input
+								type="text"
+								id="location"
+								formControlName="location"
+								class="form-control"
+								[class.invalid]="isFieldInvalid('location')"
+								placeholder="Ej: Madrid, España"
+							/>
+							<div class="error-message" *ngIf="isFieldInvalid('location')">
+								{{ getFieldError('location') }}
+							</div>
+						</div>
+
+						<!-- Status -->
+						<div class="form-group">
+							<label for="status" class="form-label"> Estado </label>
+							<div class="custom-select-wrapper">
+								<app-custom-select
+									formControlName="status"
+									[options]="statusOptions"
+									placeholder="Seleccionar estado"
+									[disabled]="workForm.get('is_current')?.value"
+									[invalid]="isFieldInvalid('status')"
+								></app-custom-select>
+							</div>
+							<div class="error-message" *ngIf="isFieldInvalid('status')">
+								{{ getFieldError('status') }}
+							</div>
 						</div>
 					</div>
+				</div>
 
-					<!-- Status -->
-					<div class="form-group">
-						<label for="status" class="form-label"> Estado </label>
-						<select
-							id="status"
-							formControlName="status"
-							class="form-control"
-							[class.invalid]="isFieldInvalid('status')"
-							[disabled]="workForm.get('is_current')?.value"
+				<!-- Fechas y estado actual -->
+				<div class="form-section">
+					<h3 class="section-title">Período de Trabajo</h3>
+					<div class="form-grid">
+						<!-- Start Date -->
+						<div class="form-group">
+							<label for="start_date" class="form-label">
+								Fecha de Inicio <span class="required">*</span>
+							</label>
+							<input
+								type="date"
+								id="start_date"
+								formControlName="start_date"
+								class="form-control"
+								[class.invalid]="isFieldInvalid('start_date')"
+							/>
+							<div class="error-message" *ngIf="isFieldInvalid('start_date')">
+								{{ getFieldError('start_date') }}
+							</div>
+						</div>
+
+						<!-- End Date -->
+						<div
+							class="form-group"
+							[class.disabled]="workForm.get('is_current')?.value"
 						>
-							<option value="active">Activa</option>
-							<option value="inactive">Inactiva</option>
-							<option value="draft">Borrador</option>
-						</select>
-						<div class="error-message" *ngIf="isFieldInvalid('status')">
-							{{ getFieldError('status') }}
+							<label for="end_date" class="form-label"> Fecha de Fin </label>
+							<input
+								type="date"
+								id="end_date"
+								formControlName="end_date"
+								class="form-control"
+								[class.invalid]="isFieldInvalid('end_date')"
+								[disabled]="workForm.get('is_current')?.value"
+							/>
+							<div class="error-message" *ngIf="isFieldInvalid('end_date')">
+								{{ getFieldError('end_date') }}
+							</div>
+						</div>
+
+						<!-- Current Work Toggle -->
+						<div class="form-group checkbox-group">
+							<label class="checkbox-label">
+								<input
+									type="checkbox"
+									formControlName="is_current"
+									(change)="toggleCurrentWork()"
+									class="checkbox-input"
+								/>
+								<span class="checkbox-text">Trabajo actual</span>
+							</label>
 						</div>
 					</div>
 				</div>
 
-				<!-- Description -->
-				<div class="form-group full-width">
-					<label for="description" class="form-label">
-						Descripción <span class="required">*</span>
-					</label>
-					<textarea
-						id="description"
-						formControlName="description"
-						class="form-control"
-						[class.invalid]="isFieldInvalid('description')"
-						rows="6"
-						placeholder="Describe tus responsabilidades, logros y tecnologías utilizadas..."
-					></textarea>
-					<div class="error-message" *ngIf="isFieldInvalid('description')">
-						{{ getFieldError('description') }}
-					</div>
-				</div>
+				<!-- Información adicional -->
+				<div class="form-section">
+					<h3 class="section-title">Información Adicional</h3>
 
-				<!-- Company URL -->
-				<div class="form-group full-width">
-					<label for="company_url" class="form-label">
-						URL de la Empresa
-					</label>
-					<input
-						type="url"
-						id="company_url"
-						formControlName="company_url"
-						class="form-control"
-						[class.invalid]="isFieldInvalid('company_url')"
-						placeholder="https://ejemplo.com"
-					/>
-					<div class="error-message" *ngIf="isFieldInvalid('company_url')">
-						{{ getFieldError('company_url') }}
+					<!-- Description -->
+					<div class="form-group full-width">
+						<label for="description" class="form-label">
+							Descripción <span class="required">*</span>
+						</label>
+						<textarea
+							id="description"
+							formControlName="description"
+							class="form-control"
+							[class.invalid]="isFieldInvalid('description')"
+							rows="6"
+							placeholder="Describe tus responsabilidades, logros y tecnologías utilizadas..."
+						></textarea>
+						<div class="error-message" *ngIf="isFieldInvalid('description')">
+							{{ getFieldError('description') }}
+						</div>
+					</div>
+
+					<!-- Company URL -->
+					<div class="form-group full-width">
+						<label for="company_url" class="form-label">
+							URL de la Empresa
+						</label>
+						<input
+							type="url"
+							id="company_url"
+							formControlName="company_url"
+							class="form-control"
+							[class.invalid]="isFieldInvalid('company_url')"
+							placeholder="https://ejemplo.com"
+						/>
+						<div class="error-message" *ngIf="isFieldInvalid('company_url')">
+							{{ getFieldError('company_url') }}
+						</div>
 					</div>
 				</div>
 

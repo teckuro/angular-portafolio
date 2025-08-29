@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdminWorksService } from '../../../../shared/services/admin-works.service';
+import { SelectOption } from '../../../../shared/components/custom-select/custom-select.component';
 import {
 	AdminWork,
 	AdminWorkCreate
@@ -19,6 +20,13 @@ export class AdminWorkFormComponent implements OnInit {
 	error: string | null = null;
 	isEditMode = false;
 	workId: number | null = null;
+
+	// Opciones para el select de status
+	statusOptions: SelectOption[] = [
+		{ value: 'active', label: 'Activa' },
+		{ value: 'inactive', label: 'Inactiva' },
+		{ value: 'draft', label: 'Borrador' }
+	];
 
 	constructor(
 		private fb: FormBuilder,
