@@ -23,6 +23,12 @@
 	--glass-bg: rgba(255, 255, 255, 0.05);
 	--glass-bg-hover: rgba(255, 255, 255, 0.1);
 
+	/* Sombras por defecto (tema oscuro) */
+	--input-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+	--input-shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.3);
+	--card-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+	--card-shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.3);
+
 	/* Tipografía */
 	--font-family:
 		'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
