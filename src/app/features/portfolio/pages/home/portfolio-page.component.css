@@ -182,7 +182,7 @@ html {
 .current-badge {
 	background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
 	color: white;
-	padding: 0.25rem 0.5rem;
+	padding: 0.5rem 1rem;
 	border-radius: 12px;
 	font-size: 0.75rem;
 	font-weight: 600;
@@ -882,7 +882,7 @@ main {
 /* Responsive design mejorado */
 @media (max-width: 1200px) {
 	.content-wrapper {
-		gap: 4rem;
+		gap: 1rem;
 	}
 
 	header {
@@ -893,11 +893,11 @@ main {
 @media (max-width: 1024px) {
 	.container {
 		padding-top: 1rem;
+		gap: 1rem;
 	}
 
 	.content-wrapper {
 		flex-direction: column;
-		gap: 3rem;
 	}
 
 	header {
@@ -913,8 +913,8 @@ main {
 		text-align: center;
 		align-items: center;
 		height: auto;
-		justify-content: space-between;
-		position: fixed;
+		/* justify-content: space-between; */
+		position: relative;
 	}
 
 	.header-content-info h1 {
