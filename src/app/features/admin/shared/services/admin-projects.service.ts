@@ -30,9 +30,9 @@ export class AdminProjectsService {
 	/**
 	 * Obtener todos los proyectos
 	 */
-	getProjects(
-		filters: AdminProjectFilters = {}
-	): Observable<AdminProjectsResponse> {
+    getProjects(
+        filters: AdminProjectFilters = {}
+    ): Observable<AdminProjectsResponse> {
 		let params = new HttpParams();
 
 		if (filters.status) {
@@ -45,63 +45,66 @@ export class AdminProjectsService {
 			params = params.set('search', filters.search);
 		}
 
-		return this.http
-			.get<{ success: boolean; data: AdminProject[] }>(this.API_URL, { params })
-			.pipe(
-				map((response) => ({ data: response.data })),
-				catchError((error) => {
-					throw error;
-				})
-			);
+        return this.http
+            .get<{ success: boolean; data: AdminProject[] }>(this.API_URL, { params })
+            .pipe(
+                map((response) => ({
+                    data: response.data.map((item) => this.normalizeResponse(item))
+                })),
+                catchError((error) => {
+                    throw error;
+                })
+            );
 	}
 
 	/**
 	 * Obtener un proyecto por ID
 	 */
-	getProjectById(id: number): Observable<AdminProject> {
-		return this.http
-			.get<{ success: boolean; data: AdminProject }>(`${this.API_URL}/${id}`)
-			.pipe(
-				map((response) => response.data),
-				catchError((error) => {
-					throw error;
-				})
-			);
-	}
+    getProjectById(id: number): Observable<AdminProject> {
+        return this.http
+            .get<{ success: boolean; data: AdminProject }>(`${this.API_URL}/${id}`)
+            .pipe(
+                map((response) => this.normalizeResponse(response.data)),
+                catchError((error) => {
+                    throw error;
+                })
+            );
+    }
 
 	/**
 	 * Crear un nuevo proyecto
 	 */
-	createProject(project: AdminProjectCreate): Observable<AdminProject> {
-		return this.http
-			.post<{ success: boolean; data: AdminProject }>(this.API_URL, project)
-			.pipe(
-				map((response) => response.data),
-				catchError((error) => {
-					throw error;
-				})
-			);
-	}
+    createProject(project: AdminProjectCreate): Observable<AdminProject> {
+        // No mapeamos payload aquí; el backend espera tech_stack/features
+        return this.http
+            .post<{ success: boolean; data: AdminProject }>(this.API_URL, project)
+            .pipe(
+                map((response) => this.normalizeResponse(response.data)),
+                catchError((error) => {
+                    throw error;
+                })
+            );
+    }
 
 	/**
 	 * Actualizar un proyecto existente
 	 */
-	updateProject(
-		id: number,
-		project: AdminProjectUpdate
-	): Observable<AdminProject> {
-		return this.http
-			.put<{
-				success: boolean;
-				data: AdminProject;
-			}>(`${this.API_URL}/${id}`, project)
-			.pipe(
-				map((response) => response.data),
-				catchError((error) => {
-					throw error;
-				})
-			);
-	}
+    updateProject(
+        id: number,
+        project: AdminProjectUpdate
+    ): Observable<AdminProject> {
+        return this.http
+            .put<{
+                success: boolean;
+                data: AdminProject;
+            }>(`${this.API_URL}/${id}`, project)
+            .pipe(
+                map((response) => this.normalizeResponse(response.data)),
+                catchError((error) => {
+                    throw error;
+                })
+            );
+    }
 
 	/**
 	 * Eliminar un proyecto
@@ -162,4 +165,28 @@ export class AdminProjectsService {
 				})
 			);
 	}
+
+    /**
+     * Normaliza tech_stack y features a arrays cuando llegan como JSON string
+     */
+    private normalizeResponse(item: any): AdminProject {
+        item.tech_stack = this.ensureArray(item.tech_stack);
+        item.features = this.ensureArray(item.features);
+        return item as AdminProject;
+    }
+
+    private ensureArray(value: any): string[] {
+        if (Array.isArray(value)) {
+            return value;
+        }
+        if (typeof value === 'string' && value.trim().length > 0) {
+            try {
+                const parsed = JSON.parse(value);
+                return Array.isArray(parsed) ? parsed : [];
+            } catch {
+                return [];
+            }
+        }
+        return [];
+    }
 }

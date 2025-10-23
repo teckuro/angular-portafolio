@@ -71,6 +71,14 @@
 							</div>
 						</div>
 
+						<div class="project-features" *ngIf="project.features && project.features.length > 0">
+							<ul class="features-list">
+								<li class="feature-item" *ngFor="let feature of project.features.slice(0, 3)">
+									{{ feature }}
+								</li>
+							</ul>
+						</div>
+
 						<div
 							class="project-links"
 							*ngIf="project.project_url || project.github_url"
