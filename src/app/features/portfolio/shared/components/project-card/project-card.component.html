@@ -55,7 +55,11 @@
 					<span class="tech-tag" *ngFor="let tech of getLimitedTechStack()">
 						{{ tech }}
 					</span>
-					<span class="tech-tag more" *ngIf="getAdditionalTechCount() > 0">
+					<span
+						class="tech-tag more more-with-tooltip"
+						*ngIf="getAdditionalTechCount() > 0"
+						title="{{ getHiddenTechStack().join(', ') }}"
+					>
 						+{{ getAdditionalTechCount() }}
 					</span>
 				</div>

@@ -439,6 +439,11 @@
 	color: white;
 }
 
+/* Tooltip simple nativo usando title y estilos de ayuda */
+.more-with-tooltip {
+	position: relative;
+}
+
 /* Características */
 .project-features {
 	display: flex;

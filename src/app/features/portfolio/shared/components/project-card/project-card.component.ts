@@ -94,6 +94,16 @@ export class ProjectCardComponent implements OnInit {
 	}
 
 	/**
+	 * Obtiene la lista de tecnologías ocultas para el tooltip
+	 */
+	getHiddenTechStack(): string[] {
+		if (!this.project?.tech_stack) {
+			return [];
+		}
+		return this.project.tech_stack.slice(4);
+	}
+
+	/**
 	 * Obtiene las características limitadas
 	 */
 	getLimitedFeatures(): string[] {
