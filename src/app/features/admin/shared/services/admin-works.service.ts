@@ -46,7 +46,9 @@ export class AdminWorksService {
 		return this.http
 			.get<{ success: boolean; data: AdminWork[] }>(this.API_URL, { params })
 			.pipe(
-				map((response) => ({ data: response.data })),
+				map((response) => ({
+					data: response.data.map((item) => this.normalizeResponse(item))
+				})),
 				catchError((error) => {
 					throw error;
 				})
@@ -60,7 +62,7 @@ export class AdminWorksService {
 		return this.http
 			.get<{ success: boolean; data: AdminWork }>(`${this.API_URL}/${id}`)
 			.pipe(
-				map((response) => response.data),
+				map((response) => this.normalizeResponse(response.data)),
 				catchError((error) => {
 					throw error;
 				})
@@ -71,10 +73,18 @@ export class AdminWorksService {
 	 * Crear una nueva experiencia laboral
 	 */
 	createWork(work: AdminWorkCreate): Observable<AdminWork> {
+		const payload: any = {
+			...work,
+			technologies: (work as any).tech ?? [],
+			tech: undefined
+		};
+		if (payload.is_current) {
+			payload.end_date = null;
+		}
 		return this.http
-			.post<{ success: boolean; data: AdminWork }>(this.API_URL, work)
+			.post<{ success: boolean; data: AdminWork }>(this.API_URL, payload)
 			.pipe(
-				map((response) => response.data),
+				map((response) => this.normalizeResponse(response.data)),
 				catchError((error) => {
 					throw error;
 				})
@@ -85,14 +95,39 @@ export class AdminWorksService {
 	 * Actualizar una experiencia laboral existente
 	 */
 	updateWork(id: number, work: AdminWorkUpdate): Observable<AdminWork> {
+		const payload: any = {
+			...work,
+			technologies: (work as any).tech ?? (work as any).technologies ?? [],
+			tech: undefined
+		};
+		if (payload.is_current) {
+			payload.end_date = null;
+		}
 		return this.http
-			.put<{ success: boolean; data: AdminWork }>(`${this.API_URL}/${id}`, work)
+			.put<{
+				success: boolean;
+				data: AdminWork;
+			}>(`${this.API_URL}/${id}`, payload)
 			.pipe(
-				map((response) => response.data),
+				map((response) => this.normalizeResponse(response.data)),
 				catchError((error) => {
 					throw error;
 				})
 			);
+	}
+
+	private normalizeResponse(item: any): AdminWork {
+		if ('technologies' in item && !('tech' in item)) {
+			item.tech = Array.isArray(item.technologies) ? item.technologies : [];
+			delete item.technologies;
+		}
+		if (
+			item.is_current &&
+			(item.end_date === '' || item.end_date === undefined)
+		) {
+			item.end_date = null;
+		}
+		return item as AdminWork;
 	}
 
 	/**

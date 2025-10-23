@@ -19,10 +19,15 @@ export class WorksService extends BaseApiService<Work> {
 	 * Transforma los datos específicos de Work
 	 */
 	protected transformData(work: any): Work {
-		// Transformar campos JSON a arrays
-		this.transformJsonField(work, 'technologies');
+		// Alinear nombre de campo del backend ("technologies") con el modelo ("tech")
+		if ('technologies' in work && !('tech' in work)) {
+			work.tech = work.technologies;
+			delete work.technologies;
+		}
+
+		// Transformar campos JSON a arrays de forma segura
+		this.transformJsonField(work, 'tech');
 		this.transformJsonField(work, 'achievements');
-		this.transformJsonField(work, 'responsibilities');
 
 		return work as Work;
 	}
@@ -52,10 +57,13 @@ export class WorksService extends BaseApiService<Work> {
 	 */
 	getWorksByCompany(company: string): Observable<Work[]> {
 		return this.http
-			.get<{ success: boolean; data: Work[] }>(
-				`${this.apiUrl}?company=${encodeURIComponent(company)}`
-			)
-			.pipe(map((response) => response.data.map((item) => this.transformData(item))));
+			.get<{
+				success: boolean;
+				data: Work[];
+			}>(`${this.apiUrl}?company=${encodeURIComponent(company)}`)
+			.pipe(
+				map((response) => response.data.map((item) => this.transformData(item)))
+			);
 	}
 
 	/**
@@ -63,9 +71,12 @@ export class WorksService extends BaseApiService<Work> {
 	 */
 	getWorksByTech(tech: string): Observable<Work[]> {
 		return this.http
-			.get<{ success: boolean; data: Work[] }>(
-				`${this.apiUrl}?tech=${encodeURIComponent(tech)}`
-			)
-			.pipe(map((response) => response.data.map((item) => this.transformData(item))));
+			.get<{
+				success: boolean;
+				data: Work[];
+			}>(`${this.apiUrl}?tech=${encodeURIComponent(tech)}`)
+			.pipe(
+				map((response) => response.data.map((item) => this.transformData(item)))
+			);
 	}
 }
