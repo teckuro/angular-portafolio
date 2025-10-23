@@ -238,7 +238,7 @@
 									#techInput
 									class="tag-input"
 									placeholder="Agregar tecnología (presiona Enter)"
-									(keyup.enter)="addTech(techInput)"
+									(keydown.enter)="$event.preventDefault(); addTech(techInput)"
 									(keyup.space)="addTech(techInput)"
 									(keyup.comma)="addTech(techInput)"
 								/>
@@ -281,7 +281,7 @@
 									#achievementInput
 									class="achievement-input"
 									placeholder="Agregar logro (presiona Enter)"
-									(keyup.enter)="addAchievement(achievementInput)"
+								(keydown.enter)="$event.preventDefault(); addAchievement(achievementInput)"
 								/>
 							</div>
 						</div>
