@@ -14,7 +14,7 @@ export interface AdminWorksResponse {
 }
 
 export interface AdminWorkFilters {
-	status?: 'active' | 'inactive' | 'draft';
+	status?: 'Activo' | 'Inactivo' | 'Borrado';
 	is_current?: boolean;
 	search?: string;
 }

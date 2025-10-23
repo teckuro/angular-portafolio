@@ -281,7 +281,9 @@
 									#achievementInput
 									class="achievement-input"
 									placeholder="Agregar logro (presiona Enter)"
-								(keydown.enter)="$event.preventDefault(); addAchievement(achievementInput)"
+									(keydown.enter)="
+										$event.preventDefault(); addAchievement(achievementInput)
+									"
 								/>
 							</div>
 						</div>
