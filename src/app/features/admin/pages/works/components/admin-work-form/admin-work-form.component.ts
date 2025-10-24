@@ -110,11 +110,27 @@ export class AdminWorkFormComponent implements OnInit {
 
 			const formData = this.workForm.value;
 
+			// Sanitizar strings base
+			const sanitize = (v: any) => (typeof v === 'string' ? v.trim() : v);
+			formData.position = sanitize(formData.position);
+			formData.company = sanitize(formData.company);
+			formData.location = sanitize(formData.location);
+			formData.description = sanitize(formData.description);
+			formData.company_url = sanitize(formData.company_url);
+
 			// Si es trabajo actual, no incluir fecha de fin y debe ser activo
 			if (formData.is_current) {
 				formData.end_date = null;
 				formData.status = 'active';
 			}
+
+			// Normalizar arrays
+			const tech: string[] = (formData.tech || [])
+				.map((v: any) => (typeof v === 'string' ? v.trim() : ''))
+				.filter((v: string) => v.length > 0);
+			const achievements: string[] = (formData.achievements || [])
+				.map((v: any) => (typeof v === 'string' ? v.trim() : ''))
+				.filter((v: string) => v.length > 0);
 
 			const workData: AdminWorkCreate = {
 				position: formData.position,
@@ -123,8 +139,8 @@ export class AdminWorkFormComponent implements OnInit {
 				start_date: formData.start_date,
 				end_date: formData.end_date,
 				description: formData.description,
-				tech: formData.tech || [],
-				achievements: formData.achievements || [],
+				tech,
+				achievements,
 				is_current: formData.is_current,
 				company_url: formData.company_url || '',
 				status: formData.status

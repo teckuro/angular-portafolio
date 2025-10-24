@@ -101,6 +101,15 @@ export class AdminProjectFormComponent implements OnInit {
 
 			const formData = this.projectForm.value;
 
+			// Sanitizar strings
+			const sanitize = (v: any) => (typeof v === 'string' ? v.trim() : v);
+			formData.title = sanitize(formData.title);
+			formData.short_description = sanitize(formData.short_description);
+			formData.description = sanitize(formData.description);
+			formData.image_url = sanitize(formData.image_url);
+			formData.project_url = sanitize(formData.project_url);
+			formData.github_url = sanitize(formData.github_url);
+
 			// Normalizar arrays: quitar vacíos y espacios
 			const techStack: string[] = (formData.tech_stack || [])
 				.map((v: any) => (typeof v === 'string' ? v.trim() : ''))
@@ -148,6 +157,8 @@ export class AdminProjectFormComponent implements OnInit {
 					}
 				});
 			}
+		} else {
+			this.markFormGroupTouched();
 		}
 	}
 
@@ -158,6 +169,13 @@ export class AdminProjectFormComponent implements OnInit {
 			if (sanitized.length > 0) {
 				formArray.push(this.fb.control(sanitized, Validators.required));
 			}
+		});
+	}
+
+	private markFormGroupTouched(): void {
+		Object.keys(this.projectForm.controls).forEach((key) => {
+			const control = this.projectForm.get(key);
+			control?.markAsTouched();
 		});
 	}
 
