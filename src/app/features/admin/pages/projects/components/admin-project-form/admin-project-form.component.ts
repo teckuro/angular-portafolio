@@ -75,6 +75,16 @@ export class AdminProjectFormComponent implements OnInit {
 					is_featured: project.is_featured,
 					order: project.order
 				});
+
+				// Cargar FormArrays con datos existentes
+				this.setArrayValues(
+					this.techStackArray,
+					Array.isArray(project.tech_stack) ? project.tech_stack : []
+				);
+				this.setArrayValues(
+					this.featuresArray,
+					Array.isArray(project.features) ? project.features : []
+				);
 				this.isLoading = false;
 			},
 			error: (error: any) => {
@@ -91,6 +101,14 @@ export class AdminProjectFormComponent implements OnInit {
 
 			const formData = this.projectForm.value;
 
+			// Normalizar arrays: quitar vacíos y espacios
+			const techStack: string[] = (formData.tech_stack || [])
+				.map((v: any) => (typeof v === 'string' ? v.trim() : ''))
+				.filter((v: string) => v.length > 0);
+			const features: string[] = (formData.features || [])
+				.map((v: any) => (typeof v === 'string' ? v.trim() : ''))
+				.filter((v: string) => v.length > 0);
+
 			const projectData: any = {
 				title: formData.title,
 				short_description: formData.short_description,
@@ -101,8 +119,8 @@ export class AdminProjectFormComponent implements OnInit {
 				status: formData.status,
 				is_featured: formData.is_featured,
 				order: formData.order,
-				tech_stack: formData.tech_stack,
-				features: formData.features
+				tech_stack: techStack,
+				features: features
 			};
 
 			if (this.isEditMode && this.projectId) {
@@ -131,6 +149,16 @@ export class AdminProjectFormComponent implements OnInit {
 				});
 			}
 		}
+	}
+
+	private setArrayValues(formArray: FormArray, values: string[]): void {
+		formArray.clear();
+		values.forEach((value) => {
+			const sanitized = typeof value === 'string' ? value.trim() : '';
+			if (sanitized.length > 0) {
+				formArray.push(this.fb.control(sanitized, Validators.required));
+			}
+		});
 	}
 
 	// Métodos para validación de campos

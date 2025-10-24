@@ -75,9 +75,14 @@ export class AdminProjectsService {
 	 * Crear un nuevo proyecto
 	 */
 	createProject(project: AdminProjectCreate): Observable<AdminProject> {
-		// No mapeamos payload aquí; el backend espera tech_stack/features
+		// Mapear a la forma que espera el backend: 'technologies'
+		const payload: any = {
+			...project,
+			technologies: (project as any).tech_stack ?? [],
+			tech_stack: undefined
+		};
 		return this.http
-			.post<{ success: boolean; data: AdminProject }>(this.API_URL, project)
+			.post<{ success: boolean; data: AdminProject }>(this.API_URL, payload)
 			.pipe(
 				map((response) => this.normalizeResponse(response.data)),
 				catchError((error) => {
@@ -93,11 +98,17 @@ export class AdminProjectsService {
 		id: number,
 		project: AdminProjectUpdate
 	): Observable<AdminProject> {
+		const payload: any = {
+			...project,
+			technologies:
+				(project as any).tech_stack ?? (project as any).technologies ?? [],
+			tech_stack: undefined
+		};
 		return this.http
 			.put<{
 				success: boolean;
 				data: AdminProject;
-			}>(`${this.API_URL}/${id}`, project)
+			}>(`${this.API_URL}/${id}`, payload)
 			.pipe(
 				map((response) => this.normalizeResponse(response.data)),
 				catchError((error) => {
@@ -170,12 +181,12 @@ export class AdminProjectsService {
 	 * Normaliza tech_stack y features a arrays cuando llegan como JSON string
 	 */
 	private normalizeResponse(item: any): AdminProject {
-        // Alinear posibles nombres de campo del backend
-        if ('technologies' in item && !('tech_stack' in item)) {
-            item.tech_stack = item.technologies;
-        }
+		// Alinear posibles nombres de campo del backend
+		if ('technologies' in item && !('tech_stack' in item)) {
+			item.tech_stack = item.technologies;
+		}
 
-        item.tech_stack = this.ensureArray(item.tech_stack);
+		item.tech_stack = this.ensureArray(item.tech_stack);
 		item.features = this.ensureArray(item.features);
 		return item as AdminProject;
 	}
