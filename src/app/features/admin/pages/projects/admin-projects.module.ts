@@ -9,6 +9,7 @@ import { AdminProjectFormComponent } from './components/admin-project-form/admin
 
 // Shared Components
 import { AdminComponentsModule } from '../../shared/components/admin-components.module';
+import { SharedModule } from '../../../../shared/shared.module';
 
 // Services
 import { AdminProjectsService } from '../../shared/services/admin-projects.service';
@@ -42,7 +43,8 @@ const routes: Routes = [
 		CommonModule,
 		ReactiveFormsModule,
 		RouterModule.forChild(routes),
-		AdminComponentsModule
+		AdminComponentsModule,
+		SharedModule
 	],
 	providers: [AdminProjectsService]
 })

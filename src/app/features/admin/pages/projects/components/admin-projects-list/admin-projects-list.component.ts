@@ -28,7 +28,13 @@ export class AdminProjectsListComponent implements OnInit {
 
 		this.projectsService.getProjects().subscribe({
 			next: (response: any) => {
-				this.projects = response.data;
+				this.projects = (response.data || [])
+					.slice()
+					.sort((a: AdminProject, b: AdminProject) => {
+						const ao = typeof a.order === 'number' ? a.order : 0;
+						const bo = typeof b.order === 'number' ? b.order : 0;
+						return ao - bo;
+					});
 				this.loading = false;
 			},
 			error: (error: any) => {

@@ -235,4 +235,31 @@ export class AdminProjectFormComponent implements OnInit {
 	onImageUploadError(error: string): void {
 		// Error al subir imagen
 	}
+
+	// Métodos estilo "tags" para tecnologías
+	addTechTag(input: HTMLInputElement): void {
+		const value = (input.value || '').trim();
+		if (!value) return;
+		const currentValues: string[] = this.techStackArray.value || [];
+		if (!currentValues.includes(value)) {
+			this.techStackArray.push(this.fb.control(value, Validators.required));
+		}
+		input.value = '';
+	}
+
+	removeTechTag(index: number): void {
+		this.techStackArray.removeAt(index);
+	}
+
+	// Métodos estilo "lista" para características
+	addFeatureTag(input: HTMLInputElement): void {
+		const value = (input.value || '').trim();
+		if (!value) return;
+		this.featuresArray.push(this.fb.control(value, Validators.required));
+		input.value = '';
+	}
+
+	removeFeatureTag(index: number): void {
+		this.featuresArray.removeAt(index);
+	}
 }

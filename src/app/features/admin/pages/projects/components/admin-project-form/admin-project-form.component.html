@@ -141,12 +141,14 @@
 						<!-- Status -->
 						<div class="form-group">
 							<label for="status" class="form-label"> Estado </label>
-							<app-custom-select
-								formControlName="status"
-								[options]="statusOptions"
-								placeholder="Seleccionar estado"
-								[invalid]="isFieldInvalid('status')"
-							></app-custom-select>
+							<div class="custom-select-wrapper">
+								<app-custom-select
+									formControlName="status"
+									[options]="statusOptions"
+									placeholder="Seleccionar estado"
+									[invalid]="isFieldInvalid('status')"
+								></app-custom-select>
+							</div>
 							<div class="error-message" *ngIf="isFieldInvalid('status')">
 								{{ getFieldError('status') }}
 							</div>
@@ -204,72 +206,79 @@
 						</div>
 					</div>
 
-					<!-- Tech Stack -->
+					<!-- Tech Stack como Tags -->
 					<div class="form-group full-width">
-						<label class="form-label"> Stack Tecnológico </label>
-						<div class="array-input-container">
-							<div class="array-items" formArrayName="tech_stack">
-								<div
-									class="array-item"
-									*ngFor="let tech of techStackArray.controls; let i = index"
+						<label class="form-label">Tecnologías</label>
+						<div class="tags-input-container">
+							<div class="tags-display">
+								<span
+									class="tag-item"
+									*ngFor="let tech of techStackArray.value; let i = index"
 								>
-									<input
-										[formControlName]="i"
-										type="text"
-										class="form-control"
-										placeholder="Ej: Angular, React, Node.js"
-									/>
+									{{ tech }}
 									<button
 										type="button"
-										class="btn btn-danger btn-sm"
-										(click)="removeTechStack(i)"
+										class="tag-remove"
+										(click)="removeTechTag(i)"
 									>
-										🗑️
+										×
 									</button>
-								</div>
+								</span>
 							</div>
-							<button
-								type="button"
-								class="btn btn-outline btn-sm"
-								(click)="addTechStack()"
-							>
-								➕ Agregar Tecnología
-							</button>
+							<div class="tag-input-wrapper">
+								<input
+									type="text"
+									#techInput
+									class="tag-input"
+									placeholder="Agregar tecnología (presiona Enter)"
+									(keydown.enter)="
+										$event.preventDefault(); addTechTag(techInput)
+									"
+									(keyup.space)="addTechTag(techInput)"
+									(keyup.comma)="addTechTag(techInput)"
+								/>
+							</div>
 						</div>
+						<p class="form-help">
+							Presiona Enter, Espacio o Coma para agregar una tecnología
+						</p>
 					</div>
 
-					<!-- Features -->
+					<!-- Features como lista -->
 					<div class="form-group full-width">
-						<label class="form-label"> Características del Proyecto </label>
-						<div class="array-input-container">
-							<div class="array-items" formArrayName="features">
-								<div
-									class="array-item"
-									*ngFor="let feature of featuresArray.controls; let i = index"
-								>
-									<input
-										[formControlName]="i"
-										type="text"
-										class="form-control"
-										placeholder="Ej: Panel de administración, CRUD completo"
-									/>
-									<button
-										type="button"
-										class="btn btn-danger btn-sm"
-										(click)="removeFeature(i)"
-									>
-										🗑️
-									</button>
-								</div>
-							</div>
-							<button
-								type="button"
-								class="btn btn-outline btn-sm"
-								(click)="addFeature()"
+						<label class="form-label">Características del Proyecto</label>
+						<div class="achievements-container">
+							<div
+								*ngFor="let feature of featuresArray.value; let i = index"
+								class="achievement-item"
 							>
-								➕ Agregar Característica
-							</button>
+								<div class="achievement-content">
+									<span class="achievement-number">{{ i + 1 }}</span>
+									<span class="achievement-text">{{ feature }}</span>
+								</div>
+								<button
+									type="button"
+									class="achievement-remove"
+									(click)="removeFeatureTag(i)"
+								>
+									×
+								</button>
+							</div>
+							<div class="achievement-input-wrapper">
+								<input
+									type="text"
+									#featureInput
+									class="achievement-input"
+									placeholder="Agregar característica (presiona Enter)"
+									(keydown.enter)="
+										$event.preventDefault(); addFeatureTag(featureInput)
+									"
+								/>
+							</div>
 						</div>
+						<p class="form-help">
+							Presiona Enter para agregar una característica
+						</p>
 					</div>
 				</div>
 

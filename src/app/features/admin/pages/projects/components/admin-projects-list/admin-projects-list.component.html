@@ -36,9 +36,37 @@
 				<div class="project-card" *ngFor="let project of projects">
 					<div class="project-header">
 						<div class="project-image">
-							<img [src]="project.image_url" [alt]="project.title" />
+							<app-safe-image
+								[src]="project.image_url"
+								[alt]="project.title"
+								cssClass="project-image-el"
+								placeholderText="Cargando imagen..."
+								placeholderColor="#1f2937"
+								errorText="Sin imagen"
+							></app-safe-image>
+							<div class="image-overlay">
+								<div class="image-actions">
+									<a
+										class="overlay-link"
+										[href]="project.project_url"
+										target="_blank"
+										*ngIf="project.project_url"
+									>
+										🌐 Ver Demo
+									</a>
+									<a
+										class="overlay-link"
+										[href]="project.github_url"
+										target="_blank"
+										*ngIf="project.github_url"
+									>
+										📁 Ver Código
+									</a>
+								</div>
+							</div>
 						</div>
 						<div class="project-status">
+							<span class="order-badge">#{{ project.order }}</span>
 							<span
 								class="status-badge"
 								[class]="getStatusClass(project.status)"
@@ -58,9 +86,9 @@
 						</div>
 
 						<div class="project-tech" *ngIf="project.tech_stack.length > 0">
-							<div class="tech-tags">
+							<div class="tags-display">
 								<span
-									class="tech-tag"
+									class="tag-item"
 									*ngFor="let tech of project.tech_stack.slice(0, 3)"
 								>
 									{{ tech }}
@@ -109,6 +137,13 @@
 					</div>
 
 					<div class="project-actions">
+						<button
+							class="btn btn-outline btn-sm drag-handle"
+							type="button"
+							title="Reordenar"
+						>
+							<span class="btn-icon">☰</span>
+						</button>
 						<button
 							class="btn btn-secondary btn-sm"
 							(click)="editProject(project.id)"

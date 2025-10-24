@@ -92,7 +92,13 @@
 								{{ getFieldError('location') }}
 							</div>
 						</div>
+					</div>
+				</div>
 
+				<!-- Enlaces y Configuración -->
+				<div class="form-section">
+					<h3 class="section-title">Enlaces y Configuración</h3>
+					<div class="form-grid">
 						<!-- Status -->
 						<div class="form-group">
 							<label for="status" class="form-label"> Estado </label>
@@ -107,6 +113,37 @@
 							</div>
 							<div class="error-message" *ngIf="isFieldInvalid('status')">
 								{{ getFieldError('status') }}
+							</div>
+						</div>
+
+						<!-- Current Work Toggle -->
+						<div class="form-group checkbox-group">
+							<label class="checkbox-label">
+								<input
+									type="checkbox"
+									formControlName="is_current"
+									(change)="toggleCurrentWork()"
+									class="checkbox-input"
+								/>
+								<span class="checkbox-text">Trabajo actual</span>
+							</label>
+						</div>
+
+						<!-- Company URL -->
+						<div class="form-group">
+							<label for="company_url" class="form-label">
+								URL de la Empresa
+							</label>
+							<input
+								type="url"
+								id="company_url"
+								formControlName="company_url"
+								class="form-control"
+								[class.invalid]="isFieldInvalid('company_url')"
+								placeholder="https://ejemplo.com"
+							/>
+							<div class="error-message" *ngIf="isFieldInvalid('company_url')">
+								{{ getFieldError('company_url') }}
 							</div>
 						</div>
 					</div>
@@ -151,25 +188,12 @@
 								{{ getFieldError('end_date') }}
 							</div>
 						</div>
-
-						<!-- Current Work Toggle -->
-						<div class="form-group checkbox-group">
-							<label class="checkbox-label">
-								<input
-									type="checkbox"
-									formControlName="is_current"
-									(change)="toggleCurrentWork()"
-									class="checkbox-input"
-								/>
-								<span class="checkbox-text">Trabajo actual</span>
-							</label>
-						</div>
 					</div>
 				</div>
 
-				<!-- Información adicional -->
+				<!-- Información detallada -->
 				<div class="form-section">
-					<h3 class="section-title">Información Adicional</h3>
+					<h3 class="section-title">Información Detallada</h3>
 
 					<!-- Description -->
 					<div class="form-group full-width">
@@ -186,24 +210,6 @@
 						></textarea>
 						<div class="error-message" *ngIf="isFieldInvalid('description')">
 							{{ getFieldError('description') }}
-						</div>
-					</div>
-
-					<!-- Company URL -->
-					<div class="form-group full-width">
-						<label for="company_url" class="form-label">
-							URL de la Empresa
-						</label>
-						<input
-							type="url"
-							id="company_url"
-							formControlName="company_url"
-							class="form-control"
-							[class.invalid]="isFieldInvalid('company_url')"
-							placeholder="https://ejemplo.com"
-						/>
-						<div class="error-message" *ngIf="isFieldInvalid('company_url')">
-							{{ getFieldError('company_url') }}
 						</div>
 					</div>
 				</div>

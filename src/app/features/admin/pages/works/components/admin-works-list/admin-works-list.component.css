@@ -234,6 +234,9 @@
 
 .work-details {
 	margin-bottom: 1.5rem;
+	display: flex;
+	align-items: stretch;
+	gap: 0.75rem;
 }
 
 .work-period,
@@ -241,17 +244,17 @@
 	display: flex;
 	align-items: center;
 	gap: 0.75rem;
-	margin-bottom: 0.75rem;
-	padding: 0.75rem;
+	padding: 0.75rem 1rem;
 	background: rgba(255, 255, 255, 0.05);
 	border-radius: 8px;
 	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	flex: 1;
 }
 
 .work-card:hover .work-period,
 .work-card:hover .work-location {
 	background: rgba(255, 255, 255, 0.1);
-	transform: translateX(4px);
+	transform: translateY(-1px);
 }
 
 .period-label,
@@ -508,12 +511,13 @@
 	}
 
 	.work-actions {
-		flex-direction: column;
+		flex-direction: row;
+		flex-wrap: wrap;
 		gap: 0.75rem;
 	}
 
 	.work-actions .btn {
-		width: 100%;
+		width: auto;
 		justify-content: center;
 	}
 

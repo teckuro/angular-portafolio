@@ -2,7 +2,7 @@
 
 .project-form-container {
 	width: 100%;
-	max-width: 1400px;
+	max-width: 1200px;
 	margin: 0 auto;
 	padding: 0 1rem;
 	/* Mejoras visuales */
@@ -128,7 +128,7 @@
 	background: rgba(255, 255, 255, 0.03);
 	border: 1px solid rgba(255, 255, 255, 0.12);
 	border-radius: 24px;
-	padding: 3.5rem;
+	padding: 3rem;
 	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
 	backdrop-filter: blur(25px);
 	transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -576,6 +576,190 @@ select.form-control:hover {
 
 .btn-text {
 	font-weight: 600;
+}
+
+/* Tags (Tecnologías) */
+.tags-input-container {
+	border: 1px solid var(--border-color);
+	border-radius: 8px;
+	padding: 0.75rem;
+	background: var(--input-bg);
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tags-input-container:focus-within {
+	border-color: var(--accent-blue);
+	box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
+}
+
+.tags-display {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	margin-bottom: 0.75rem;
+}
+
+.tag-item {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	background: linear-gradient(
+		135deg,
+		var(--accent-blue) 0%,
+		var(--accent-blue-hover) 100%
+	);
+	color: white;
+	padding: 0.375rem 0.75rem;
+	border-radius: 20px;
+	font-size: 0.875rem;
+	font-weight: 500;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	box-shadow: 0 2px 8px rgba(49, 130, 206, 0.2);
+}
+
+.tag-item:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 4px 12px rgba(49, 130, 206, 0.3);
+}
+
+.tag-remove {
+	background: none;
+	border: none;
+	color: white;
+	font-size: 1.2rem;
+	font-weight: bold;
+	cursor: pointer;
+	padding: 0;
+	width: 16px;
+	height: 16px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	line-height: 1;
+}
+
+.tag-remove:hover {
+	background: rgba(255, 255, 255, 0.2);
+	transform: scale(1.1);
+}
+
+.tag-input-wrapper {
+	position: relative;
+}
+.tag-input {
+	width: 100%;
+	border: none;
+	outline: none;
+	background: transparent;
+	font-size: 0.875rem;
+	color: var(--text-primary);
+	padding: 0.5rem 0;
+}
+.tag-input::placeholder {
+	color: var(--text-muted);
+}
+
+/* Lista de características (reutiliza estilos de achievements) */
+.achievements-container {
+	border: 1px solid var(--border-color);
+	border-radius: 8px;
+	padding: 0.75rem;
+	background: var(--input-bg);
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.achievements-container:focus-within {
+	border-color: var(--accent-blue);
+	box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
+}
+.achievement-item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 8px;
+	padding: 0.75rem;
+	margin-bottom: 0.5rem;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.achievement-item:hover {
+	background: rgba(255, 255, 255, 0.08);
+	border-color: rgba(255, 255, 255, 0.15);
+}
+.achievement-content {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	flex: 1;
+}
+.achievement-number {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 24px;
+	height: 24px;
+	background: linear-gradient(
+		135deg,
+		var(--accent-blue) 0%,
+		var(--accent-blue-hover) 100%
+	);
+	color: white;
+	border-radius: 50%;
+	font-size: 0.75rem;
+	font-weight: 600;
+	flex-shrink: 0;
+}
+.achievement-text {
+	color: var(--text-primary);
+	font-size: 0.875rem;
+	line-height: 1.4;
+}
+.achievement-remove {
+	background: none;
+	border: none;
+	color: var(--text-muted);
+	font-size: 1.2rem;
+	font-weight: bold;
+	cursor: pointer;
+	padding: 0;
+	width: 24px;
+	height: 24px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	line-height: 1;
+	flex-shrink: 0;
+}
+.achievement-remove:hover {
+	background: rgba(239, 68, 68, 0.1);
+	color: #ef4444;
+	transform: scale(1.1);
+}
+.achievement-input-wrapper {
+	margin-top: 0.5rem;
+}
+.achievement-input {
+	width: 100%;
+	border: none;
+	outline: none;
+	background: transparent;
+	font-size: 0.875rem;
+	color: var(--text-primary);
+	padding: 0.5rem 0;
+}
+.achievement-input::placeholder {
+	color: var(--text-muted);
+}
+
+.form-help {
+	font-size: 0.75rem;
+	color: var(--text-muted);
+	margin-top: 0.5rem;
+	font-style: italic;
 }
 
 /* Animaciones de entrada */
