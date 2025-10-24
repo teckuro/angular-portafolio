@@ -75,11 +75,10 @@ export class AdminProjectsService {
 	 * Crear un nuevo proyecto
 	 */
 	createProject(project: AdminProjectCreate): Observable<AdminProject> {
-		// Mapear a la forma que espera el backend: 'technologies'
+		// Enviar directamente 'tech_stack' como espera el backend (también acepta alias)
 		const payload: any = {
 			...project,
-			technologies: (project as any).tech_stack ?? [],
-			tech_stack: undefined
+			tech_stack: (project as any).tech_stack ?? []
 		};
 		return this.http
 			.post<{ success: boolean; data: AdminProject }>(this.API_URL, payload)
@@ -100,9 +99,11 @@ export class AdminProjectsService {
 	): Observable<AdminProject> {
 		const payload: any = {
 			...project,
-			technologies:
-				(project as any).tech_stack ?? (project as any).technologies ?? [],
-			tech_stack: undefined
+			tech_stack:
+				(project as any).tech_stack ??
+				(project as any).stack ??
+				(project as any).teck ??
+				[]
 		};
 		return this.http
 			.put<{
@@ -184,6 +185,12 @@ export class AdminProjectsService {
 		// Alinear posibles nombres de campo del backend
 		if ('technologies' in item && !('tech_stack' in item)) {
 			item.tech_stack = item.technologies;
+		}
+		if ('stack' in item && !('tech_stack' in item)) {
+			item.tech_stack = item.stack;
+		}
+		if ('teck' in item && !('tech_stack' in item)) {
+			item.tech_stack = item.teck;
 		}
 
 		item.tech_stack = this.ensureArray(item.tech_stack);

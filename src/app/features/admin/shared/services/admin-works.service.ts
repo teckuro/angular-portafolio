@@ -75,8 +75,8 @@ export class AdminWorksService {
 	createWork(work: AdminWorkCreate): Observable<AdminWork> {
 		const payload: any = {
 			...work,
-			technologies: (work as any).tech ?? [],
-			tech: undefined
+			// Enviar como 'stack' que el backend acepta (también acepta 'tech')
+			stack: (work as any).tech ?? []
 		};
 		if (payload.is_current) {
 			payload.end_date = null;
@@ -97,8 +97,9 @@ export class AdminWorksService {
 	updateWork(id: number, work: AdminWorkUpdate): Observable<AdminWork> {
 		const payload: any = {
 			...work,
-			technologies: (work as any).tech ?? (work as any).technologies ?? [],
-			tech: undefined
+			// Preferir 'tech' del formulario, si no, intentar alias legacy
+			stack:
+				(work as any).tech ?? (work as any).stack ?? (work as any).teck ?? []
 		};
 		if (payload.is_current) {
 			payload.end_date = null;
@@ -117,9 +118,18 @@ export class AdminWorksService {
 	}
 
 	private normalizeResponse(item: any): AdminWork {
+		// Alinear posibles nombres de campo del backend
 		if ('technologies' in item && !('tech' in item)) {
 			item.tech = Array.isArray(item.technologies) ? item.technologies : [];
 			delete item.technologies;
+		}
+		if ('stack' in item && !('tech' in item)) {
+			item.tech = Array.isArray(item.stack) ? item.stack : [];
+			delete item.stack;
+		}
+		if ('teck' in item && !('tech' in item)) {
+			item.tech = Array.isArray(item.teck) ? item.teck : [];
+			delete item.teck;
 		}
 		if (
 			item.is_current &&
