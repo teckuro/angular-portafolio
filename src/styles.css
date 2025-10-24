@@ -178,6 +178,42 @@ button {
 	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Utilidades de espaciado y tipografía para normalizar diseño en admin */
+.u-spacing-section {
+	margin-bottom: 2rem;
+}
+
+.u-text-title {
+	font-size: 1.75rem;
+	font-weight: 700;
+	letter-spacing: -0.02em;
+}
+
+.u-text-subtitle {
+	font-size: 1rem;
+	color: var(--text-secondary);
+	font-weight: 500;
+}
+
+.u-card {
+	background: rgba(255, 255, 255, 0.03);
+	border: 1px solid rgba(255, 255, 255, 0.12);
+	border-radius: 16px;
+	box-shadow: var(--card-shadow);
+	backdrop-filter: blur(15px);
+	padding: 1.5rem;
+}
+
+.u-badge {
+	display: inline-block;
+	padding: 0.4rem 0.8rem;
+	border-radius: 9999px;
+	font-size: 0.75rem;
+	font-weight: 700;
+	letter-spacing: 0.02em;
+	border: 1px solid var(--border-color);
+}
+
 /* Estilos globales para select */
 select {
 	background-color: var(--glass-bg) !important;
