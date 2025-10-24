@@ -39,14 +39,14 @@
 							<h3>{{ work.position }}</h3>
 							<span class="company-name">{{ work.company }}</span>
 						</div>
-						<div class="work-status">
-							<span
-								class="status-badge"
-								[class.active]="work.status === 'active'"
-							>
-								{{ work.status === 'active' ? 'Activa' : 'Inactiva' }}
-							</span>
-						</div>
+					<div class="work-status">
+						<span
+							class="status-badge"
+							[class]="getStatusClass(work.status)"
+						>
+							{{ getStatusLabel(work.status) }}
+						</span>
+					</div>
 					</div>
 
 					<div class="work-details">
@@ -89,9 +89,7 @@
 							(click)="toggleWorkCurrent(work)"
 						>
 							<span class="btn-icon">{{ work.is_current ? '⭐' : '☆' }}</span>
-							<span class="btn-text">{{
-								work.is_current ? 'Quitar Actual' : 'Marcar Actual'
-							}}</span>
+							<span class="btn-text">{{ work.is_current ? 'Quitar Actual' : 'Marcar Actual' }}</span>
 						</button>
 						<button class="btn btn-danger btn-sm" (click)="deleteWork(work.id)">
 							<span class="btn-icon">🗑️</span>

@@ -213,11 +213,23 @@
 	backdrop-filter: blur(10px);
 }
 
-.status-badge.active {
+.status-badge.status-active {
 	background: linear-gradient(135deg, #10b981, #059669);
 	color: white;
 	border-color: #10b981;
 	box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.status-badge.status-inactive {
+	background: linear-gradient(135deg, #6b7280, #4b5563);
+	color: white;
+	border-color: #6b7280;
+}
+
+.status-badge.status-draft {
+	background: linear-gradient(135deg, #f59e0b, #d97706);
+	color: white;
+	border-color: #f59e0b;
 }
 
 .work-details {

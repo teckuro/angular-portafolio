@@ -71,4 +71,22 @@ export class AdminWorksListComponent implements OnInit {
 			}
 		});
 	}
+
+	getStatusLabel(status: string): string {
+		const map: { [key: string]: string } = {
+			active: 'Activa',
+			inactive: 'Inactiva',
+			draft: 'Borrador'
+		};
+		return map[status] || status;
+	}
+
+	getStatusClass(status: string): string {
+		const map: { [key: string]: string } = {
+			active: 'status-active',
+			inactive: 'status-inactive',
+			draft: 'status-draft'
+		};
+		return map[status] || '';
+	}
 }
