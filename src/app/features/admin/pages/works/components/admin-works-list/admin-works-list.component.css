@@ -379,7 +379,7 @@
 }
 
 .btn-text {
-	display: none;
+	display: inline;
 }
 
 /* Empty State */
@@ -511,6 +511,10 @@
 
 	.page-subtitle {
 		font-size: 0.9rem;
+	}
+
+	.btn-text {
+		display: none;
 	}
 }
 

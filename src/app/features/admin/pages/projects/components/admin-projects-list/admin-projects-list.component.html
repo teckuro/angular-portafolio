@@ -39,10 +39,10 @@
 							<img [src]="project.image_url" [alt]="project.title" />
 						</div>
 						<div class="project-status">
-						<span
-							class="status-badge"
-							[class]="getStatusClass(project.status)"
-						>
+							<span
+								class="status-badge"
+								[class]="getStatusClass(project.status)"
+							>
 								{{ getStatusLabel(project.status) }}
 							</span>
 							<span class="featured-badge" *ngIf="project.is_featured">
